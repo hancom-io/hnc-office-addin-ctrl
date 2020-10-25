@@ -12,6 +12,9 @@
     --hnc-control-text-color-hover: #4b70fd;
     --hnc-control-text-color-visited: #8c59b9;
     --hnc-control-text-color-disabled: #bfbfbf;
+    --hnc-control-text-color-accent1: #5775c1; /* checkbox hover caption */
+    --hnc-control-text-color-accent2: #3554a3; /* checkbox - check표시 */
+   
 
     --hnc-control-background-color: #ffffff;
     --hnc-control-background-color-hover: #e9eefb;
@@ -23,7 +26,6 @@
     --hnc-control-border-color-disabled: #e5e5e5;
     --hnc-control-border-color-accent1: #6182d6; /* 전체 포커스시 사용 - command button, icon button */
     --hnc-control-border-color-accent2: #b4b4b4; /* 캡션 포커스시 사용 - 하이퍼링크 */
-
 
     --hnc-control-border-style: solid;
     --hnc-control-border-width: 1px;

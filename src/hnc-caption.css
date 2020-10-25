@@ -12,7 +12,8 @@
     border-width: 1px; /* 일반적으로 테두리가 보이지 않으나, focus시 표시될 수 있어 width 영역 확보 */
 
 }
-.hnc-control:disabled > .hnc-caption {
+.hnc-control:disabled > .hnc-caption,
+.hnc-checkbox:disabled + .hnc-caption {
     color: var(--hnc-control-text-color-disabled)!important; /* hyperlink에서는 버튼의 caption 색을 hover시 바꾸는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
     text-decoration: none!important; /* hyperlink에서는 캡션에 underline을 표시하는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
 }
@@ -31,7 +32,8 @@
 .hnc-icon-only-button:hover > .hnc-caption {
     display: block; /* icon-only 인 경우 caption 숨기고, hover시 툴팁으로 표시. 하단에 표시하기위해 block 사용 */
 }
-.hnc-hyperlink-button:focus > .hnc-caption { /* 포커스 받았을때 캡션에만 rect 표시 */
+.hnc-hyperlink-button:focus > .hnc-caption,
+.hnc-checkbox:focus + .hnc-caption { /* 포커스 받았을때 캡션에만 rect 표시 */
     border-color: var(--hnc-control-border-color-accent2)!important;  /* hnc-caption 에서 테두리 투명을 주어 반영되지 않으므로, important 추가 */
     border-style: dotted;
 }

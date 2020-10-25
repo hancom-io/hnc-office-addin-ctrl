@@ -1,0 +1,44 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+/* -----------------------
+** checkbox
+-------------------------- */
+.hnc-checkbox {
+    position: absolute; /* display none으로 하면 포커스를 줄 수 없음 */
+    clip:rect(0,0,0,0);
+    
+ }
+.hnc-checkbox + .hnc-caption:before {
+    content: '';
+    display: inline-block;
+    width: 10px;
+    height: 10px; 
+    line-height: 10px; /* check 표시가 세로정렬될 수 있도록 height와 맞춤 */
+    margin-top: 1px; /* vertical-align: middle 시 하단 배치되어 top 기준으로 조정 */
+    margin-left: 0px; /* caption의 border가 있어 왼쪽은 꼭 1로 해야 다른 컨트롤과 정렬이 맞음 */
+    margin-right: 5px; /* caption과의 간격 */
+
+    font-size: 12px;
+    padding: var(--hnc-control-padding);
+    vertical-align: top;
+    background-color: var(--hnc-control-background-color);
+    border-style: var(--hnc-control-border-style);
+    border-width: var(--hnc-control-border-width);
+    border-color: var(--hnc-control-border-color);
+    border-radius: var(--hnc-control-border-radius);
+    /* hover, disabled, focus 는 hnc-control, hnc-caption 에 정의함(동일한게 있음) */
+}
+.hnc-checkbox:checked + .hnc-caption:before {
+    content: '\2714'; /*check 표시 글꼴. svg 쓰긴 좀 부담스러워서 이미 있는 비슷한 글꼴 사용 */
+    display: inline-block;
+    color: var(--hnc-control-text-color-accent2);
+    font-weight: bold;
+}
+
+.hnc-checkbox + .hnc-caption:hover {
+    color: var(--hnc-control-text-color-accent1);
+}
+.hnc-checkbox + .hnc-caption {
+    padding-right : 12px; /* 다른개체들과 함께 표시될때 간격 확보 */
+}
