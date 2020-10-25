@@ -15,9 +15,8 @@
     margin: var(--hnc-control-margin);
     padding: var(--hnc-control-padding);
     font-family: var(--hnc-control-font-family);
-    font-size: var(--hnc-control-font-size);
-    font-size: 0; /*!! 하위 아이템간 요소 간격 없앰 */
-    text-decoration:none; /* a 태그로 사용시 기본으로 밑줄이 적용되므로 제거 */
+    font-size: 0; /* 하위 아이템간 요소 간격 없앰. 예를들어 버튼안의 아이콘과 캡션 간 불필요한 간격들. */
+    text-decoration: none; /* a 태그로 사용시 기본으로 밑줄이 적용되므로 제거 */
     outline: 0; /* 디자인상 브라우저의 포커스 rect를 없앰 */
 
     background-color: var(--hnc-control-background-color);
@@ -25,12 +24,15 @@
     border-style: var(--hnc-control-border-style);
     border-width: var(--hnc-control-border-width);
 }
-.hnc-control:hover { /* 일반적인 하일라이트-배경을 채우고, 테두리를 그림 */
+.hnc-control:hover,
+.hnc-checkbox + .hnc-caption:hover:before {
+ /* 일반적인 하일라이트-배경을 채우고, 테두리를 그림 */
     background-color: var(--hnc-control-background-color-hover);
     border-color: var(--hnc-control-border-color-hover);
 }
-.hnc-control:disabled {
+.hnc-control:disabled,
+.hnc-checkbox:disabled + .hnc-caption:before {
     color: var(--hnc-control-text-color-disabled); /* div로 캡션을 넣지 않고, 직접 content로 입력한 경우도 동작하도록 색지정 */
     background-color: var(--hnc-control-background-color-disabled);
-    border-color:var(--hnc-control-border-color-disabled);
+    border-color: var(--hnc-control-border-color-disabled);
 }
