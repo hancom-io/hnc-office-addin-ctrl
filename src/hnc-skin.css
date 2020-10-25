@@ -1,0 +1,45 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+:root {
+    --hnc-control-margin: 1px 1px 1px 1px;
+    --hnc-control-padding: 1px 1px 1px 1px; /* focus 를 주었을때 border를 1->2로 변경할 수 있음. 이에 따른 padding 영역 확보 */
+
+    --hnc-control-font-family: "한컴산뜻돋움", "맑은 고딕", "Arial", "Helvetica", "sans-serif";
+    --hnc-control-font-size: 12px;
+
+    --hnc-control-text-color: black;
+    --hnc-control-text-color-hover: #4b70fd;
+    --hnc-control-text-color-visited: #8c59b9;
+    --hnc-control-text-color-disabled: #bfbfbf;
+
+    --hnc-control-background-color: #ffffff;
+    --hnc-control-background-color-hover: #e9eefb;
+    --hnc-control-background-color-disabled: #fbfbfb;
+    --hnc-control-background-accent1: #e0e0e0; /* separater */
+
+    --hnc-control-border-color: #c5c5c5;
+    --hnc-control-border-color-hover: #90a5dc;
+    --hnc-control-border-color-disabled: #e5e5e5;
+    --hnc-control-border-color-accent1: #6182d6; /* 전체 포커스시 사용 - command button, icon button */
+    --hnc-control-border-color-accent2: #b4b4b4; /* 캡션 포커스시 사용 - 하이퍼링크 */
+
+
+    --hnc-control-border-style: solid;
+    --hnc-control-border-width: 1px;
+    --hnc-control-border-radius: 3px;
+
+    --hnc-control-expander-color : #7f7f7f;
+    --hnc-control-expander-color-hover : #335095;
+    --hnc-control-expander-color-disabled : #bfbfbf;
+
+    --hnc-control-submenu-border-color: #cccccc; /* submenu 테두리*/
+    --hnc-control-submenu-box-shadow: 2px 2px 2px #CBCBCB; /* offset x, offiset y, radius, color */
+    --hnc-control-submenu-icon-size: 16px;
+
+    --hnc-control-tooltip-padding: 3px 3px 3px 3px;
+    --hnc-control-tooltip-background-color: #f7f5db;
+    --hnc-control-tooltip-border-color: #b4b4b4;
+    --hnc-control-tooltip-box-shadow: 2px 2px 2px #CBCBCB; /* offset x, offiset y, radius, color */
+
+}

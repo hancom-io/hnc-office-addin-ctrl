@@ -1,0 +1,216 @@
+<!-- Copyright (c) Hancom. All rights reserved. -->
+<!-- Licensed under the MIT License. See License.txt in the project root for license information. -->
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <title>office-addin-ctrl Tester</title>
+        <!-- Menu 의 disabled 지원 못함. 클래스에 넣어두어 사용하는 방식 필요.(li 로 사용시 html 에서 disabled 지원 안함)-->
+        <link rel="stylesheet" href="../src/hnc-office-addin-ctrl.css" type="text/css">
+        <script type="text/javascript" src="../src/hnc-DOMContentLoaded.js"></script>
+        <script type="text/javascript" src="../src/hnc-Submenu.js"></script>
+    </head>
+    <body>
+        <header>
+            Hancom Office addin ctrl
+        </header>
+        <nav></nav>
+        <section>
+            <article>
+                <ul>
+                    <!-- ****************** -->
+                    <!-- command button Sample -->
+                    <!-- ****************** -->
+                    <li>
+                        <div>command button</div>
+                        <div>확인, 취소버튼등 기본적인 명령 실행. 최소너비를 가짐, 추가 대화상자 표시, 대화상자 닫힘등 명령에 의해 UI가 현저히 변하는 경우 사용</div>
+                        <div class="hnc-control-container">
+                            <!-- button과 같은 form 개체는 포커스를 받으므로 tabindex 지정은 필요없으나, div같이 포커스를 못받는 개체 사용시에는 tabindex=0을 주어 포커스가 갈 수 있게함. -->
+                            <button class="hnc-control hnc-command-button" tabindex=0>
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">확인</span>
+                            </button>
+                            <button class="hnc-control hnc-command-button" tabindex=0>
+                                <span class="hnc-control hnc-caption">취소</span>
+                            </button>
+                            <button class="hnc-control hnc-command-button" tabindex=0 disabled="true">
+                                <span class="hnc-control hnc-caption">비활성</span>
+                            </button>
+                        </div>
+                    </li>
+                    <!-- ****************** -->
+                    <!-- icon only button Sample -->
+                    <!-- ****************** -->
+                    <li>
+                        <div>icon only button 16</div>
+                        <div>아이콘으로 충분히 의미 전달이 될 때 사용</div>
+                        <div class="hnc-control-container">
+                            <button class="hnc-control hnc-icon-only-button" tabindex=0>
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">icon only button의 캡션</span>
+                            </button>
+                            <button class="hnc-control hnc-icon-only-button" tabindex=0 disabled="true">
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">비활성</span>
+                            </button>
+                        </div>
+                        <div>icon only button 24</div>
+                        <div class="hnc-control-container">
+                            <button class="hnc-control hnc-icon-only-button" tabindex=0>
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-24.png"></image>
+                                <span class="hnc-control hnc-caption">icon only button의 캡션</span>
+                            </button>
+                            <button class="hnc-control hnc-icon-only-button" tabindex=0 disabled="true">
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-24.png"></image>
+                                <span class="hnc-control hnc-caption">비활성</span>
+                            </button>
+                        </div>
+                    </li>
+                    <!-- ****************** -->
+                    <!-- icon + text button Sample -->
+                    <!-- ****************** -->
+                    <li>
+                        <div>icon text button</div>
+                        <div>아이콘으로 의미 전달이 어려울때 사용. 아이콘만 추가하면 툴팁이 나오지 않고, 우측 margin이 넓어짐</div>
+                        <div class="hnc-control-container">
+                            <button class="hnc-control hnc-icon-text-button" tabindex=0>
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">icon text button의 캡션</span>
+                            </button>
+                            <button class="hnc-control hnc-icon-text-button" tabindex=0 disabled="true">
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">비활성</span>
+                            </button>
+                            <button class="hnc-control hnc-icon-text-button" tabindex=0>
+                                <span class="hnc-control hnc-caption">텍스트만 있는 경우</span>
+                            </button>
+                            <!-- 아이콘만 있으면 툴팁이 나오지 않고, 우측 margin이 넓어보임 -->
+                            <button class="hnc-control hnc-icon-text-button" tabindex=0>
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                            </button>
+                            <button class="hnc-control hnc-icon-only-button" tabindex=0>
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">icon only 인 경우는 icon-only-button 을 사용함</span>
+                            </button>
+                        </div>
+                    </li>
+                    <!-- ****************** -->
+                    <!-- hyperlink button Sample -->
+                    <!-- ****************** -->
+                    <li>
+                        <div>hyperlink button</div>
+                        <div>URL 이동시 사용</div>
+                        <div class="hnc-control-container">
+                            <button class="hnc-control hnc-hyperlink-button" tabindex=0>
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">hyperlink button의 캡션</span>
+                            </button>
+                            <button class="hnc-control hnc-hyperlink-button" tabindex=0 disabled="true">
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">비활성</span>
+                            </button>
+                            <button class="hnc-control hnc-hyperlink-button" tabindex=0>
+                                <span class="hnc-control hnc-caption">텍스트만 있는 경우</span>
+                            </button>
+                        </div>
+                    </li>
+                    <!-- ****************** -->
+                    <!-- <a href> Sample -->
+                    <!-- ****************** -->
+                    <li>
+                        <div>button외에 a href에서도 사용가능 - 클릭하여 Url 이동 확인 </div>
+                        <div class="hnc-control-container">
+                            <a class="hnc-control hnc-command-button" tabindex=0 href="http://www.hancom.com" target="_blank">
+                                <span class="hnc-control hnc-caption">command button</span>
+                            </a>
+                            <a class="hnc-control hnc-icon-only-button" tabindex=0 href="http://www.hancom.com" target="_blank">
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">icon only button</span>
+                            </a>
+                            <a class="hnc-control hnc-icon-text-button" tabindex=0 href="http://www.hancom.com" target="_blank">
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">icon text button</span>
+                            </a>
+                            <a class="hnc-control hnc-hyperlink-button" tabindex=0 href="http://www.hancom.com" target="_blank">
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">hyperlink button</span>
+                            </a>
+                        </div>
+                    </li>
+                    <!-- ****************** -->
+                    <!-- Submenu 버튼 Sample -->
+                    <!-- ****************** -->
+                    <li>
+                        <div>submenu button </div>
+                        <div>클릭시 button 하위에 있는 submenu 를 토글 표시함</div>
+
+                        <div class="hnc-control-container">
+                            <button class="hnc-control hnc-submenu-button" tabindex=0>
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">submenu button</span>
+                                <ul class="hnc-control hnc-submenu">
+                                    <li class="hnc-control hnc-menu-item">1단계 메뉴1(Text만)</li>
+                                    <li class="hnc-control hnc-menu-item">
+                                        <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                        <span class="hnc-control hnc-caption">icon 메뉴(이미지와 함께)</span>
+                                    </li>
+                                    <li class="hnc-control hnc-separater"></li>
+                                    <li class="hnc-control hnc-submenu-item">
+                                        <span class="hnc-control hnc-caption">1단계 하위메뉴</span>
+                                        <ul class="hnc-control hnc-submenu">
+                                            <li class="hnc-control hnc-submenu-item">
+                                                <span class="hnc-control hnc-caption">2단계 하위 메뉴1-좀 명칭이 긴</span>
+                                                <ul class="hnc-control hnc-submenu">
+                                                    <li class="hnc-control hnc-menu-item">2단계 메뉴1</li>
+                                                    <li class="hnc-control hnc-menu-item">2단계 메뉴2</li>
+                                                </ul>
+                                            </li>
+                                            <li class="hnc-control hnc-menu-item">2단계 메뉴2</li>
+                                            <li class="hnc-control hnc-menu-item">2단계 메뉴3</li>
+                                        </ul>
+                                    </li>
+                                    <li class="hnc-control hnc-menu-item">1단계 메뉴2</li>
+                                    <li class="hnc-control hnc-menu-item">1단계 메뉴3</li>
+                                </ul>
+                            </button>
+                            <button class="hnc-control hnc-submenu-button" tabindex=0>
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">submenu button</span>
+                                <ul class="hnc-control hnc-submenu">
+                                    <li class="hnc-control hnc-menu-item">1단계 하위메뉴1</li>
+                                    <li class="hnc-control hnc-menu-item">1단계 하위메뉴2</li>
+                                    <li class="hnc-control hnc-menu-item">1단계 하위메뉴3</li>
+                                </ul>
+                            </button>
+                            <button class="hnc-control hnc-submenu-button" tabindex=0 disabled="true">
+                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                <span class="hnc-control hnc-caption">비활성</span>
+                            </button>
+                        </div>
+                    </li>
+
+                        <!--
+                            콤보버튼
+                            콤보박스
+                            리스트박스(text, icon+text)
+                            이미지리스트 박스
+                            에디터
+                            스핀
+                            슬라이더
+                            캡션
+                            라디오
+                            체크
+                            그룹박스 -->
+                </ul>
+
+            </article>
+        </section>
+        <aside>
+            <ul>
+
+
+            </ul>
+        </aside>
+        <footer></footer>
+    </body>
+</html>

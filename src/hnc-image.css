@@ -1,0 +1,30 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+.hnc-image {
+    display: inline-block; /* div등으로 넣을 수도 있어 inline 으로 강제(margin등 boxing을 위한 여백 사용을 위해 inline-block 사용) */
+    margin: 0;
+    padding: 0;
+    background-color: transparent!important; /* image 의 배경은 transparent이나, over시 색이 나와서 important 추가됨 */
+    border-color: transparent!important;
+    border-width: 1px; /* 일반적으로 테두리가 보이지 않으나, focus시 표시될 수 있어 width 영역 확보 */
+}
+.hnc-control:disabled > .hnc-image {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+.hnc-command-button > .hnc-image,
+.hnc-icon-text-button > .hnc-image,
+.hnc-hyperlink-button > .hnc-image,
+.hnc-submenu-button > .hnc-image {
+    margin: 0px 6px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 - text와의 공간 추가 */
+}
+.hnc-menu-item > .hnc-image,
+.hnc-submenu-item > .hnc-image { /* menu item 하위에 사용하면 16x16 으로 크기 강제 */
+    position: absolute; /* 이미지 위치 절대 크기로 조정 */
+    width: var(--hnc-control-submenu-icon-size);
+    height: var(--hnc-control-submenu-icon-size);
+    /* border 1, image 16, border1, padding 3, item간 간격 3 */
+    transform: translateX(-24px); /* menu-item의 padding 영역에 표시 */
+    margin: 0px 0px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 - text와의 공간 추가 */
+}

@@ -1,0 +1,62 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+/* -----------------------
+** command button
+-------------------------- */
+.hnc-command-button {
+    padding: 4px 4px 4px 4px;
+    min-width: 73px; /* 내부 content 너비. padding, border, margin 제외 */
+    text-align: center; /* div, span 사용시에도 가운데 정렬 */
+    border-radius: var(--hnc-control-border-radius);
+}
+.hnc-command-button:focus {
+    padding: 3px 3px 3px 3px; /* border-width가 2여서 1씩 감소 */
+
+    border-color: var(--hnc-control-border-color-accent1);
+    border-width: 2px; /*선을 두껍게 표시. 대신 padding을 조정해야 전체 레이아웃이 덜렁거리지 않음 */
+}
+/* -----------------------
+** icon only button
+-------------------------- */
+.hnc-icon-only-button {
+    border-radius: var(--hnc-control-border-radius);
+}
+.hnc-icon-only-button:focus {
+    padding: 0px 0px 0px 0px; /* border-width가 2여서 1씩 감소 */
+
+    border-color: var(--hnc-control-border-color-accent1);
+    border-width: 2px; /*선을 두껍게 표시. 대신 padding을 조정해야 전체 레이아웃이 덜렁거리지 않음 */
+}
+/* -----------------------
+** icon text button
+-------------------------- */
+.hnc-icon-text-button,
+.hnc-submenu-button {
+    padding: 1px 4px 1px 4px; /* 위, 오른쪽, 아래, 왼쪽 */
+    border-radius: var(--hnc-control-border-radius);
+}
+.hnc-icon-text-button:focus,
+.hnc-submenu-button:focus {
+    padding: 0px 3px 0px 3px; /* border-width가 2여서 1씩 감소 */
+
+    border-color: var(--hnc-control-border-color-accent1);
+    border-width: 2px; /*선을 두껍게 표시. 대신 padding을 조정해야 전체 레이아웃이 덜렁거리지 않음 */
+}
+
+/* -----------------------
+** hyperlink button
+-------------------------- */
+.hnc-hyperlink-button {
+    padding: 1px 4px 1px 4px; /* 위, 오른쪽, 아래, 왼쪽 */
+    background-color: transparent!important; /* hover시 색상이 바뀌지 않도록 important */
+    border-color: transparent!important;
+}
+
+.hnc-hyperlink-button:hover {
+    cursor: pointer; /* 손모양 */
+    border-color: transparent;
+}
+.hnc-hyperlink-button:disabled {
+    cursor: initial; /* 초기상태 아마도 arrow */
+}

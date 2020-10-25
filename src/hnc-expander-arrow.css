@@ -1,0 +1,28 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+/* -----------------------
+** expander-arrow
+-------------------------- */
+.hnc-expander-down,
+.hnc-expander-right { /* 코드에서 hnc-submenu-button및 메뉴에 동적으로 추가되는 화살표 expander-path에 의해 그려지고 색상 변경 */
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0; /* 기본 폰트 크기가 설정되면, block의 크기가 커질 수 있으므로 0으로 설정 */
+    margin: 0px 0px 0px 3px; /* 위, 오른쪽, 아래, 왼쪽 : 화살표 왼쪽의 캡션과 마진 추가 */
+}
+.hnc-expander-right {
+    position: absolute;
+    right: 6px; /* 메뉴 오른쪽으로부터의 기준 */
+    margin-top : calc(var(--hnc-control-submenu-icon-size) / 2 - 7px / 2); /* expander를 세로 중심에 배치 */
+    }
+.hnc-expander-path {
+    fill : var(--hnc-control-expander-color);
+}
+.hnc-submenu-button:hover > .hnc-expander-down .hnc-expander-path,
+.hnc-submenu-item:hover > .hnc-expander-right .hnc-expander-path {
+    fill : var(--hnc-control-expander-color-hover);
+}
+.hnc-control:disabled .hnc-expander-path {
+    fill : var(--hnc-control-expander-color-disabled)!important; /* hover 에 의해 설정되지 않아서 important 추가 */
+}

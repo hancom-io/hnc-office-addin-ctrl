@@ -1,0 +1,15 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+/* -----------------------
+** separater
+-------------------------- */
+.hnc-separater {
+    display: block; /* separater는 개행되어야 함*/
+    height: 1px;
+    padding : 0px 0px 0px 0px;
+    pointer-events: none; /* 마우스 이벤트 안받음 */
+    background-color: var(--hnc-control-background-accent1);
+    border-width: 0px; /*border는 상하 1px씩 2px로 그려지므로 배경채우기로 사용 */
+
+}
