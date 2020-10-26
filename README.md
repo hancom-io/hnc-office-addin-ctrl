@@ -10,4 +10,15 @@
 2. CSS, JS 스터디용이어서 매 라인마다 주석이 많습니다. 
 3. 틈날때 작업합니다.
 4. 스킨은 한컴오피스2020 기준으로 개발합니다.
-***
+
+## 사용법
+tester.html 참조 : button 사용 
+```html
+<button class="hnc-control hnc-command-button" tabindex=0>
+    <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+    <span class="hnc-control hnc-caption">확인</span>
+</button>
+```
+## 결과
+
+## tester.html 전체 이미지
