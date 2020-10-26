@@ -22,5 +22,5 @@ tester.html 참조 : button 사용
 ## 결과
 ![image](https://user-images.githubusercontent.com/70936450/97146348-0f642580-17ab-11eb-87f2-04660beece7c.png)
 
-## tester.html 전체 이미지
+## tester.html 전체 이미지(2020/10/26)
 ![image](https://user-images.githubusercontent.com/70936450/97146404-230f8c00-17ab-11eb-9120-3d56281688f6.png)
