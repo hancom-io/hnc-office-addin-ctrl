@@ -26,12 +26,18 @@
 }
 .hnc-control:hover,
 .hnc-checkbox + .hnc-caption:hover:before {
- /* 일반적인 하일라이트-배경을 채우고, 테두리를 그림 */
+    /* 일반적인 하일라이트-배경을 채우고, 테두리를 그림 */
     background-color: var(--hnc-control-background-color-hover);
     border-color: var(--hnc-control-border-color-hover);
 }
+.hnc-radio + .hnc-caption:hover:before {
+    /* 라디오는 테두리만 다른색임 */
+    border-color: var(--hnc-control-border-color-hover);
+}
 .hnc-control:disabled,
-.hnc-checkbox:disabled + .hnc-caption:before {
+.hnc-checkbox:disabled + .hnc-caption:before, /* hover 색상이 반영되므로 추가 */
+.hnc-radio:disabled + .hnc-caption:before { /* hover 색상이 반영되므로 추가 */
+
     color: var(--hnc-control-text-color-disabled); /* div로 캡션을 넣지 않고, 직접 content로 입력한 경우도 동작하도록 색지정 */
     background-color: var(--hnc-control-background-color-disabled);
     border-color: var(--hnc-control-border-color-disabled);

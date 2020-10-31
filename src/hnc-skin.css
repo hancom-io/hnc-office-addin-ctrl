@@ -14,7 +14,7 @@
     --hnc-control-text-color-disabled: #bfbfbf;
     --hnc-control-text-color-accent1: #5775c1; /* checkbox hover caption */
     --hnc-control-text-color-accent2: #3554a3; /* checkbox - check표시 */
-   
+    --hnc-control-background-accent3:#335095; /* radio - 체크 색 */
 
     --hnc-control-background-color: #ffffff;
     --hnc-control-background-color-hover: #e9eefb;
