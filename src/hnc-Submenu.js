@@ -10,7 +10,7 @@ function hncAddSubmenuButtonExpander() {
         buttons[i - 1].innerHTML += '<div class="hnc-expander-down"><svg width="7" height="4"><g><path class="hnc-expander-path" d="M0,0 L7,0 L3.5,4z"/></g></svg></div>';
     }
 }
-    // submenu-item들의 오른쪽 Expander 추가. absolute로 배치됨
+// submenu-item들의 오른쪽 Expander 추가. absolute로 배치됨
 function hncAddSubmenuItemExpander() {
     let items = document.querySelectorAll('.hnc-submenu-item');
 

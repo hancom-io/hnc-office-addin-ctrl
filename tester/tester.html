@@ -8,7 +8,8 @@
         <!-- Menu 의 disabled 지원 못함. 클래스에 넣어두어 사용하는 방식 필요.(li 로 사용시 html 에서 disabled 지원 안함)-->
         <link rel="stylesheet" href="../src/hnc-office-addin-ctrl.css" type="text/css">
         <script type="text/javascript" src="../src/hnc-DOMContentLoaded.js"></script>
-        <script type="text/javascript" src="../src/hnc-Submenu.js"></script>
+         <script type="text/javascript" src="../src/hnc-submenu.js"></script>
+        <script type="text/javascript" src="../src/hnc-spin.js"></script>
     </head>
     <body>
         <header>
@@ -225,7 +226,6 @@
                     <li>
                         <div>editor</div>
                         <div class="hnc-control-container">
-
                             <label class="hnc-control hnc-caption" for="test-editor1">항목1</label>
                             <input type="text" class="hnc-control hnc-editor" id="test-editor1" tabindex=0/>
                             <div> </div>
@@ -236,15 +236,29 @@
                             <input type="text" class="hnc-control hnc-editor" id="test-editor3" value="비활성 에디트" tabindex=0 disabled="true"/>
                         </div>
                     </li>
- 
+                    <!-- ****************** -->
+                    <!-- Spin Sample -->
+                    <!-- ****************** -->
+                    <li> 
+                        <div>spin</div>
+                        <div>hnc-spin 대신 hnc-spin-container 가 대체되고, up/down이 추가됨</div>
+                        <div class="hnc-control-container">
+                            <label class="hnc-control hnc-caption" for="test-spin1">항목</label>
+                            <input type="number" class="hnc-control hnc-spin" id="test-spin1" tabindex=0/>
+                            <div> </div>
+                            <label class="hnc-control hnc-caption" for="test-spin2">비활성</label>
+                            <input type="number" class="hnc-control hnc-spin" id="test-spin2" value="비활성 스핀" tabindex=0 disabled="true"/>
+                        </div>
+                    </li>
                         <!--
+                            슬라이더
+                            그룹박스
+                            탭
                             콤보박스
                             리스트박스(text, icon+text)
                             이미지리스트 박스
-                            스핀
-                            슬라이더
-                            캡션
-                            그룹박스 -->
+
+                             -->
                 </ul>
 
             </article>
