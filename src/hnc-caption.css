@@ -23,6 +23,7 @@
     position: absolute; /* 상위 버튼이 caption 툴팁 표시에 따라 레이아웃이 커지지 않도록 지정 */
 
     /* tooltip 형태로 표시 */
+    z-index: 1000; /* 툴팁이 최상위에 보일 수 있도록 조정 */
     padding: var(--hnc-control-tooltip-padding);
     background-color: var(--hnc-control-tooltip-background-color)!important; /* hnc-caption 에서 배경 투명을 주어 반영되지 않으므로, important 추가 */
     border-color: var(--hnc-control-tooltip-border-color)!important; /* hnc-caption 에서 테두리 투명을 주어 반영되지 않으므로, important 추가*/
