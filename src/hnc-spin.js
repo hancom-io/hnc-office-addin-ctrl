@@ -21,3 +21,77 @@ function hncAddSpinUpDownButton() {
     }
 }
 
+// 버튼 클릭시 spin 값 수정
+function onClick_HncSpinUp(e) {
+    // this : 이벤트를 발생시킨 버튼
+    let spinContainer = this.parentElement.parentElement;
+    if (spinContainer == undefined) {
+        alert('spinContainer 가 없음');
+        return;
+    }
+
+    let spin = spinContainer.children[0];
+    if (spin == undefined) {
+        alert('spin이 없음');
+        return;
+    }
+    
+    let step = spin.step;
+    if (step == '') {
+        step = 1;
+    }
+    let value = spin.value;
+    if (value == '') {
+        value = 0;
+    }  
+
+    // step 만큼 값 증가
+    value = parseFloat(value) + parseFloat(step);
+
+    if (spin.max != '') {
+        if (parseFloat(spin.max) < value) {
+            value = spin.max;
+        }
+    }
+    spin.value = value;
+
+    // 이벤트 전파를 중단
+    e.stopPropagation();
+}
+function onClick_HncSpinDown(e) {
+    // this : 이벤트를 발생시킨 버튼
+    let spinContainer = this.parentElement.parentElement;
+    if (spinContainer == undefined) {
+        alert('spinContainer 가 없음');
+        return;
+    }
+
+    let spin = spinContainer.children[0];
+    if (spin == undefined) {
+        alert('spin이 없음');
+        return;
+    }
+    
+    let step = spin.step;
+    if (step == '') {
+        step = 1;
+    }
+    let value = spin.value;
+    if (value == '') {
+        value = 0;
+    }   
+    
+    // step 만큼 값 만큼 감소
+    value = parseFloat(value) - parseFloat(step);
+
+    if (spin.min != '') {
+        if (value < parseFloat(spin.min)) {
+            value = spin.min;
+        }
+    }
+    spin.value = value;
+
+    // 이벤트 전파를 중단
+    e.stopPropagation();
+
+}

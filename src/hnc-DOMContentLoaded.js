@@ -26,4 +26,15 @@ document.addEventListener('DOMContentLoaded', function() {
     // 빈 영역을 클릭하면 모든 submenu를 닫는다.
     document.addEventListener('click', onClick_HncDocument);
 
+    // spin의 up/down
+    let spinUps = document.querySelectorAll('.hnc-spin-up');
+    for (let up of spinUps) {
+        up.addEventListener('click', onClick_HncSpinUp);
+    }
+
+    let spinDowns = document.querySelectorAll('.hnc-spin-down');
+    for (let down of spinDowns) {
+        down.addEventListener('click', onClick_HncSpinDown);
+    }
+
 });
