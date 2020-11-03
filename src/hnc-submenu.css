@@ -10,7 +10,7 @@
     display: block;
     position: absolute; /* display = none 이 아니기에 화면 크기에 관여하게 된다. 그래서 버튼에서 하위메뉴가 있으면 전체 브라우저에 스크롤이 나타날 수 있음. */
     text-align: left;
-
+    z-index: 1000; /* 메뉴가 최상위에 보일 수 있도록 조정 */
     opacity: 0; /* click시나 menuItem hover시 코드내에서 동적으로 submenu 표시. display로 처리하면 즉시 사라지거나 나타나 사용성이 떨어짐. */
     pointer-events: none; /* 마우스 이벤트는 opacity가 1일때 받음 */
 
