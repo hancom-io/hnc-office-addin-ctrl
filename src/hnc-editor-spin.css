@@ -1,0 +1,95 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+/* -----------------------
+** editor
+-------------------------- */
+.hnc-editor,
+.hnc-spin {
+    font-size: var(--hnc-control-font-size);
+    margin-left: 4px; /* 캡션과의 간격 */
+    padding-left: 2px;
+    padding-right: 2px;
+}
+.hnc-caption + .hnc-editor, 
+.hnc-caption + .hnc-spin {
+    margin-left: 4px; /* 캡션 붙어있으면 마진 추가 */
+}
+.hnc-editor:hover,
+.hnc-spin-container:hover .hnc-spin,
+.hnc-spin-container:hover .hnc-spin-up,
+.hnc-spin-container:hover .hnc-spin-down {
+    /* editor는 hover시 원래 배경색을 사용 */
+    background-color: var(--hnc-control-background-color);
+    border-color: var(--hnc-control-border-color-hover);
+}
+/* -----------------------
+** spin
+** 오른쪽 upDown은 javascript 코드에서 일괄 추가함.
+-------------------------- */
+.hnc-spin-container { /* spin, spin-up, spin-down을 묶어둔 개체로 표시 내용 없음 */ 
+    margin : 0;
+    padding : 0;
+    background-color: transparent;
+    border-color:transparent;
+    border-width:0;
+}
+
+.hnc-spin-container:hover {
+    background-color: transparent; /* .hnc-control:hover 에서 색을 표시하므로 재정의 */
+    border-color:transparent;
+}
+.hnc-spin-arrow-container { /* spin-up, spin-down을 묶어둔 개체로 표시 내용 없음 */ 
+    display: inline-block;
+    margin : 0;
+    padding : 0;
+    vertical-align: middle;
+    background-color: transparent;
+    border-color:transparent;
+    border-width:0;
+}
+.hnc-spin::-webkit-inner-spin-button, 
+.hnc-spin::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Chrome, Safari, Edge, Opera 내부 화살표 감춤 */
+    margin: 0px;
+}
+.hnc-spin { 
+    -moz-apperance: textfield; /* Firefox 내부 화살표 감춤 */
+
+    width: 70px;
+    margin-right: 0px; /* 오른쪽은 Up/down에 붙임 */
+    border-right-width: 0px; /* 오른쪽은 Up/down에 붙임 */
+    border-top-left-radius: var(--hnc-control-border-radius);
+    border-bottom-left-radius: var(--hnc-control-border-radius);
+}
+.hnc-spin-up { 
+    display: block;
+
+    margin: var(--hnc-control-margin);
+    margin-left: 0px;
+    margin-bottom: 0px;
+    padding: 2px 3px 3px 3px; /* 위, 오른쪽, 아래, 왼쪽 */
+    border-bottom-width: 0px;
+    border-top-right-radius: var(--hnc-control-border-radius);
+
+    /* arrow 색상, hover, disable은 hnc-control-expander-color와 동일 */
+}
+.hnc-spin-up:hover { 
+    background-color: var(--hnc-control-background-color-hover)!important; /* .hnc-spin-container:hover .hnc-spin-up 에서 원래 배경생으로 설정해서 충돌됨. 따라서 hover시 배경색을 important로 세팅 */
+} 
+.hnc-spin-down { 
+    display: block;
+
+    margin: var(--hnc-control-margin);
+    margin-left: 0px;
+    margin-top: 0px;
+    padding: 2px 3px 3px 3px; /* 위, 오른쪽, 아래, 왼쪽 */
+    border-top-width: 0px;
+    border-bottom-right-radius: var(--hnc-control-border-radius);
+
+     /* arrow 색상, hover, disable은 hnc-control-expander-color와 동일  */
+ } 
+.hnc-spin-down:hover { 
+    background-color: var(--hnc-control-background-color-hover)!important;
+} 
+

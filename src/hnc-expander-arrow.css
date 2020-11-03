@@ -16,13 +16,18 @@
     right: 6px; /* 메뉴 오른쪽으로부터의 기준 */
     margin-top : calc(var(--hnc-control-submenu-icon-size) / 2 - 7px / 2); /* expander를 세로 중심에 배치 */
     }
-.hnc-expander-path {
+.hnc-expander-path,
+.hnc-spin-path {
     fill : var(--hnc-control-expander-color);
 }
 .hnc-submenu-button:hover > .hnc-expander-down .hnc-expander-path,
-.hnc-submenu-item:hover > .hnc-expander-right .hnc-expander-path {
+.hnc-submenu-item:hover > .hnc-expander-right .hnc-expander-path,
+.hnc-spin-up:hover .hnc-spin-path,
+.hnc-spin-down:hover .hnc-spin-path {
     fill : var(--hnc-control-expander-color-hover);
 }
-.hnc-control:disabled .hnc-expander-path {
-    fill : var(--hnc-control-expander-color-disabled)!important; /* hover 에 의해 설정되지 않아서 important 추가 */
+.hnc-control:disabled .hnc-expander-path,
+.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-path,
+.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-path { 
+    fill: var(--hnc-control-expander-color-disabled)!important; /* hover 에 의해 설정되지 않아서 important 추가 */
 }

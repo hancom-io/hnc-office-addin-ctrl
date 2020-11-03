@@ -7,6 +7,9 @@ document.addEventListener('DOMContentLoaded', function() {
     hncAddSubmenuButtonExpander();
     hncAddSubmenuItemExpander();
 
+    // spin의 upDown 추가
+    hncAddSpinUpDownButton();
+
     // 버튼 클릭시 하위 메뉴 확장
     let buttons = document.querySelectorAll('.hnc-submenu-button');
     for (let button of buttons) {
