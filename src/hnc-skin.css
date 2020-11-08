@@ -14,13 +14,14 @@
     --hnc-control-text-color-disabled: #bfbfbf;
     --hnc-control-text-color-accent1: #5775c1; /* checkbox hover caption, slider value 배경색 */
     --hnc-control-text-color-accent2: #3554a3; /* checkbox - check표시 */
-    --hnc-control-text-color-accent3:#335095; /* radio - 체크 색 */
+    --hnc-control-text-color-accent3:#335095; /* radio - 체크 색, groupbox caption */
     --hnc-control-text-color-accent4: #6182D6; /* 선택시 slider thumb 테두리, 배경색 */
 
     --hnc-control-background-color: #ffffff;
     --hnc-control-background-color-hover: #e9eefb;
     --hnc-control-background-color-disabled: #fbfbfb;
-    --hnc-control-background-accent1: #e0e0e0; /* separater */
+    --hnc-control-background-accent1: #e0e0e0; /* separator */
+    --hnc-control-background-accent2: #d8d8d8; /* groupbox separator */
 
     --hnc-control-border-color: #c5c5c5;
     --hnc-control-border-color-hover: #90a5dc;

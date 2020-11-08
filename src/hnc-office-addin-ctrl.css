@@ -8,7 +8,8 @@
 @import url("../src/hnc-expander-arrow.css");
 @import url("../src/hnc-button.css"); /* hnc-submenu-button 사용시 expander 추가를 위해 js 필요 */
 @import url("../src/hnc-submenu.css"); /* expander 표시, 메뉴 show/hide, 메뉴위치 설정에 js 필요 */
-@import url("../src/hnc-separater.css");
+@import url("../src/hnc-separator.css");
 @import url("../src/hnc-checkbox-radio.css");
 @import url("../src/hnc-editor-spin.css");
 @import url("../src/hnc-slider.css");
+@import url("../src/hnc-groupbox.css");
