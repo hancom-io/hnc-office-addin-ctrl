@@ -6,7 +6,7 @@
 -------------------------- */
 .hnc-control-container {
     font-size: 0; /* inline-block으로 구성된 컨트롤들간 추가 마진 3px 표시되는 문제 수정 */
-    position: relative; /* container 내부는 상대적 배치 */
+    position: relative; /* 하위 항목들은 상대적 배치 */
 }
 .hnc-control {
     display: inline-block; /* 가로 배치가능하도록 inline, margin 적용이 되도록 inline-block으로 사용 */
@@ -18,7 +18,7 @@
     font-family: var(--hnc-control-font-family);
     font-size: 0; /* 하위 아이템간 요소 간격 없앰. 예를들어 버튼안의 아이콘과 캡션 간 불필요한 간격들. */
     text-decoration: none; /* a 태그로 사용시 기본으로 밑줄이 적용되므로 제거 */
-    outline: 0; /* 디자인상 브라우저의 포커스 rect를 없앰 */
+    outline: none; /* 디자인상 브라우저의 포커스 rect를 없앰 */
 
     background-color: var(--hnc-control-background-color);
     border-color: var(--hnc-control-border-color);
@@ -39,7 +39,8 @@
 .hnc-checkbox:disabled + .hnc-caption:before, /* hover 색상이 반영되므로 추가 */
 .hnc-radio:disabled + .hnc-caption:before, /* hover 색상이 반영되므로 추가 */
 .hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-up, /* 비활성된 spin의 up/down */
-.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-down {
+.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-down,
+.hnc-slider:disabled::-webkit-slider-thumb {
     color: var(--hnc-control-text-color-disabled); /* div로 캡션을 넣지 않고, 직접 content로 입력한 경우도 동작하도록 색지정 */
     background-color: var(--hnc-control-background-color-disabled)!important; /* edit, spin에서 hover 재정의하여 반영되지 않는 경우가 있어 important 추가 */
     border-color: var(--hnc-control-border-color-disabled)!important;

@@ -36,7 +36,8 @@
 }
 .hnc-hyperlink-button:focus > .hnc-caption,
 .hnc-checkbox:focus + .hnc-caption,
-.hnc-radio:focus + .hnc-caption { /* 포커스 받았을때 캡션에만 rect 표시 */
+.hnc-radio:focus + .hnc-caption,  /* 포커스 받았을때 캡션에만 rect 표시 */
+.hnc-slider:focus::before { 
     border-color: var(--hnc-control-border-color-accent2)!important;  /* hnc-caption 에서 테두리 투명을 주어 반영되지 않으므로, important 추가 */
     border-style: dotted;
 }

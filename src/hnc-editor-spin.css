@@ -7,12 +7,12 @@
 .hnc-editor,
 .hnc-spin {
     font-size: var(--hnc-control-font-size);
-    margin-left: 4px; /* 캡션과의 간격 */
     padding-left: 2px;
     padding-right: 2px;
 }
 .hnc-caption + .hnc-editor, 
-.hnc-caption + .hnc-spin {
+.hnc-caption + .hnc-spin-container,
+.hnc-caption + .hnc-slider-container {
     margin-left: 4px; /* 캡션 붙어있으면 마진 추가 */
 }
 .hnc-editor:hover,
@@ -27,12 +27,16 @@
 ** spin
 ** 오른쪽 upDown은 javascript 코드에서 일괄 추가함.
 -------------------------- */
-.hnc-spin-container { /* spin, spin-up, spin-down을 묶어둔 개체로 표시 내용 없음 */ 
+.hnc-spin-container, /* spin, spin-up, spin-down을 묶어둔 개체로 표시 내용 없음 */ 
+.hnc-slider-container { /* slider의 focus rect 표시를 위해 slider와 slider::before를 감싸둔  개체로 표시 내용 없음 */ 
+    display: inline-block;
+    position: relative; /* 하위 항목들이 상대적 배치됨 */
     margin : 0;
     padding : 0;
+    vertical-align: middle;
     background-color: transparent;
-    border-color:transparent;
-    border-width:0;
+    border-color: transparent;
+    border-width: 0;
 }
 
 .hnc-spin-container:hover {
@@ -45,7 +49,7 @@
     padding : 0;
     vertical-align: middle;
     background-color: transparent;
-    border-color:transparent;
+    border-color: transparent;
     border-width:0;
 }
 .hnc-spin::-webkit-inner-spin-button, 
@@ -54,9 +58,10 @@
     margin: 0px;
 }
 .hnc-spin { 
-    -moz-apperance: textfield; /* Firefox 내부 화살표 감춤 */
+    -moz-apperance: textfield; /* Firefox 내부 화살표 감춤. 테스트 안됨. */
 
     width: 70px;
+    margin-left: 0px; /* 전체적인 좌우 margin은 spin-container에서 처리함*/
     margin-right: 0px; /* 오른쪽은 Up/down에 붙임 */
     border-right-width: 0px; /* 오른쪽은 Up/down에 붙임 */
     border-top-left-radius: var(--hnc-control-border-radius);
