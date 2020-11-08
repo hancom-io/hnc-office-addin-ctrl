@@ -7,8 +7,13 @@ document.addEventListener('DOMContentLoaded', function() {
     hncAddSubmenuButtonExpander();
     hncAddSubmenuItemExpander();
 
-    // spin의 upDown 추가
-    hncAddSpinUpDownButton();
+    // spin-container로 감싸고 spin의 upDown 추가
+    hncInitSpin();
+
+    // slider-container로 감쌈
+    hncInitSlider();
+
+
 
     // 버튼 클릭시 하위 메뉴 확장
     let buttons = document.querySelectorAll('.hnc-submenu-button');
@@ -35,6 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
     let spinDowns = document.querySelectorAll('.hnc-spin-down');
     for (let down of spinDowns) {
         down.addEventListener('click', onClick_HncSpinDown);
+    }
+
+    let sliders = document.querySelectorAll('.hnc-slider');
+    for (let slider of sliders) {
+        slider.addEventListener("input", onInput_HncSlider);
     }
 
 });

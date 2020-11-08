@@ -8,8 +8,9 @@
         <!-- Menu 의 disabled 지원 못함. 클래스에 넣어두어 사용하는 방식 필요.(li 로 사용시 html 에서 disabled 지원 안함)-->
         <link rel="stylesheet" href="../src/hnc-office-addin-ctrl.css" type="text/css">
         <script type="text/javascript" src="../src/hnc-DOMContentLoaded.js"></script>
-         <script type="text/javascript" src="../src/hnc-submenu.js"></script>
+        <script type="text/javascript" src="../src/hnc-submenu.js"></script>
         <script type="text/javascript" src="../src/hnc-spin.js"></script>
+        <script type="text/javascript" src="../src/hnc-slider.js"></script>
     </head>
     <body>
         <header>
@@ -26,15 +27,15 @@
                         <div>command button</div>
                         <div>확인, 취소버튼등 기본적인 명령 실행. 최소너비를 가짐, 추가 대화상자 표시, 대화상자 닫힘등 명령에 의해 UI가 현저히 변하는 경우 사용</div>
                         <div class="hnc-control-container">
-                            <!-- button과 같은 form 개체는 포커스를 받으므로 tabindex 지정은 필요없으나, div같이 포커스를 못받는 개체 사용시에는 tabindex=0을 주어 포커스가 갈 수 있게함. -->
-                            <button class="hnc-control hnc-command-button" tabindex=0>
+                            <!-- button과 같은 form 개체는 포커스를 받으므로 tabindex 지정은 필요없으나, div같이 포커스를 못받는 개체 사용시에는 tabindex="0"을 주어 포커스가 갈 수 있게함. -->
+                            <button class="hnc-control hnc-command-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">확인</span>
                             </button>
-                            <button class="hnc-control hnc-command-button" tabindex=0>
+                            <button class="hnc-control hnc-command-button" tabindex="0">
                                 <span class="hnc-control hnc-caption">취소</span>
                             </button>
-                            <button class="hnc-control hnc-command-button" tabindex=0 disabled="true">
+                            <button class="hnc-control hnc-command-button" tabindex="0" disabled="true">
                                 <span class="hnc-control hnc-caption">비활성</span>
                             </button>
                         </div>
@@ -46,22 +47,22 @@
                         <div>icon only button 16</div>
                         <div>아이콘으로 충분히 의미 전달이 될 때 사용</div>
                         <div class="hnc-control-container">
-                            <button class="hnc-control hnc-icon-only-button" tabindex=0>
+                            <button class="hnc-control hnc-icon-only-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">icon only button의 캡션</span>
                             </button>
-                            <button class="hnc-control hnc-icon-only-button" tabindex=0 disabled="true">
+                            <button class="hnc-control hnc-icon-only-button" tabindex="0" disabled="true">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">비활성</span>
                             </button>
                         </div>
                         <div>icon only button 24</div>
                         <div class="hnc-control-container">
-                            <button class="hnc-control hnc-icon-only-button" tabindex=0>
+                            <button class="hnc-control hnc-icon-only-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-24.png"></image>
                                 <span class="hnc-control hnc-caption">icon only button의 캡션</span>
                             </button>
-                            <button class="hnc-control hnc-icon-only-button" tabindex=0 disabled="true">
+                            <button class="hnc-control hnc-icon-only-button" tabindex="0" disabled="true">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-24.png"></image>
                                 <span class="hnc-control hnc-caption">비활성</span>
                             </button>
@@ -74,22 +75,22 @@
                         <div>icon text button</div>
                         <div>아이콘으로 의미 전달이 어려울때 사용. 아이콘만 추가하면 툴팁이 나오지 않고, 우측 margin이 넓어짐</div>
                         <div class="hnc-control-container">
-                            <button class="hnc-control hnc-icon-text-button" tabindex=0>
+                            <button class="hnc-control hnc-icon-text-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">icon text button의 캡션</span>
                             </button>
-                            <button class="hnc-control hnc-icon-text-button" tabindex=0 disabled="true">
+                            <button class="hnc-control hnc-icon-text-button" tabindex="0" disabled="true">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">비활성</span>
                             </button>
-                            <button class="hnc-control hnc-icon-text-button" tabindex=0>
+                            <button class="hnc-control hnc-icon-text-button" tabindex="0">
                                 <span class="hnc-control hnc-caption">텍스트만 있는 경우</span>
                             </button>
                             <!-- 아이콘만 있으면 툴팁이 나오지 않고, 우측 margin이 넓어보임 -->
-                            <button class="hnc-control hnc-icon-text-button" tabindex=0>
+                            <button class="hnc-control hnc-icon-text-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                             </button>
-                            <button class="hnc-control hnc-icon-only-button" tabindex=0>
+                            <button class="hnc-control hnc-icon-only-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">icon only 인 경우는 icon-only-button 을 사용함</span>
                             </button>
@@ -102,15 +103,15 @@
                         <div>hyperlink button</div>
                         <div>URL 이동시 사용</div>
                         <div class="hnc-control-container">
-                            <button class="hnc-control hnc-hyperlink-button" tabindex=0>
+                            <button class="hnc-control hnc-hyperlink-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">hyperlink button의 캡션</span>
                             </button>
-                            <button class="hnc-control hnc-hyperlink-button" tabindex=0 disabled="true">
+                            <button class="hnc-control hnc-hyperlink-button" tabindex="0" disabled="true">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">비활성</span>
                             </button>
-                            <button class="hnc-control hnc-hyperlink-button" tabindex=0>
+                            <button class="hnc-control hnc-hyperlink-button" tabindex="0">
                                 <span class="hnc-control hnc-caption">텍스트만 있는 경우</span>
                             </button>
                         </div>
@@ -121,18 +122,18 @@
                     <li>
                         <div>button외에 a href에서도 사용가능 - 클릭하여 Url 이동 확인 </div>
                         <div class="hnc-control-container">
-                            <a class="hnc-control hnc-command-button" tabindex=0 href="http://www.hancom.com" target="_blank">
+                            <a class="hnc-control hnc-command-button" tabindex="0" href="http://www.hancom.com" target="_blank">
                                 <span class="hnc-control hnc-caption">command button</span>
                             </a>
-                            <a class="hnc-control hnc-icon-only-button" tabindex=0 href="http://www.hancom.com" target="_blank">
+                            <a class="hnc-control hnc-icon-only-button" tabindex="0" href="http://www.hancom.com" target="_blank">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">icon only button</span>
                             </a>
-                            <a class="hnc-control hnc-icon-text-button" tabindex=0 href="http://www.hancom.com" target="_blank">
+                            <a class="hnc-control hnc-icon-text-button" tabindex="0" href="http://www.hancom.com" target="_blank">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">icon text button</span>
                             </a>
-                            <a class="hnc-control hnc-hyperlink-button" tabindex=0 href="http://www.hancom.com" target="_blank">
+                            <a class="hnc-control hnc-hyperlink-button" tabindex="0" href="http://www.hancom.com" target="_blank">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">hyperlink button</span>
                             </a>
@@ -146,7 +147,7 @@
                         <div>클릭시 button 하위에 있는 submenu 를 토글 표시함</div>
 
                         <div class="hnc-control-container">
-                            <button class="hnc-control hnc-submenu-button" tabindex=0>
+                            <button class="hnc-control hnc-submenu-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">submenu button</span>
                                 <ul class="hnc-control hnc-submenu">
@@ -174,7 +175,7 @@
                                     <li class="hnc-control hnc-menu-item">1단계 메뉴3</li>
                                 </ul>
                             </button>
-                            <button class="hnc-control hnc-submenu-button" tabindex=0>
+                            <button class="hnc-control hnc-submenu-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">submenu button</span>
                                 <ul class="hnc-control hnc-submenu">
@@ -183,7 +184,7 @@
                                     <li class="hnc-control hnc-menu-item">1단계 하위메뉴3</li>
                                 </ul>
                             </button>
-                            <button class="hnc-control hnc-submenu-button" tabindex=0 disabled="true">
+                            <button class="hnc-control hnc-submenu-button" tabindex="0" disabled="true">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">비활성</span>
                             </button>
@@ -196,10 +197,10 @@
                         <div>check</div>
                         <div>input 엘리먼트의 형제로 label 추가.</div>
                         <div class="hnc-control-container">
-                            <input type="checkbox" class="hnc-control hnc-checkbox" id="test-checkbox1" tabindex=0/>
+                            <input type="checkbox" class="hnc-control hnc-checkbox" id="test-checkbox1" tabindex="0"/>
                             <label class="hnc-control hnc-caption" for="test-checkbox1">체크박스</label>
 
-                            <input type="checkbox" class="hnc-control hnc-checkbox" id="test-checkbox2" tabindex=0 disabled="true"/>
+                            <input type="checkbox" class="hnc-control hnc-checkbox" id="test-checkbox2" tabindex="0" disabled="true"/>
                             <label class="hnc-control hnc-caption" for="test-checkbox2">비활성</label>
                         </div>
                     </li>
@@ -210,13 +211,13 @@
                         <div>radio</div>
                         <div>input 엘리먼트의 형제로 label 추가.</div>
                         <div class="hnc-control-container">
-                            <input type="radio" class="hnc-control hnc-radio" id="test-radio1" name="radio-group" tabindex=0/>
-                            <label class="hnc-control hnc-caption" for="test-radio1"> 항목1</label>
+                            <input type="radio" class="hnc-control hnc-radio" id="test-radio1" name="radio-group" tabindex="0"/>
+                            <label class="hnc-control hnc-caption" for="test-radio1">항목1</label>
 
-                            <input type="radio" class="hnc-control hnc-radio" id="test-radio2" name="radio-group" tabindex=0/>
+                            <input type="radio" class="hnc-control hnc-radio" id="test-radio2" name="radio-group" tabindex="0"/>
                             <label class="hnc-control hnc-caption" for="test-radio2">항목2</label>
-
-                            <input type="radio" class="hnc-control hnc-radio" id="test-radio3" name="radio-group" tabindex=0 disabled="true"/>
+                
+                            <input type="radio" class="hnc-control hnc-radio" id="test-radio3" name="radio-group" tabindex="0" disabled="true"/>
                             <label class="hnc-control hnc-caption" for="test-radio3">비활성</label>
                         </div>
                     </li>
@@ -227,13 +228,13 @@
                         <div>editor</div>
                         <div class="hnc-control-container">
                             <label class="hnc-control hnc-caption" for="test-editor1">항목1</label>
-                            <input type="text" class="hnc-control hnc-editor" id="test-editor1" tabindex=0/>
+                            <input type="text" class="hnc-control hnc-editor" id="test-editor1" tabindex="0"/>
                             <div> </div>
                             <label class="hnc-control hnc-caption" for="test-editor2">비밀번호</label>
-                            <input type="password" class="hnc-control hnc-editor" id="test-editor2" tabindex=0/>
+                            <input type="password" class="hnc-control hnc-editor" id="test-editor2" tabindex="0"/>
                             <div> </div>
                             <label class="hnc-control hnc-caption" for="test-editor3">비활성</label>
-                            <input type="text" class="hnc-control hnc-editor" id="test-editor3" value="비활성 에디트" tabindex=0 disabled="true"/>
+                            <input type="text" class="hnc-control hnc-editor" id="test-editor3" value="비활성 에디트" tabindex="0" disabled="true"/>
                         </div>
                     </li>
                     <!-- ****************** -->
@@ -241,17 +242,33 @@
                     <!-- ****************** -->
                     <li> 
                         <div>spin</div>
-                        <div>hnc-spin 대신 hnc-spin-container 가 대체되고, up/down이 추가됨</div>
+                        <div>hnc-spin 대신 hnc-spin-container로 대체되고, up/down이 추가됨</div>
                         <div class="hnc-control-container">
                             <label class="hnc-control hnc-caption" for="test-spin1">항목</label>
-                            <input type="number" class="hnc-control hnc-spin" id="test-spin1" tabindex=0/>
+                            <input type="number" class="hnc-control hnc-spin" id="test-spin1" tabindex="0"/>
                             <div> </div>
                             <label class="hnc-control hnc-caption" for="test-spin2">비활성</label>
-                            <input type="number" class="hnc-control hnc-spin" id="test-spin2" value="비활성 스핀" tabindex=0 disabled="true"/>
+                            <input type="number" class="hnc-control hnc-spin" id="test-spin2" tabindex="0" disabled="true"/>
+                        </div>
+                    </li>
+                    <!-- ****************** -->
+                    <!-- Slider Sample -->
+                    <!-- ****************** -->
+                    <li> 
+                        <div>spin</div>
+                        <div>hnc-slider 대신 hnc-slider-container로 대체되고, focus 표시를 위한 rect 추가됨</div>
+                        <div class="hnc-control-container">
+                            <label class="hnc-control hnc-caption" for="test-range1">항목</label>
+                            <input type="range" class="hnc-control hnc-slider" id="test-range1" tabindex="0"/>
+                            <div> </div>
+                            <label class="hnc-control hnc-caption" for="test-range2">항목 min/max 지정</label>
+                            <input type="range" class="hnc-control hnc-slider" id="test-range2" tabindex="0" min="0" max="50"/>
+                            <div> </div>
+                            <label class="hnc-control hnc-caption" for="test-range3">비활성</label>
+                            <input type="range" class="hnc-control hnc-slider" id="test-range3" tabindex="0" disabled="true"/>
                         </div>
                     </li>
                         <!--
-                            슬라이더
                             그룹박스
                             탭
                             콤보박스
