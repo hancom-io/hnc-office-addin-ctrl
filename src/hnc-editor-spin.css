@@ -18,8 +18,12 @@
 .hnc-editor:hover,
 .hnc-spin-container:hover .hnc-spin,
 .hnc-spin-container:hover .hnc-spin-up,
-.hnc-spin-container:hover .hnc-spin-down {
-    /* editor는 hover시 원래 배경색을 사용 */
+.hnc-spin-container:hover .hnc-spin-down,
+.hnc-editor:focus,
+.hnc-spin:focus,
+.hnc-spin:focus~.hnc-spin-arrow-container .hnc-spin-up,
+.hnc-spin:focus~.hnc-spin-arrow-container .hnc-spin-down {
+    /* hover시 원래 배경색을 사용 */
     background-color: var(--hnc-control-background-color);
     border-color: var(--hnc-control-border-color-hover);
 }
