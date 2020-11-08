@@ -1,0 +1,38 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+/* -----------------------
+** groupbox
+-------------------------- */
+.hnc-groupbox {
+    background-color: transparent!important; /* hover시 색이 나오므로 important 추가 */
+    border-color: transparent!important;          
+    border-width: 0;
+    padding-left: 11px; /* groupbox 하위 항목 들여쓰기 */
+    padding-right: 11px; /* groupbox 하위 항목 들여쓰기 */
+}
+.hnc-groupbox > .hnc-groupbox-caption {
+    display: flex; /* caption과 separator 가 1줄에 나오므로 block 특성처럼 정의 */
+ 
+    margin: 0;
+    margin-left: -11px; /* groupbox 들여쓴 만큼 내어쓰기 */
+    margin-right: -11px; /* groupbox 들여쓴 만큼 내어쓰기 */
+    margin-bottom: 7px; /* 실제 그룹박스 item 간의 간격 */
+
+    align-items: center; /* after 세로 가운데 정렬 */
+    
+    font-size: var(--hnc-control-font-size);
+    color: var(--hnc-control-text-color-accent3);
+    font-weight: bold;
+
+    background-color: transparent; 
+    border-color: transparent;          
+    border-width: 0;
+}
+.hnc-groupbox > .hnc-groupbox-caption::after {
+    content:"";
+    margin-left: 10px; /* 왼쪽 캡션과의 여백 */
+    flex: 1; /* 증가 너비 */
+    height: 1px;
+    background-color: var(--hnc-control-background-accent2);
+}

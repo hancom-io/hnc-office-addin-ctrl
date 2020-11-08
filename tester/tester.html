@@ -156,7 +156,7 @@
                                         <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                         <span class="hnc-control hnc-caption">icon 메뉴(이미지와 함께)</span>
                                     </li>
-                                    <li class="hnc-control hnc-separater"></li>
+                                    <li class="hnc-control hnc-separator"></li>
                                     <li class="hnc-control hnc-submenu-item">
                                         <span class="hnc-control hnc-caption">1단계 하위메뉴</span>
                                         <ul class="hnc-control hnc-submenu">
@@ -255,7 +255,7 @@
                     <!-- Slider Sample -->
                     <!-- ****************** -->
                     <li> 
-                        <div>spin</div>
+                        <div>slider</div>
                         <div>hnc-slider 대신 hnc-slider-container로 대체되고, focus 표시를 위한 rect 추가됨</div>
                         <div class="hnc-control-container">
                             <label class="hnc-control hnc-caption" for="test-range1">항목</label>
@@ -268,8 +268,39 @@
                             <input type="range" class="hnc-control hnc-slider" id="test-range3" tabindex="0" disabled="true"/>
                         </div>
                     </li>
+                    <!-- ****************** -->
+                    <!-- groupbox Sample -->
+                    <!-- ****************** -->
+                    <li> 
+                        <div>groupbox</div>
+                        <div>groupbox 하위의 hnc-groupbox-caption 을 생략하면 separator가 보이지 않음</div>
+                        <div class="hnc-control-container">
+                            <div class="hnc-control hnc-groupbox">
+                                <label class="hnc-control hnc-groupbox-caption">그룹박스</label>
+                                <button class="hnc-control hnc-icon-text-button" tabindex="0">
+                                    <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                    <span class="hnc-control hnc-caption">icon text button의 캡션</span>
+                                </button>
+                                <div> </div>
+                                <input type="checkbox" class="hnc-control hnc-checkbox" id="test-groupbox1" tabindex="0"/>
+                                <label class="hnc-control hnc-caption" for="test-groupbox1">체크박스</label>
+                                <div> </div>
+                                <input type="radio" class="hnc-control hnc-radio" id="test-groupbox2" name="radio-groupbox" tabindex="0"/>
+                                <label class="hnc-control hnc-caption" for="test-groupbox2">라디오</label>
+                                <div> </div>
+                                <label class="hnc-control hnc-caption" for="test-groupbox3">항목</label>
+                                <input type="text" class="hnc-control hnc-editor" id="test-groupbox3" tabindex="0"/>
+                                <div> </div>
+                                <label class="hnc-control hnc-caption" for="test-groupbox4">항목</label>
+                                <input type="number" class="hnc-control hnc-spin" id="test-groupbox4" tabindex="0"/>
+                                <div> </div>
+                                <label class="hnc-control hnc-caption" for="test-groupbox5">항목</label>
+                                <input type="range" class="hnc-control hnc-slider" id="test-groupbox5" tabindex="0"/>
+                            </div>
+                         </div>
+                    </li>
                         <!--
-                            그룹박스
+
                             탭
                             콤보박스
                             리스트박스(text, icon+text)
@@ -277,7 +308,6 @@
 
                              -->
                 </ul>
-
             </article>
         </section>
         <aside>
