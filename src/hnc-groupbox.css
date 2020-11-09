@@ -3,6 +3,7 @@
 
 /* -----------------------
 ** groupbox
+** 첫번째 child인 hnc-caption 으로부터 separator 사용
 -------------------------- */
 .hnc-groupbox {
     background-color: transparent!important; /* hover시 색이 나오므로 important 추가 */

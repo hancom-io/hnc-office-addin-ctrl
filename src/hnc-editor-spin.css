@@ -29,7 +29,9 @@
 }
 /* -----------------------
 ** spin
-** 오른쪽 upDown은 javascript 코드에서 일괄 추가함.
+** 기본 upDown은 지우고 오른쪽 upDown은 javascript 코드에서 일괄 추가함.
+** spin-container로 <spin> 과 spin-arrow-container를 감쌈
+** upDown 동작은 javascript에서 처리
 -------------------------- */
 .hnc-spin-container, /* spin, spin-up, spin-down을 묶어둔 개체로 표시 내용 없음 */ 
 .hnc-slider-container { /* slider의 focus rect 표시를 위해 slider와 slider::before를 감싸둔  개체로 표시 내용 없음 */ 
@@ -45,7 +47,7 @@
 
 .hnc-spin-container:hover {
     background-color: transparent; /* .hnc-control:hover 에서 색을 표시하므로 재정의 */
-    border-color:transparent;
+    border-color: transparent;
 }
 .hnc-spin-arrow-container { /* spin-up, spin-down을 묶어둔 개체로 표시 내용 없음 */ 
     display: inline-block;

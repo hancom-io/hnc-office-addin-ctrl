@@ -2,7 +2,9 @@
 /* Licensed under the MIT License. See License.txt in the project root for license information. */
 
 /* -----------------------
-** slider : focus rect 표시를 위해 .hnc-slider::before를 사용하고, 이를 묶어 관리하기 위해 javascript에 slider-container로 강제로 감쌈
+** slider 
+** focus rect 표시를 위해 .hnc-slider::before를 사용하고, 이를 묶어 관리하기 위해 javascript에 slider-container로 강제로 감쌈
+** value 위치까지 배경색 표시를 위해 javascript 사용
 -------------------------- */
 .hnc-slider {
     -webkit-appearance: none; /* Chrome, Safari, Edge, Opera 에서 원래 형태 감춤 */
@@ -28,7 +30,7 @@
     border-width: 1px;
     border-color: transparent; /* focus rect 표시됨 */
     pointer-events: none; /* before에서 마우스 이벤트를 받으면, thumb:active 가 동작안함 */
-    /* focus 는 caption에 정의 */
+    /* focus 는 hnc-base 에 정의 */
 }
 .hnc-slider:hover {
     /* slider는 hover시 원래 배경색을 사용- 이후 Javascript에 의해 수정됨 */
@@ -45,7 +47,7 @@
     border-style: solid;
     border-color: var(--hnc-control-expander-color);
     border-radius: 50%;
-    /* disabled는 control 에 정의 */
+    /* disabled는 hnc-base 에 정의 */
 }
 .hnc-slider::-webkit-slider-thumb:hover {
     background-color: var(--hnc-control-background-color-hover);

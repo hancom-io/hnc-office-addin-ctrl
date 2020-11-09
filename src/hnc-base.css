@@ -1,0 +1,160 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+/* -----------------------
+** control 공통 속성
+-------------------------- */
+.hnc-control-container {
+    font-size: 0; /* inline-block으로 구성된 컨트롤들간 추가 마진 3px 표시되는 문제 수정 */
+    position: relative; /* 하위 항목들은 상대적 배치 */
+}
+.hnc-control {
+    display: inline-block; /* 가로 배치가능하도록 inline, margin 적용이 되도록 inline-block으로 사용 */
+    vertical-align: middle;
+    box-sizing: content-box; /*  box-sizing이 button은 border-box임(테두리와 padding이 width에 포함됨). 이에 따라 div, button 에 css 줄때 다른 width가 나타나게 되어, 기본 css 스타일로 강제함 */
+
+    margin: var(--hnc-control-margin);
+    padding: var(--hnc-control-padding);
+    font-family: var(--hnc-control-font-family);
+    font-size: 0; /* 하위 아이템간 요소 간격 없앰. 예를들어 버튼안의 아이콘과 캡션 간 불필요한 간격들. */
+    text-decoration: none; /* a 태그로 사용시 기본으로 밑줄이 적용되므로 제거 */
+    outline: none; /* 디자인상 브라우저의 포커스 rect를 없앰 */
+
+    background-color: var(--hnc-control-background-color);
+    border-color: var(--hnc-control-border-color);
+    border-style: var(--hnc-control-border-style);
+    border-width: var(--hnc-control-border-width);
+}
+.hnc-control:hover,
+.hnc-checkbox + .hnc-caption:hover:before {
+    /* 일반적인 하일라이트-배경을 채우고, 테두리를 그림 */
+    background-color: var(--hnc-control-background-color-hover);
+    border-color: var(--hnc-control-border-color-hover);
+}
+.hnc-radio + .hnc-caption:hover:before {
+    /* 라디오는 테두리만 다른색임 */
+    border-color: var(--hnc-control-border-color-hover);
+}
+.hnc-control:disabled,
+.hnc-checkbox:disabled + .hnc-caption:before, /* hover 색상이 반영되므로 추가 */
+.hnc-radio:disabled + .hnc-caption:before, /* hover 색상이 반영되므로 추가 */
+.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-up, /* 비활성된 spin의 up/down */
+.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-down,
+.hnc-slider:disabled::-webkit-slider-thumb {
+    color: var(--hnc-control-text-color-disabled); /* div로 캡션을 넣지 않고, 직접 content로 입력한 경우도 동작하도록 색지정 */
+    background-color: var(--hnc-control-background-color-disabled)!important; /* edit, spin에서 hover 재정의하여 반영되지 않는 경우가 있어 important 추가 */
+    border-color: var(--hnc-control-border-color-disabled)!important;
+}
+
+/* -----------------------
+** caption
+-------------------------- */
+.hnc-caption { /* control 하위에 div 태그로 넣는 경우 div 태그가 상위 배경/테두리를 표시 하게 되므로, 투명처리함 */
+    display: inline-block; /* div등으로 넣을 수도 있어 inline 으로 강제(그냥 inline만 하면 a 태그에서 사용시 underline이 표시되어 inline-block 사용) */
+    margin: 0;
+    padding: 0;
+    font-size: var(--hnc-control-font-size);
+    color: var(--hnc-control-text-color);
+    background-color: transparent!important; /* caption의 배경은 transparent이나, caption에서 over시 색이 나와서 important 추가됨 */
+    border-color: transparent!important;
+    border-width: 1px; /* 일반적으로 테두리가 보이지 않으나, focus시 표시될 수 있어 width 영역 확보 */
+
+}
+.hnc-control:disabled > .hnc-caption,
+.hnc-checkbox:disabled + .hnc-caption,
+.hnc-radio:disabled + .hnc-caption {
+    color: var(--hnc-control-text-color-disabled)!important; /* hyperlink에서는 버튼의 caption 색을 hover시 바꾸는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
+    text-decoration: none!important; /* hyperlink에서는 캡션에 underline을 표시하는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
+}
+.hnc-icon-only-button > .hnc-caption {
+    display: none; /* icon-only 인 경우 caption 숨김. 이후 hover시 display: block을 하여 툴팁으로 표시됨 */
+    position: absolute; /* 상위 버튼이 caption 툴팁 표시에 따라 레이아웃이 커지지 않도록 지정 */
+
+    /* tooltip 형태로 표시 */
+    z-index: 1000; /* 툴팁이 최상위에 보일 수 있도록 조정 */
+    padding: var(--hnc-control-tooltip-padding);
+    background-color: var(--hnc-control-tooltip-background-color)!important; /* hnc-caption 에서 배경 투명을 주어 반영되지 않으므로, important 추가 */
+    border-color: var(--hnc-control-tooltip-border-color)!important; /* hnc-caption 에서 테두리 투명을 주어 반영되지 않으므로, important 추가*/
+    border-radius: var(--hnc-control-border-radius);
+    box-shadow: var(--hnc-control-tooltip-box-shadow); /* offset x, offiset y, radius, color */
+
+}
+.hnc-icon-only-button:hover > .hnc-caption {
+    display: block; /* icon-only 인 경우 caption 숨기고, hover시 툴팁으로 표시. 하단에 표시하기위해 block 사용 */
+}
+.hnc-hyperlink-button:focus > .hnc-caption,
+.hnc-checkbox:focus + .hnc-caption,
+.hnc-radio:focus + .hnc-caption,  /* 포커스 받았을때 캡션에만 rect 표시 */
+.hnc-slider:focus::before { 
+    border-color: var(--hnc-control-border-color-accent2)!important;  /* hnc-caption 에서 테두리 투명을 주어 반영되지 않으므로, important 추가 */
+    border-style: dotted;
+}
+.hnc-hyperlink-button:hover > .hnc-caption {
+    color: var(--hnc-control-text-color-hover);
+    text-decoration: underline;
+}
+.hnc-hyperlink-button:visited > .hnc-caption {
+    color: var(--hnc-control-text-color-visited);
+}
+/* -----------------------
+** image
+-------------------------- */
+.hnc-image {
+    display: inline-block; /* div등으로 넣을 수도 있어 inline 으로 강제(margin등 boxing을 위한 여백 사용을 위해 inline-block 사용) */
+    margin: 0;
+    padding: 0;
+    background-color: transparent!important; /* image 의 배경은 transparent이나, over시 색이 나와서 important 추가됨 */
+    border-color: transparent!important;
+    border-width: 1px; /* 일반적으로 테두리가 보이지 않으나, focus시 표시될 수 있어 width 영역 확보 */
+}
+.hnc-control:disabled > .hnc-image {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}
+.hnc-command-button > .hnc-image,
+.hnc-icon-text-button > .hnc-image,
+.hnc-hyperlink-button > .hnc-image,
+.hnc-submenu-button > .hnc-image {
+    margin: 0px 6px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 - text와의 공간 추가 */
+}
+.hnc-menu-item > .hnc-image,
+.hnc-submenu-item > .hnc-image { /* menu item 하위에 사용하면 16x16 으로 크기 강제 */
+    position: absolute; /* 이미지 위치 절대 크기로 조정 */
+    width: var(--hnc-control-submenu-icon-size);
+    height: var(--hnc-control-submenu-icon-size);
+    /* border 1, image 16, border1, padding 3, item간 간격 3 */
+    transform: translateX(-24px); /* menu-item의 padding 영역에 표시 */
+    margin: 0px 0px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 - text와의 공간 추가 */
+}
+
+/* -----------------------
+** expander-arrow
+-------------------------- */
+.hnc-expander-down,
+.hnc-expander-right { /* 코드에서 hnc-submenu-button및 메뉴에 동적으로 추가되는 화살표 expander-path에 의해 그려지고 색상 변경 */
+    display: inline-block;
+    vertical-align: middle;
+    font-size: 0; /* 기본 폰트 크기가 설정되면, block의 크기가 커질 수 있으므로 0으로 설정 */
+    margin: 0px 0px 0px 3px; /* 위, 오른쪽, 아래, 왼쪽 : 화살표 왼쪽의 캡션과 마진 추가 */
+}
+.hnc-expander-right {
+    position: absolute;
+    right: 6px; /* 메뉴 오른쪽으로부터의 기준 */
+    margin-top : calc(var(--hnc-control-submenu-icon-size) / 2 - 7px / 2); /* expander를 세로 중심에 배치 */
+    }
+.hnc-expander-path,
+.hnc-spin-path {
+    fill : var(--hnc-control-expander-color);
+}
+.hnc-submenu-button:hover > .hnc-expander-down .hnc-expander-path,
+.hnc-submenu-item:hover > .hnc-expander-right .hnc-expander-path,
+.hnc-spin-up:hover .hnc-spin-path,
+.hnc-spin-down:hover .hnc-spin-path {
+    fill : var(--hnc-control-expander-color-hover);
+}
+.hnc-control:disabled .hnc-expander-path,
+.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-path,
+.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-path { 
+    fill: var(--hnc-control-expander-color-disabled)!important; /* hover 에 의해 설정되지 않아서 important 추가 */
+}
+
