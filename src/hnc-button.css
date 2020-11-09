@@ -9,6 +9,7 @@
     min-width: 73px; /* 내부 content 너비. padding, border, margin 제외 */
     text-align: center; /* div, span 사용시에도 가운데 정렬 */
     border-radius: var(--hnc-control-border-radius);
+    /* image는 hnc-base에 정의 */
 }
 .hnc-command-button:focus {
     padding: 3px 3px 3px 3px; /* border-width가 2여서 1씩 감소 */
@@ -21,6 +22,7 @@
 -------------------------- */
 .hnc-icon-only-button {
     border-radius: var(--hnc-control-border-radius);
+    /* caption, caption:hover는 hnc-base에 정의 */
 }
 .hnc-icon-only-button:focus {
     padding: 0px 0px 0px 0px; /* border-width가 2여서 1씩 감소 */
@@ -35,6 +37,7 @@
 .hnc-submenu-button {
     padding: 1px 4px 1px 4px; /* 위, 오른쪽, 아래, 왼쪽 */
     border-radius: var(--hnc-control-border-radius);
+    /* image는 hnc-base에 정의 */
 }
 .hnc-icon-text-button:focus,
 .hnc-submenu-button:focus {
@@ -51,6 +54,7 @@
     padding: 1px 4px 1px 4px; /* 위, 오른쪽, 아래, 왼쪽 */
     background-color: transparent!important; /* hover시 색상이 바뀌지 않도록 important */
     border-color: transparent!important;
+    /* image, focus, hover, visited 는 hnc-base에 정의 */
 }
 
 .hnc-hyperlink-button:hover {
@@ -60,3 +64,8 @@
 .hnc-hyperlink-button:disabled {
     cursor: initial; /* 초기상태 아마도 arrow */
 }
+/* -----------------------
+** submenu button
+** javascript에서 expander 추가. 
+** 외형은 icon-text-botton, hnc-base 에 정의됨
+-------------------------- */

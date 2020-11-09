@@ -9,6 +9,7 @@
 .hnc-radio {
     position: absolute; /* display none으로 해되되나, 그러면 포커스를 줄 수 없어서 clip 사용 */
     clip:rect(0,0,0,0);
+    /* hover, disabled, focus 는 hnc-base 에 정의함(동일한게 있음) */
  }
 .hnc-checkbox + .hnc-caption:before { /* checkbox 왼편 box */
     content: '';
@@ -29,7 +30,6 @@
     border-width: var(--hnc-control-border-width);
     border-color: var(--hnc-control-border-color);
     border-radius: var(--hnc-control-border-radius);
-    /* hover, disabled, focus 는 hnc-base 에 정의함(동일한게 있음) */
 }
 .hnc-checkbox:checked + .hnc-caption:before { /* checked 시 box에 표시되는 마크 */
     content: '\2714'; /*check 표시 글꼴. svg 쓰긴 좀 부담스러워서 이미 있는 비슷한 글꼴 사용 */
@@ -46,6 +46,7 @@
 /* -----------------------
 ** radio
 ** 기본 형태를 지우고 before를 이용하여 왼편 원형 표시. after로 체크 마크 표시
+** hnc-check에 기본형태 정의
 -------------------------- */
 .hnc-radio + .hnc-caption {
     position: relative; /* 라디오의 선택표시는 after 가상선택자를 넣어 absolute 로 하게 되는데, 캡션을 기준으로 좌표가 설정되게끔 relative 를 강제함. 그렇치 않으면 스크린 기준으로 표시됨 */
@@ -67,7 +68,6 @@
     border-width: var(--hnc-control-border-width);
     border-color: var(--hnc-control-border-color);
     border-radius: 50%;
-    /* hover, disabled, focus 는 hnc-base 에 정의함(동일한게 있음) */
 }
 .hnc-radio:checked + .hnc-caption:after { /* checked 시 원형에 표시되는 마크 */
     content: ''; 

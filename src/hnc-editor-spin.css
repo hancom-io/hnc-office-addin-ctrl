@@ -72,6 +72,8 @@
     border-right-width: 0px; /* 오른쪽은 Up/down에 붙임 */
     border-top-left-radius: var(--hnc-control-border-radius);
     border-bottom-left-radius: var(--hnc-control-border-radius);
+    /* hover, focus 는 hnc-editor 에 정의 */
+    /* arrow disabled, hover는 hnc-base에 정의 */
 }
 .hnc-spin-up { 
     display: block;
