@@ -3,17 +3,15 @@
 
 // html에서 hnc 계열 컨트롤들을 초기화 하고, 이벤트핸들러 장착
 document.addEventListener('DOMContentLoaded', function() {
-    // expander 추가
-    hncAddSubmenuButtonExpander();
-    hncAddSubmenuItemExpander();
+    
+    //submenu에 expander 추가
+    hncInitSubmenu();
 
     // spin-container로 감싸고 spin의 upDown 추가
     hncInitSpin();
 
     // slider-container로 감쌈
     hncInitSlider();
-
-
 
     // 버튼 클릭시 하위 메뉴 확장
     let buttons = document.querySelectorAll('.hnc-submenu-button');

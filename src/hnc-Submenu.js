@@ -1,6 +1,13 @@
 // Copyright (c) Hancom. All rights reserved. 
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
+
+// expander 추가
+function hncInitSubmenu() {
+    hncAddSubmenuButtonExpander();
+    hncAddSubmenuItemExpander();
+}
+
 // submenu-button들의 아래쪽 Expander 추가
 function hncAddSubmenuButtonExpander() {
     let buttons = document.querySelectorAll('.hnc-submenu-button');

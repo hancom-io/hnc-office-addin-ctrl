@@ -5,7 +5,7 @@
 ** separator
 -------------------------- */
 .hnc-separator {
-    display: block; /* separator는 개행되어야 함*/
+    display: block; /* separator는 개행되어야 함 */
     height: 1px;
     padding : 0px 0px 0px 0px;
     pointer-events: none; /* 마우스 이벤트 안받음 */
