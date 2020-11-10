@@ -25,7 +25,12 @@
     border-style: var(--hnc-control-border-style);
     border-width: var(--hnc-control-border-width);
 }
-.hnc-control:hover,
+.hnc-command-button:hover,
+.hnc-icon-only-button:hover,
+.hnc-icon-text-button:hover,
+.hnc-submenu-button:hover,
+.hnc-menu-item:hover,
+.hnc-submenu-item:hover,
 .hnc-checkbox + .hnc-caption:hover:before {
     /* 일반적인 하일라이트-배경을 채우고, 테두리를 그림 */
     background-color: var(--hnc-control-background-color-hover);
@@ -35,17 +40,37 @@
     /* 라디오는 테두리만 다른색임 */
     border-color: var(--hnc-control-border-color-hover);
 }
-.hnc-control:disabled,
-.hnc-checkbox:disabled + .hnc-caption:before, /* hover 색상이 반영되므로 추가 */
-.hnc-radio:disabled + .hnc-caption:before, /* hover 색상이 반영되므로 추가 */
-.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-up, /* 비활성된 spin의 up/down */
-.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-down,
-.hnc-slider:disabled::-webkit-slider-thumb {
-    color: var(--hnc-control-text-color-disabled); /* div로 캡션을 넣지 않고, 직접 content로 입력한 경우도 동작하도록 색지정 */
-    background-color: var(--hnc-control-background-color-disabled)!important; /* edit, spin에서 hover 재정의하여 반영되지 않는 경우가 있어 important 추가 */
-    border-color: var(--hnc-control-border-color-disabled)!important;
+
+.hnc-editor:hover,
+.hnc-spin-container:hover .hnc-spin,
+.hnc-spin-container:hover .hnc-spin-up,
+.hnc-spin-container:hover .hnc-spin-down,
+.hnc-editor:focus,
+.hnc-spin:focus,
+.hnc-spin:focus~.hnc-spin-arrow-container .hnc-spin-up,
+.hnc-spin:focus~.hnc-spin-arrow-container .hnc-spin-down {
+    border-color: var(--hnc-control-border-color-hover);
 }
 
+.hnc-command-button:disabled,
+.hnc-icon-only-button:disabled,
+.hnc-icon-text-button:disabled,
+.hnc-submenu-button:disabled,
+.hnc-menu-item:disabled,
+.hnc-submenu-item:disabled,
+.hnc-checkbox:disabled + .hnc-caption:before, /* hover 색상이 반영되므로 추가 */
+.hnc-radio:disabled + .hnc-caption:before, /* hover 색상이 반영되므로 추가 */
+.hnc-editor:disabled,
+.hnc-spin:disabled,
+.hnc-spin-container:hover .hnc-spin:disabled,
+.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-up, /* 비활성된 spin의 up/down */
+.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-down,
+.hnc-slider:disabled,
+.hnc-slider:disabled::-webkit-slider-thumb {
+    color: var(--hnc-control-text-color-disabled); /* div로 캡션을 넣지 않고, 직접 content로 입력한 경우도 동작하도록 색지정 */
+    background-color: var(--hnc-control-background-color-disabled);
+    border-color: var(--hnc-control-border-color-disabled);
+}
 /* -----------------------
 ** caption
 -------------------------- */
@@ -55,8 +80,8 @@
     padding: 0;
     font-size: var(--hnc-control-font-size);
     color: var(--hnc-control-text-color);
-    background-color: transparent!important; /* caption의 배경은 transparent이나, caption에서 over시 색이 나와서 important 추가됨 */
-    border-color: transparent!important;
+    background-color: transparent; 
+    border-color: transparent;
     border-width: 1px; /* 일반적으로 테두리가 보이지 않으나, focus시 표시될 수 있어 width 영역 확보 */
 
 }
@@ -73,8 +98,8 @@
     /* tooltip 형태로 표시 */
     z-index: 1000; /* 툴팁이 최상위에 보일 수 있도록 조정 */
     padding: var(--hnc-control-tooltip-padding);
-    background-color: var(--hnc-control-tooltip-background-color)!important; /* hnc-caption 에서 배경 투명을 주어 반영되지 않으므로, important 추가 */
-    border-color: var(--hnc-control-tooltip-border-color)!important; /* hnc-caption 에서 테두리 투명을 주어 반영되지 않으므로, important 추가*/
+    background-color: var(--hnc-control-tooltip-background-color); 
+    border-color: var(--hnc-control-tooltip-border-color); 
     border-radius: var(--hnc-control-border-radius);
     box-shadow: var(--hnc-control-tooltip-box-shadow); /* offset x, offiset y, radius, color */
 
@@ -85,8 +110,9 @@
 .hnc-hyperlink-button:focus > .hnc-caption,
 .hnc-checkbox:focus + .hnc-caption,
 .hnc-radio:focus + .hnc-caption,  /* 포커스 받았을때 캡션에만 rect 표시 */
-.hnc-slider:focus::before { 
-    border-color: var(--hnc-control-border-color-accent2)!important;  /* hnc-caption 에서 테두리 투명을 주어 반영되지 않으므로, important 추가 */
+.hnc-slider:focus::before,
+.hnc-tab-radio:focus + .hnc-tab-header > .hnc-caption { 
+    border-color: var(--hnc-control-border-color-accent2);                  
     border-style: dotted;
 }
 .hnc-hyperlink-button:hover > .hnc-caption {
@@ -103,8 +129,8 @@
     display: inline-block; /* div등으로 넣을 수도 있어 inline 으로 강제(margin등 boxing을 위한 여백 사용을 위해 inline-block 사용) */
     margin: 0;
     padding: 0;
-    background-color: transparent!important; /* image 의 배경은 transparent이나, over시 색이 나와서 important 추가됨 */
-    border-color: transparent!important;
+    background-color: transparent; 
+    border-color: transparent;
     border-width: 1px; /* 일반적으로 테두리가 보이지 않으나, focus시 표시될 수 있어 width 영역 확보 */
 }
 .hnc-control:disabled > .hnc-image {
@@ -152,9 +178,9 @@
 .hnc-spin-down:hover .hnc-spin-path {
     fill : var(--hnc-control-expander-color-hover);
 }
-.hnc-control:disabled .hnc-expander-path,
-.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-path,
-.hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-path { 
-    fill: var(--hnc-control-expander-color-disabled)!important; /* hover 에 의해 설정되지 않아서 important 추가 */
+.hnc-submenu-button:disabled > .hnc-expander-down .hnc-expander-path,
+.hnc-spin:disabled ~ .hnc-spin-arrow-container .hnc-spin-path,
+.hnc-spin:disabled ~ .hnc-spin-arrow-container .hnc-spin-path { 
+    fill: var(--hnc-control-expander-color-disabled); 
 }
 

@@ -16,7 +16,7 @@
     border-width: 0px; /* 테두리 사용 안함. 테두리색은 Javascript에서 사용됨 */
     /* hnc-slider-container는 hnc-spin-container에 정의 */
     /* caption과의 margin은 hnc-editor에 정의 */
-    /* 비활성시 control:disabled에 의해 color와 border-color가 변경되고 이로부터 track을 렌더링하여 비활성 track표시가 구현됨 */
+    /* 비활성시 .hnc-slider:disabled에 의해 color와 border-color가 변경되고 이로부터 track을 렌더링하여 비활성 track표시가 구현됨 */
 }
 
 .hnc-slider::before { /* focus rect 그리기용 */
@@ -33,12 +33,6 @@
     pointer-events: none; /* before에서 마우스 이벤트를 받으면, thumb:active 가 동작안함 */
     /* focus 는 hnc-base 에 정의 */
 }
-.hnc-slider:hover {
-    /* slider는 hover시 원래 배경색을 사용- 이후 Javascript에 의해 수정됨 */
-    background-color: var(--hnc-control-border-color-accent2);
-    /* javascript에서 hover시 hnc-control 것을 가져오지 않도록 원래값으로 설정 */
-    border-color: var(--hnc-control-border-color-accent2);
-}
 .hnc-slider::-webkit-slider-thumb {
     -webkit-appearance: none; /* Chrome, Safari, Edge, Opera 에서 원래 형태 감춤 */
     height: 10px;
@@ -54,6 +48,12 @@
     background-color: var(--hnc-control-background-color-hover);
     border-color: var(--hnc-control-text-color-accent4); 
 }
+.hnc-slider:disabled::-webkit-slider-thumb {
+    color: var(--hnc-control-text-color-disabled); /* div로 캡션을 넣지 않고, 직접 content로 입력한 경우도 동작하도록 색지정 */
+    background-color: var(--hnc-control-background-color-disabled);
+    border-color: var(--hnc-control-border-color-disabled);
+}
+
 .hnc-slider::-webkit-slider-thumb:active { /* 마우스 드래그중 */
     background-color: var(--hnc-control-text-color-accent4);
 }

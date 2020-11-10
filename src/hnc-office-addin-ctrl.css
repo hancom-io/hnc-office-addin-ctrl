@@ -11,3 +11,4 @@
 @import url("../src/hnc-editor-spin.css"); /* up/down 버튼 클릭 동작에 js 필요 */
 @import url("../src/hnc-slider.css"); /* slider 배경색 설정에 js 필요 */
 @import url("../src/hnc-groupbox.css");
+@import url("../src/hnc-tab.css");

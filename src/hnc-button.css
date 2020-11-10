@@ -52,14 +52,12 @@
 -------------------------- */
 .hnc-hyperlink-button {
     padding: 1px 4px 1px 4px; /* 위, 오른쪽, 아래, 왼쪽 */
-    background-color: transparent!important; /* hover시 색상이 바뀌지 않도록 important */
-    border-color: transparent!important;
+    background-color: transparent; 
+    border-color: transparent;
     /* image, focus, hover, visited 는 hnc-base에 정의 */
 }
-
 .hnc-hyperlink-button:hover {
     cursor: pointer; /* 손모양 */
-    border-color: transparent;
 }
 .hnc-hyperlink-button:disabled {
     cursor: initial; /* 초기상태 아마도 arrow */

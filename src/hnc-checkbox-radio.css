@@ -7,7 +7,7 @@
 -------------------------- */
 .hnc-checkbox,
 .hnc-radio {
-    position: absolute; /* display none으로 해되되나, 그러면 포커스를 줄 수 없어서 clip 사용 */
+    position: absolute; /* display none으로 해도되나, 그러면 포커스를 줄 수 없어서 clip 사용 */
     clip:rect(0,0,0,0);
     /* hover, disabled, focus 는 hnc-base 에 정의함(동일한게 있음) */
  }

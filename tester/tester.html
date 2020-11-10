@@ -299,9 +299,40 @@
                             </div>
                          </div>
                     </li>
+                    <!-- ****************** -->
+                    <!-- tab Sample -->
+                    <!-- ****************** -->
+                    <li> 
+                        <div>tab</div>
+                        <div>ul 태그에 사용. 초기에 checked 된 항목이 있어야 보임. radio의 id와 name 설정 필수</div>
+                        <div class="hnc-control-container">
+                            <ul class="hnc-control hnc-tab">
+                                <li>
+                                    <input type="radio" class="hnc-control hnc-tab-radio" id="tab1" name="tab-radio" tabindex="0" checked/>
+                                    <div class="hnc-control hnc-tab-header">
+                                        <label class="hnc-control hnc-caption" for="tab1">탭 1</label>
+                                    </div>
+                                    <div class="hnc-control hnc-tab-body">
+                                        <button class="hnc-control hnc-command-button" tabindex="0">
+                                            <span class="hnc-control hnc-caption">탭 1의 버튼</span>
+                                        </button>
+                                    </div>
+                                </li>
+                                <li>
+                                    <input type="radio" class="hnc-control hnc-tab-radio" id="tab2" name="tab-radio" tabindex="0"/>
+                                    <div class="hnc-control hnc-tab-header">
+                                        <label class="hnc-control hnc-caption" for="tab2">탭 2</label>
+                                    </div>
+                                    <div class="hnc-control hnc-tab-body">
+                                        <div style="font-size: 12px;">탭 2의 본문내용입니다. hnc-control 내에 있기 때문에 글꼴 크기가 0입니다. 이는 글꼴 크기가 있으면 control 배치시 불필요한 여백이 3px 정도 생기기 때문입니다. 따라서, hnc-caption 클래스를 사용하던지, style="font-size: 12px;" 을 강제로 주어야 합니다.</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </li>
                         <!--
 
-                            탭
+
                             콤보박스
                             리스트박스(text, icon+text)
                             이미지리스트 박스

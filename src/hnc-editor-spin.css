@@ -9,24 +9,14 @@
     font-size: var(--hnc-control-font-size);
     padding-left: 2px;
     padding-right: 2px;
+    /* hover, focus 는 hnc-base에 구현-disabled 보다 먼저 구현하기 위함. 그렇지 않으면, disable 상태에서 hover시 hover 속성이 적용됨 */
 }
 .hnc-caption + .hnc-editor, 
 .hnc-caption + .hnc-spin-container,
 .hnc-caption + .hnc-slider-container {
     margin-left: 4px; /* 캡션 붙어있으면 마진 추가 */
 }
-.hnc-editor:hover,
-.hnc-spin-container:hover .hnc-spin,
-.hnc-spin-container:hover .hnc-spin-up,
-.hnc-spin-container:hover .hnc-spin-down,
-.hnc-editor:focus,
-.hnc-spin:focus,
-.hnc-spin:focus~.hnc-spin-arrow-container .hnc-spin-up,
-.hnc-spin:focus~.hnc-spin-arrow-container .hnc-spin-down {
-    /* hover시 원래 배경색을 사용 */
-    background-color: var(--hnc-control-background-color);
-    border-color: var(--hnc-control-border-color-hover);
-}
+
 /* -----------------------
 ** spin
 ** 기본 upDown은 지우고 오른쪽 upDown은 javascript 코드에서 일괄 추가함.
@@ -45,10 +35,6 @@
     border-width: 0;
 }
 
-.hnc-spin-container:hover {
-    background-color: transparent; /* .hnc-control:hover 에서 색을 표시하므로 재정의 */
-    border-color: transparent;
-}
 .hnc-spin-arrow-container { /* spin-up, spin-down을 묶어둔 개체로 표시 내용 없음 */ 
     display: inline-block;
     margin : 0;
@@ -75,6 +61,10 @@
     /* hover, focus 는 hnc-editor 에 정의 */
     /* arrow disabled, hover는 hnc-base에 정의 */
 }
+.hnc-spin:disabled~.hnc-spin-arrow-container > .hnc-spin-up,
+.hnc-spin:disabled~.hnc-spin-arrow-container > .hnc-spin-down {
+    pointer-events: none; /* spin 비활성시 마우스 이벤트 받지 않음 */
+}
 .hnc-spin-up { 
     display: block;
 
@@ -88,7 +78,7 @@
     /* arrow 색상, hover, disable은 hnc-control-expander-color와 동일 */
 }
 .hnc-spin-up:hover { 
-    background-color: var(--hnc-control-background-color-hover)!important; /* .hnc-spin-container:hover .hnc-spin-up 에서 원래 배경생으로 설정해서 충돌됨. 따라서 hover시 배경색을 important로 세팅 */
+    background-color: var(--hnc-control-background-color-hover); 
 } 
 .hnc-spin-down { 
     display: block;
@@ -103,6 +93,8 @@
      /* arrow 색상, hover, disable은 hnc-control-expander-color와 동일  */
  } 
 .hnc-spin-down:hover { 
-    background-color: var(--hnc-control-background-color-hover)!important;
+    background-color: var(--hnc-control-background-color-hover);
 } 
+
+
 

@@ -32,10 +32,7 @@
     opacity: 1!important; /* 기본 opacity를 조정하여 표시 */
     pointer-events: auto!important;
 }
-.hnc-control:hover > .hnc-submenu {
-    background-color: var(--hnc-control-background-color); /* menu 는 hover 하더라도 활성화 표시를 하지 않음 */
-    border-color: var(--hnc-control-submenu-border-color);
-}
+
 /* -----------------------
 ** menu item
 -------------------------- */
