@@ -14,19 +14,19 @@
     --hnc-control-text-color-disabled: #bfbfbf;
     --hnc-control-text-color-accent1: #5775c1; /* checkbox hover caption, slider value 배경색 */
     --hnc-control-text-color-accent2: #3554a3; /* checkbox - check표시 */
-    --hnc-control-text-color-accent3:#335095; /* radio - 체크 색, groupbox caption */
+    --hnc-control-text-color-accent3:#335095; /* radio - 체크 색, groupbox caption, tab caption */
     --hnc-control-text-color-accent4: #6182D6; /* 선택시 slider thumb 테두리, 배경색 */
 
     --hnc-control-background-color: #ffffff;
     --hnc-control-background-color-hover: #e9eefb;
     --hnc-control-background-color-disabled: #fbfbfb;
     --hnc-control-background-accent1: #e0e0e0; /* separator */
-    --hnc-control-background-accent2: #d8d8d8; /* groupbox separator */
+    --hnc-control-background-accent2: #d8d8d8; /* groupbox separator, tab separator */
 
     --hnc-control-border-color: #c5c5c5;
     --hnc-control-border-color-hover: #90a5dc;
     --hnc-control-border-color-disabled: #e5e5e5;
-    --hnc-control-border-color-accent1: #6182d6; /* 전체 포커스시 사용 - command button, icon button */
+    --hnc-control-border-color-accent1: #6182d6; /* 전체 포커스시 사용 - command button, icon button, tab 선택표시 */
     --hnc-control-border-color-accent2: #b4b4b4; /* 캡션 포커스시 사용 - 하이퍼링크, slider 배경색 */
 
     --hnc-control-border-style: solid;

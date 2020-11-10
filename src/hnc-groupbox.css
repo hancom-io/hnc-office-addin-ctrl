@@ -3,11 +3,11 @@
 
 /* -----------------------
 ** groupbox
-** 첫번째 child인 hnc-caption 으로부터 separator 사용
+** 첫번째 child인 hnc-caption의 :after로 separator 생성.
 -------------------------- */
 .hnc-groupbox {
-    background-color: transparent!important; /* hover시 색이 나오므로 important 추가 */
-    border-color: transparent!important;          
+    background-color: transparent; 
+    border-color: transparent;          
     border-width: 0;
     padding-left: 11px; /* groupbox 하위 항목 들여쓰기 */
     padding-right: 11px; /* groupbox 하위 항목 들여쓰기 */
@@ -26,7 +26,7 @@
    
     border-width: 0; 
 }
-.hnc-groupbox > .hnc-caption:first-child::after {
+.hnc-groupbox > .hnc-caption:first-child::after { /* 캡션 오른편 separator */
     content:"";
     flex: 1; /* 증가 너비 */
     margin-left: 10px; /* 왼쪽 캡션과의 여백 */
