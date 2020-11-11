@@ -91,8 +91,9 @@
     color: var(--hnc-control-text-color-disabled)!important; /* hyperlink에서는 버튼의 caption 색을 hover시 바꾸는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
     text-decoration: none!important; /* hyperlink에서는 캡션에 underline을 표시하는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
 }
+
 .hnc-icon-only-button > .hnc-caption,
-.hnc-tab-header-label > .hnc-caption {
+.hnc-tab-header-label > .hnc-image ~ .hnc-caption {
     display: none; /* icon-only 인 경우 caption 숨김. 이후 hover시 display: block을 하여 툴팁으로 표시됨 */
     position: absolute; /* 상위 버튼이 caption 툴팁 표시에 따라 레이아웃이 커지지 않도록 지정 */
 
@@ -105,13 +106,12 @@
     border-color: var(--hnc-control-tooltip-border-color); 
     border-radius: var(--hnc-control-border-radius);
     box-shadow: var(--hnc-control-tooltip-box-shadow); /* offset x, offiset y, radius, color */
-    font-weight: normal; /* hnc-tab-header-label 에서 선택된 tab-header는 굵게 표시하여 툴팁도 굵게 표시됨. 따라서, 상위에 다른 속성이 있더라도 평범하게 표시함 */
 }
-.hnc-tab-header-label > .hnc-caption {
+.hnc-tab-header-label >  .hnc-image ~ .hnc-caption {
     margin-top: 12px; /* tab-header 선택표시를 가려서 많이 띄움 */
 }
 .hnc-icon-only-button:hover > .hnc-caption,
-.hnc-tab-header-label:hover > .hnc-caption {
+.hnc-tab-header-label:hover > .hnc-image ~ .hnc-caption {
     display: block; /* icon-only 인 경우 caption 숨기고, hover시 툴팁으로 표시. 하단에 표시하기위해 block 사용 */
 }
 

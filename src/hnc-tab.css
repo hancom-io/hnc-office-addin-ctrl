@@ -79,9 +79,15 @@
     /* focus 는 hnc-base에 정의 */
     /* caption 툴팁은 hnc-base에 정의 */
 }
-.hnc-tab-radio:checked ~ .hnc-tab-header > .hnc-tab-header-label {
+.hnc-tab-radio:checked ~ .hnc-tab-header > .hnc-tab-header-label,
+.hnc-tab-radio:checked ~ .hnc-tab-header > .hnc-tab-header-label > .hnc-caption { /* 선택된 header 캡션은 굵게 */
     color: var(--hnc-control-text-color-accent3);
     font-weight: bold;
+}
+
+.hnc-tab-radio:checked ~ .hnc-tab-header > .hnc-tab-header-label > .hnc-image + .hnc-caption {
+    color: var(--hnc-control-text-color);
+    font-weight: normal; /* image와 함께 있는 캡션이면 툴팁이므로 툴팁과 동일하게 스타일링 */ 
 }
 .hnc-tab-header > .hnc-tab-header-label > .hnc-image {
     filter: grayscale(100%); /* tab-header의 이미지는 회색조로 표시 */  
