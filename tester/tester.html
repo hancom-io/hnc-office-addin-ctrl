@@ -11,6 +11,7 @@
         <script type="text/javascript" src="../src/hnc-submenu.js"></script>
         <script type="text/javascript" src="../src/hnc-spin.js"></script>
         <script type="text/javascript" src="../src/hnc-slider.js"></script>
+        <script type="text/javascript" src="../src/hnc-tab.js"></script>
     </head>
     <body>
         <header>
@@ -304,40 +305,87 @@
                     <!-- ****************** -->
                     <li> 
                         <div>tab</div>
-                        <div>ul 태그에 사용. 초기에 checked 된 항목이 있어야 보임. radio의 id와 name 설정 필수</div>
+                        <div>div 하위에 hnc-tab-headers 와 hnc-tab-bodies로 구성</div>
+                        <div>hnc-tab-headers는 ul > li > input(radio) 으로 구성해야함. 초기에 checked 된 항목이 있어야 보임. </div>
                         <div class="hnc-control-container">
-                            <ul class="hnc-control hnc-tab">
-                                <li>
-                                    <input type="radio" class="hnc-control hnc-tab-radio" id="tab1" name="tab-radio" tabindex="0" checked/>
-                                    <div class="hnc-control hnc-tab-header">
-                                        <label class="hnc-control hnc-caption" for="tab1">탭 1</label>
-                                    </div>
+                            <div class="hnc-control hnc-tab">
+                                <ul class="hnc-control hnc-tab-headers">
+                                    <li>
+                                        <input type="radio" class="hnc-control hnc-tab-radio" id="tab1" name="tab-radio" tabindex="0" checked/>
+                                        <div class="hnc-control hnc-tab-header">
+                                            <label class="hnc-control hnc-tab-header-label" for="tab1">탭 1</label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <input type="radio" class="hnc-control hnc-tab-radio" id="tab2" name="tab-radio" tabindex="0"/>
+                                        <div class="hnc-control hnc-tab-header">
+                                            <label class="hnc-control hnc-tab-header-label" for="tab2">탭 2</label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="hnc-control hnc-tab-bodies">
                                     <div class="hnc-control hnc-tab-body">
                                         <button class="hnc-control hnc-command-button" tabindex="0">
                                             <span class="hnc-control hnc-caption">탭 1의 버튼</span>
                                         </button>
                                     </div>
-                                </li>
-                                <li>
-                                    <input type="radio" class="hnc-control hnc-tab-radio" id="tab2" name="tab-radio" tabindex="0"/>
-                                    <div class="hnc-control hnc-tab-header">
-                                        <label class="hnc-control hnc-caption" for="tab2">탭 2</label>
+                                    <div class="hnc-control hnc-tab-body">
+                                        <div style="font-size: 12px;">탭 2의 본문내용입니다. hnc-control 내에 있기 때문에 글꼴 크기가 0입니다. 이는 글꼴 크기가 있으면 control 배치시 불필요한 여백이 3px 정도 생기기 때문입니다. 따라서, hnc-caption 클래스를 사용하던지, style="font-size: 12px;" 을 강제로 주어야 합니다.</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <!-- ****************** -->
+                    <!-- workspace tab Sample -->
+                    <!-- ****************** -->
+                    <li> 
+                        <div>workspace tab</div>
+                        <div>class에 workspace-style을 추가함. tab-body 가 rect가 아닌 top만 표시되며, tab-header 선택이 3px로 굵어짐</div>
+                        <div>hnc-tab-header-label하위의 image 추가 가능하고, hnc-caption을 추가하면 툴팁으로 보임</div>
+                        <div class="hnc-control-container">
+                            <div class="hnc-control hnc-tab hnc-workspace-style">
+                                <ul class="hnc-control hnc-tab-headers">
+                                    <li>
+                                        <input type="radio" class="hnc-control hnc-tab-radio" id="workspace-tab1" name="workspace-tab-radio" tabindex="0" checked/>
+                                        <div class="hnc-control hnc-tab-header" class="hnc-control hnc-tab-header">
+                                            <label class="hnc-control hnc-tab-header-label" for="workspace-tab1">
+                                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                                <span class="hnc-control hnc-caption">이미지 헤더 탭1</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                    <li>
+                                        <input type="radio" class="hnc-control hnc-tab-radio" id="workspace-tab2" name="workspace-tab-radio" tabindex="0"/>
+                                        <div class="hnc-control hnc-tab-header">
+                                            <label class="hnc-control hnc-tab-header-label" for="workspace-tab2">
+                                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                                <span class="hnc-control hnc-caption">이미지 헤더 탭2</span>
+                                            </label>
+                                        </div>
+                                    </li>
+                                </ul>
+                                <div class="hnc-control hnc-tab-bodies">
+                                    <div class="hnc-control hnc-tab-body">
+                                        <button class="hnc-control hnc-command-button" tabindex="0">
+                                            <span class="hnc-control hnc-caption">탭 1의 버튼</span>
+                                        </button>
                                     </div>
                                     <div class="hnc-control hnc-tab-body">
                                         <div style="font-size: 12px;">탭 2의 본문내용입니다. hnc-control 내에 있기 때문에 글꼴 크기가 0입니다. 이는 글꼴 크기가 있으면 control 배치시 불필요한 여백이 3px 정도 생기기 때문입니다. 따라서, hnc-caption 클래스를 사용하던지, style="font-size: 12px;" 을 강제로 주어야 합니다.</div>
                                     </div>
-                                </li>
-                            </ul>
+                                </div>
+                            </div>
                         </div>
                     </li>
-                        <!--
+                    <!--
 
 
-                            콤보박스
-                            리스트박스(text, icon+text)
-                            이미지리스트 박스
+                    콤보박스
+                    리스트박스(text, icon+text)
+                    이미지리스트 박스
 
-                             -->
+                    -->
                 </ul>
             </article>
         </section>

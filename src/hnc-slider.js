@@ -45,8 +45,8 @@ function hncUpdateTrackBackground(slider) {
     }
     val = (val) / (max - min) * 100; // 퍼센트 단위로 변경
     
-    let foreColor = window.getComputedStyle(slider,null).color;
-    let backColor = window.getComputedStyle(slider,null).borderColor;
+    let foreColor = window.getComputedStyle(slider, null).color;
+    let backColor = window.getComputedStyle(slider, null).borderColor;
 
     slider.style.background = `linear-gradient(to right, ${foreColor} 0%, ${foreColor} ${val}%, ${backColor} ${val}%, ${backColor} 100%)`;
 
