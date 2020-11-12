@@ -54,14 +54,13 @@
 .hnc-radio + .hnc-caption:before { /* radio 왼편 동그라미 */
     content: '';
     display: inline-block;
-    width: 10px;
-    height: 10px; 
+    width: 12px;
+    height: 12px; 
     line-height: 10px; /* check 표시가 세로정렬될 수 있도록 height와 맞춤 */
     margin-top: 1px; /* vertical-align: middle 시 하단 배치되어 top 기준으로 조정 */
     margin-left: 0px; /* caption의 border가 있어 왼쪽은 꼭 0으로 해야 다른 컨트롤과 정렬이 맞음 */
     margin-right: 5px; /* caption과의 간격 */
 
-    padding: var(--hnc-control-padding);
     vertical-align: top;
     background-color: var(--hnc-control-background-color);
     border-style: var(--hnc-control-border-style);
@@ -72,12 +71,18 @@
 .hnc-radio:checked + .hnc-caption:after { /* checked 시 원형에 표시되는 마크 */
     content: ''; 
     position: absolute;
-    width: 8px;
-    height: 8px;
-    left: 3px;
-    top: 4px;
-    
-    background-color: var(--hnc-control-text-color-accent3);
-    border-width: 0;
-    border-radius: 50%;  
+    box-sizing: border-box; /* border, padding 포함 */
+
+    /* 확대/축소시 마커의 오프셋이 틀어지는 경향이 있어 after와 동일한 크기로 만든후 radial 그러데이션 으로 표시 */
+    width: 14px; /* border를 포함하므로 after보다 2가 큼 */
+    height: 14px;
+    margin-top: 1px;  
+    margin-left: 0px; /* caption의 border가 있어 왼쪽은 꼭 0으로 해야 다른 컨트롤과 정렬이 맞음 */
+    left : 0px;
+    top: 0px;
+
+    background: radial-gradient(var(--hnc-control-text-color-accent3) 35%, transparent 42%);
+    border-color: transparent;
+    border-width: 0px;
+    border-radius: 50%;
 }
