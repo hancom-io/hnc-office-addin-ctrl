@@ -7,7 +7,7 @@
 ** css의 :after선택자로 추가할 수는 있으나, 이경우 svg 내의 class 선택후 변경이 안되서 비활성처리 코드를 javascript 내에서 해야 하므로 오히려 더 번거로워 짐
 ** menu show/hide는 opacity 조정하여 구현.
 ** 버튼 클릭시 하위메뉴 show/hide는 javascript 에서 구현.
-** submenu-item hover 시 하위메뉴 show/hode는 css 에서 구현
+** submenu-item hover 시 하위메뉴 show/hode는 css 에서 구현해도 되나 key 입력시 포커스 처리를 위해 javascript에서 구현
 ** submenu-item의 submenu 표시 위치는 javascript에서 구현
 -------------------------- */
 .hnc-submenu {
@@ -21,6 +21,7 @@
     border-color:var(hnc-control-submenu-border-color);
     box-shadow: var(--hnc-control-submenu-box-shadow); /* offset x, offiset y, radius, color */
 }
+
 .hnc-submenu-button > .hnc-submenu {
     margin: 4px 0px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 - 버튼과의 공간 추가 */
 }
@@ -28,10 +29,12 @@
     position: fixed; /* absolute를 사용하면 하위 메뉴의 너비가 상위 메뉴 크기로 줄어드는 현상이 있고, 또한 display = none 이 아니기에 화면 크기에 관여하게 됨. */
     transition-delay: 300ms; /* 버튼 클릭시에는 바로 표시되나 submenu item 하위로 표시될 땐 한탬포 쉬고 표시 / 숨기기 */
 }
+/*
+** submenu-item hover 시 하위메뉴 show/hode는 css 에서 구현해도 되나 key 입력시 포커스 처리를 위해 javascript에서 구현
 .hnc-submenu-item:hover > .hnc-submenu {
-    opacity: 1!important; /* 기본 opacity를 조정하여 표시 */
+    opacity: 1!important; 기본 opacity를 조정하여 표시
     pointer-events: auto!important;
-}
+} */
 
 /* -----------------------
 ** menu item
