@@ -1,0 +1,29 @@
+/* Copyright (c) Hancom. All rights reserved. */
+/* Licensed under the MIT License. See License.txt in the project root for license information. */
+
+/* -----------------------
+** combobox
+** 기본 형태를 지우고 화살표 사용자 정의
+** select 엘리먼트는 :after를 지원하지 않아 background 속성으로 추가함.
+-------------------------- */
+.hnc-combobox {
+    -webkit-appearance: none;  /* 원래 형태 숨김 */
+    -moz-appearance: none;
+    appearance: none;
+    font-size: var(--hnc-control-font-size); /* hnc-control에서 font-size: 0 으로 설정하므로 원래 크기로 변경 */
+    padding-left: 2px;
+    padding-right: 2px;
+    border-radius: var(--hnc-control-border-radius);
+    /* hover, focus 는 hnc-base에 구현 - disabled 보다 먼저 구현하기 위함. 그렇지 않으면, disable 상태에서 hover시 hover 속성이 적용됨 */
+    /* 왼쪽 옆에 caption이 있으면 margin 추가 - hnc-editor에 구현 */ 
+    background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="7" height="4"><g><path class="hnc-expander-path" d="M0,0 L7,0 L3.5,4z"/></g></svg>');
+    background-repeat: no-repeat;
+    background-position : right 3px center;
+
+}
+.hnc-combobox::-ms-expand {
+    display: none; /* IE10, IE11 에서 원래 형태 숨김 - 테스트 안됨 */
+}
+.hnc-combobox:after {
+    content:"1";
+}
