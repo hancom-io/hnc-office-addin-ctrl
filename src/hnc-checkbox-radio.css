@@ -32,7 +32,7 @@
     border-radius: var(--hnc-control-border-radius);
 }
 .hnc-checkbox:checked + .hnc-caption:before { /* checked 시 box에 표시되는 마크 */
-    content: '\2714'; /*check 표시 글꼴. svg 쓰긴 좀 부담스러워서 이미 있는 비슷한 글꼴 사용 */
+    content: '\2714'; /* [✔] check 표시 글꼴. svg 쓰긴 좀 부담스러워서 이미 있는 비슷한 글꼴 사용 */
     font-weight: bold;
 }
 
@@ -73,16 +73,28 @@
     position: absolute;
     box-sizing: border-box; /* border, padding 포함 */
 
+    /* gradation을 이용해 마커 표시 방법 : 축소 상태에서도 여전히 offset이 틀어질 수 있고, 300%이상에서는 그러데이션이 뿌옇게 표시되어 별로 보기 안좋음. 그래도 100%~200% 정도에서는 그럴싸하게 보임 */
     /* 확대/축소시 마커의 오프셋이 틀어지는 경향이 있어 after와 동일한 크기로 만든후 radial 그러데이션 으로 표시 */
-    width: 14px; /* border를 포함하므로 after보다 2가 큼 */
-    height: 14px;
-    margin-top: 1px;  
-    margin-left: 0px; /* caption의 border가 있어 왼쪽은 꼭 0으로 해야 다른 컨트롤과 정렬이 맞음 */
-    left : 0px;
-    top: 0px;
+    /* width: 14px; /* border를 포함하므로 after보다 2가 큼 */
+    /* height: 14px;  */
+    /* margin-top: 1px;  */
+    /* margin-left: 0px; caption의 border가 있어 왼쪽은 꼭 0으로 해야 다른 컨트롤과 정렬이 맞음 */
+    /* left : 0px;  */
+    /* top: 0px;  */
+    /* background: radial-gradient(var(--hnc-control-text-color-accent3) 35%, transparent 42%);  */ 
+    
+    /* div 의 left-top을 조정하는 방법 : 축소 상태에서도 여전히 offset이 틀어질 수 있고, 125%, 150%등 나누어 떨어지지 않는 비율에서는 오프셋이 틀어짐. 하지만, 200%, 300%등에서는 선명하게 잘 보임 */
+    width: 8px;
+    height: 8px;
+    left: 3px;
+    top: 4px;
+    /* 중심 좌표로 바꿔봤자, 상기 left-top 명시적으로 지정하는 것과 동일 */
+    /* left : calc(14px / 2 - 8px / 2); 14 : 라디오 circle 크기, 8 : check mark */
+    /* top : calc(1px + 14px / 2 - 8px / 2); 1px : margin-top 14 : 라디오 circle 크기, 8 : check mark */
 
-    background: radial-gradient(var(--hnc-control-text-color-accent3) 35%, transparent 42%);
-    border-color: transparent;
+    background-color: var(--hnc-control-text-color-accent3);
+
     border-width: 0px;
-    border-radius: 50%;
+    border-radius: 50%; 
+
 }
