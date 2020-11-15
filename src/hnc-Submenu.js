@@ -1,15 +1,6 @@
 // Copyright (c) Hancom. All rights reserved. 
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
-var hncKeys = {
-    esc: 27,
-    space: 32,
-    left: 37,
-    up: 38,
-    right: 39,
-    down: 40
-};
-
 // -----------------------
 // hncSubmenuButton
 // -----------------------
@@ -70,6 +61,8 @@ function hncSubmenuButton_OnKeyDown(e) {
 // 
 // hnc-submenu-opened class를 Show/Hide시 동적으로 부여하고 css 에서 skin 설정함
 // -----------------------
+
+// menuItem 상하좌우 이동
 function hncSubmenu_OnKeyDown(e) {
     if (hncSubmenu_IsOpen(this) == false) {
         return;
@@ -93,6 +86,29 @@ function hncSubmenu_OnKeyDown(e) {
             e.preventDefault();
             e.stopPropagation();
             break;
+        case 'ArrowLeft':
+            // 상위가 submenuItem이라면 현 menu를 닫음
+            if (hncSubmenu_IsSubmenuItem(hncSubmenu_GetParent(this)) == true) {
+                hncAddClass(this, 'hnc-submenu-keyboard-navigation'); // 키보드 조작중에 하위 메뉴 delay를 없앰
+                hncSubmenu_Hide(this);
+            }
+             e.preventDefault();
+            e.stopPropagation();
+            break;             
+        case 'ArrowRight': 
+            currentIndex = hncSubmenu_GetCurrentIndex(this);
+            if (currentIndex == -1) {
+                hncSubmenu_GotoIndex(this, 0, true); // 아직 선택된 것이 없다면 0번째 선택
+            }
+            let menuItem = hncSubmenu_GetAt(this, currentIndex);
+            // submenu가 있다면 표시
+            if (menuItem != null && hncSubmenu_IsSubmenuItem(menuItem) == true) {
+                hncAddClass(hncSubmenu_FindFromParent(menuItem), 'hnc-submenu-keyboard-navigation'); // 키보드 조작중에 하위메뉴 delay를 없앰
+                hncSubmenu_Show(hncSubmenu_FindFromParent(menuItem));
+            }
+            e.preventDefault();
+            e.stopPropagation();
+        break;
         case 'Escape': // 메뉴를 닫는다.
             hncSubmenu_Hide(this);
             e.preventDefault(); // 이벤트 전파를 중단. 따라서 1회 닫기작업하고, 그다음엔 이벤트가 전파되어 계속 up 키를 누르면 스크롤 될 것임
@@ -101,7 +117,8 @@ function hncSubmenu_OnKeyDown(e) {
         case 'Tab': // shift+tab도 동일
             hncSubmenu_Hide(this); // e.preventDefault(); 를 호출하지 않고 이벤트 전파하여 tab이동시킴
             break;
-        case ' ':
+        case ' ': // Space
+        case 'Enter':
             currentIndex = hncSubmenu_GetCurrentIndex(this);
             hncSubmenu_GetAt(this, currentIndex).click();
             e.preventDefault(); // 이벤트 전파를 중단.
@@ -198,7 +215,6 @@ function hncSubmenu_GetCount(submenu) {
 }
 function hncSubmenu_GetAt(submenu, index) {
     if (index < 0 || hncSubmenu_GetCount(submenu) <= index) {
-        alert('유효하지 않은 index');
         return null;
     }
     return submenu.children[index];
@@ -337,6 +353,7 @@ function hncSubmenu_Hide(submenu) {
     hncSubmenu_GetParent(submenu).focus(); // 상위개체에 포커스 반환
     submenu.removeEventListener('keydown', hncSubmenu_OnKeyDown);
     hncRemoveClass(hncSubmenu_GetParent(submenu), 'hnc-submenu-opened');
+    hncRemoveClass(submenu, 'hnc-submenu-keyboard-navigation'); // 키보드 조작중에 하위메뉴 표시 delay를 없앴던 것 복원
 
     // 하위 menuItem에 이벤트 제거
     for (let menuItem of submenu.children) {
@@ -399,11 +416,7 @@ function hncMenuItem_OnClick(e) {
     if (hncSubmenu_IsSubmenuItem(this) == true) { 
         e.stopPropagation();
 
-        // 하위메뉴가 open되지 안았다면 open
-        let submenu = hncSubmenu_FindFromParent(this);
-        if (submenu != null && hncSubmenu_IsOpen(submenu) == false) {
-            hncSubmenu_Show(submenu);  
-        }
+        hncSubmenu_Show(hncSubmenu_FindFromParent(this));  
     }
 }
 

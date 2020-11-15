@@ -29,12 +29,10 @@
     position: fixed; /* absolute를 사용하면 하위 메뉴의 너비가 상위 메뉴 크기로 줄어드는 현상이 있고, 또한 display = none 이 아니기에 화면 크기에 관여하게 됨. */
     transition-delay: 300ms; /* 버튼 클릭시에는 바로 표시되나 submenu item 하위로 표시될 땐 한탬포 쉬고 표시 / 숨기기 */
 }
-/*
-** submenu-item hover 시 하위메뉴 show/hode는 css 에서 구현해도 되나 key 입력시 포커스 처리를 위해 javascript에서 구현
-.hnc-submenu-item:hover > .hnc-submenu {
-    opacity: 1!important; 기본 opacity를 조정하여 표시
-    pointer-events: auto!important;
-} */
+
+.hnc-submenu-item > .hnc-submenu-keyboard-navigation {
+    transition-delay: 0ms; /* 키보드 조작중에 delay가 있으면 느려보임. 키보드 조작중일때 javascript에서 class 를 추가해줌. */
+}
 
 /* -----------------------
 ** menu item
