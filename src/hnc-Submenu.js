@@ -22,7 +22,7 @@ function hncSubmenuButton_Init() {
         button.addEventListener('keydown', hncSubmenuButton_OnKeyDown);
     });
 
-    hncSubmenuItem_AddExpander();
+    hncMenuItem_AddExpander();
 }
 
 
@@ -31,7 +31,7 @@ function hncSubmenuButton_OnClick(e) {
     // this : 이벤트를 발생시킨 버튼
     let submenu = hncSubmenu_FindFromParent(this);
     if (submenu == null) {
-        alert("hnc-submenu-button 하위에 hnc-submenu 가 정의되지 않음");
+        alert('hnc-submenu-button 하위에 hnc-submenu 가 정의되지 않음');
         return;
     }
     hncSubmenu_Toggle(submenu);
@@ -44,7 +44,7 @@ function hncSubmenuButton_OnKeyDown(e) {
         case 'ArrowDown': // 메뉴를 연다.
             let submenu = hncSubmenu_FindFromParent(this);
             if (submenu == null) {
-                alert("hnc-submenu-button 하위에 hnc-submenu 가 정의되지 않음");
+                alert('hnc-submenu-button 하위에 hnc-submenu 가 정의되지 않음');
                 return;
             }
             hncSubmenu_Show(submenu);
@@ -55,6 +55,11 @@ function hncSubmenuButton_OnKeyDown(e) {
 
 // -----------------------
 // hncSubmenu
+// mouseenter하여 하일라이트 표시하는 menuItem은 focus 된 개체임.
+// hover로 처리하게 되면 키보드 이동에 따라 하일라이트 된 개체 찾을 수가 없어, mouseenter/mouseleave시 menuItem에 focus를 줌
+// 이에 따라 Show/Hide시 menuItem에 이벤트를 연결/해제함
+// 
+// hnc-submenu-opened class를 Show/Hide시 동적으로 부여하고 css 에서 skin 설정함
 // -----------------------
 function hncSubmenu_OnKeyDown(e) {
     if (hncSubmenu_IsOpen(this) == false) {
@@ -62,69 +67,43 @@ function hncSubmenu_OnKeyDown(e) {
     }
     let currentIndex = 0;
     switch (e.key) { 
-        case 'ArrowUp': // 메뉴를 닫는다.
+        case 'ArrowUp': 
             currentIndex = hncSubmenu_GetCurrentIndex(this);
-            if (currentIndex == -1) {
+            if (hncSubmenu_IsSubmenuButton(hncSubmenu_GetParent(this)) && currentIndex == -1) { // submenubutton의 submenu인데, 아직 menuItem 선택을 한번도 안했다면 닫는다.
                 hncSubmenu_Hide(this);
             }
             else {
                 hncSubmenu_GotoIndex(this, currentIndex - 1, false);
             }
             e.preventDefault();
+            e.stopPropagation();
             break;
         case 'ArrowDown': 
             currentIndex = hncSubmenu_GetCurrentIndex(this);
             hncSubmenu_GotoIndex(this, currentIndex + 1, true);
             e.preventDefault();
+            e.stopPropagation();
             break;
         case 'Escape': // 메뉴를 닫는다.
             hncSubmenu_Hide(this);
             e.preventDefault(); // 이벤트 전파를 중단. 따라서 1회 닫기작업하고, 그다음엔 이벤트가 전파되어 계속 up 키를 누르면 스크롤 될 것임
-
+            e.stopPropagation();
             break;
         case 'Tab': // shift+tab도 동일
             hncSubmenu_Hide(this); // e.preventDefault(); 를 호출하지 않고 이벤트 전파하여 tab이동시킴
             break;
     }  
-
-
-    // // 메뉴 하위의 li에 이벤트 핸들러 장착 
-    // let lis = submenu.querySelectorAll('li');
-    // Array.prototype.forEach.call(lis, function(li, i) {
-    //     if (hncIsSubmenuItem(li) == true) { // submenuItem이면 하위 submenu에도 이벤트 등록
-
-
-    //     }
-    //     // 일반 menuItem
-    //     else {
-    //         li.addEventListener('keydown', function(e) {
-    //             // 현재 hover 표시된 위치를 구함
-    //             // 전체 갯수를 구함
-    //             // 내부에서 rotate
-                
-    //             switch (e.key) {
-
-    //             }
-    //             alert("test");
-    //         });
-
-    //     }
-    // });
-
 }
 // body, html 클릭시 모든 submenu 닫음
 function hncDocument_OnClick(object, e) {
     hncSubmenu_CloseAll(null);
 }
 
-// 현재 submenu에서 mouseOver나 focus가 있어 선택된 항목. 0 base. 만약 없다면 -1
+// 현재 focus가 있어 선택된 항목. 0 base. 만약 없다면 -1
 function hncSubmenu_GetCurrentIndex(submenu) {
     if (submenu == null) {
         return -1;
     }
-
-    //!! hover상태의 index 상태의 항목을 구해줘야 한다.
-
 
     // 포커싱된 인덱스를 구한다.
     if (document.hasFocus()) {
@@ -164,7 +143,7 @@ function hncSubmenu_GotoIndex(submenu, index, down) {
                 }
             }
             if (index == menuItemCount)  {
-                alert("submenu 가장 끝까지 뒤졌으나 모두 separetor임. 0번 위치로 보정함.");
+                alert('submenu 가장 끝까지 뒤졌으나 모두 separetor임. 0번 위치로 보정함.');
                 index = 0;
             }
         }
@@ -177,7 +156,7 @@ function hncSubmenu_GotoIndex(submenu, index, down) {
                 }
             }
             if (i == 0)  {
-                alert("submenu 가장 앞까지 뒤졌으나 모두 separetor임. 마지막 위치로 보정함.");
+                alert('submenu 가장 앞까지 뒤졌으나 모두 separetor임. 마지막 위치로 보정함.');
                 index = menuItemCount - 1;
             }
         }
@@ -219,7 +198,15 @@ function hncSubmenu_IsSubmenuItem(menuItem) {
     }
     return false;
 }
-
+function hncSubmenu_IsSubmenuButton(subemenuButton) {
+    if (subemenuButton == undefined) {
+        return false;
+    }   
+    if (subemenuButton.className.includes('hnc-submenu-button') == true) {
+        return true;
+    }
+    return false;
+}
 
 function hncSubmenu_FindFromParent(parent) {
     if (parent == undefined || parent == null) {
@@ -232,7 +219,13 @@ function hncSubmenu_FindFromParent(parent) {
     }
 
     return null;
-
+}
+function hncSubmenu_GetParent(submenu) {
+    if (submenu == undefined || submenu == null) {
+        return null;
+    }
+    
+    return submenu.parentElement;
 }
 
 // submenu를 토글한다.
@@ -270,18 +263,17 @@ function hncSubmenu_Show(submenu) {
     hncSubmenu_CloseAll(submenu); // 모든 서브메뉴를 닫고(submenu의 parent는 안닫고)
 
     submenu.style.opacity = 1; // 내것만 연다.
-    submenu.style["pointer-events"] = 'auto'; 
+    submenu.style['pointer-events'] = 'auto'; 
     submenu.tabIndex = 0; // 키보드 이벤트를 받을 수 있게 함
     submenu.focus(); 
     submenu.addEventListener('keydown', hncSubmenu_OnKeyDown);
+    hncAddClass(hncSubmenu_GetParent(submenu), 'hnc-submenu-opened');
 
-    // 하위 submenuItem에 이벤트 장착
+    // 하위 menuItem에 이벤트 장착
     for (let menuItem of submenu.children) {
-        if (hncSubmenu_IsSubmenuItem(menuItem) == true) {
-            menuItem.addEventListener('click', hncSubmenuItem_OnClick); // submenuitem을 클릭하면 하위 메뉴가 열린 상태로 있어야 함. 닫히면 안됨.
-            menuItem.addEventListener('mouseenter', hncSubmenuItem_OnMouseEnter); 
-            menuItem.addEventListener('mouseleave', hncSubmenuItem_OnMouseLeave);
-        }
+        menuItem.addEventListener('click', hncMenuItem_OnClick); // submenuitem을 클릭하면 하위 메뉴가 열린 상태로 있어야 함. 닫히면 안됨.
+        menuItem.addEventListener('mouseenter', hncMenuItem_OnMouseEnter); 
+        menuItem.addEventListener('mouseleave', hncMenuItem_OnMouseLeave);
     } 
 }
 // hide시 키보드 포커스 반환
@@ -301,19 +293,18 @@ function hncSubmenu_Hide(submenu) {
         }
     }
     submenu.style.opacity = 0;
-    submenu.style["pointer-events"] = 'none';   
+    submenu.style['pointer-events'] = 'none';   
     submenu.tabIndex = -1; // 키보드 이벤트를 받을 수 없게 함
-    submenu.parentElement.focus(); // 상위개체에 포커스 반환
+    hncSubmenu_GetParent(submenu).focus(); // 상위개체에 포커스 반환
     submenu.removeEventListener('keydown', hncSubmenu_OnKeyDown);
+    hncRemoveClass(hncSubmenu_GetParent(submenu), 'hnc-submenu-opened');
 
-    // 하위 submenuItem에 이벤트 제거
+    // 하위 menuItem에 이벤트 제거
     for (let menuItem of submenu.children) {
         menuItem.tabIndex = -1; // 키보드 이동에 따라 하위 항목이 TabIndex를 가졌을 수 있으므로 모두 제거. 제거하지 않으면 Tab 이동시 숨겨진 submenu내의 menuItem에 포커싱이 감
-        if (hncSubmenu_IsSubmenuItem(menuItem) == true) {
-            menuItem.removeEventListener('click', hncSubmenuItem_OnClick); 
-            menuItem.removeEventListener('mouseenter', hncSubmenuItem_OnMouseEnter); 
-            menuItem.removeEventListener('mouseleave', hncSubmenuItem_OnMouseLeave);
-        }
+        menuItem.removeEventListener('click', hncMenuItem_OnClick); 
+        menuItem.removeEventListener('mouseenter', hncMenuItem_OnMouseEnter); 
+        menuItem.removeEventListener('mouseleave', hncMenuItem_OnMouseLeave);
     } 
 }
 
@@ -332,50 +323,60 @@ function hncSubmenu_CloseAll(submenu) {
 }
 
 // -----------------------
-// hncSubmenuItem
+// hncMenuItem
 // -----------------------
 // mouseenter되는 경우 상위 항목의 위치로 부터 left, top 좌표를 계산하여 메뉴 표시
 // hover상태인데도 마우스를 약간 움직이면 hover/out이 반복적으로 호출되어 mouseenter/mouseleave에서 구현
-function hncSubmenuItem_OnMouseEnter(e) {
-    let submenu = hncSubmenu_FindFromParent(this);
-    if (submenu == null) {
-        alert("hnc-submenu-item 하위에 hnc-submenu 가 정의되지 않음");
-        return;
+function hncMenuItem_OnMouseEnter(e) {
+    this.tabIndex = 0;
+    this.focus();
+    if (hncSubmenu_IsSubmenuItem(this) == true) {
+        let submenu = hncSubmenu_FindFromParent(this);
+        if (submenu == null) {
+            alert('hnc-submenu-item 하위에 hnc-submenu 가 정의되지 않음');
+            return;
+        }
+
+        let parentRect = this.getBoundingClientRect(); // window.scrollX, window.scrollY 계산 포함해야 함
+        let submenuRect = submenu.getBoundingClientRect();
+        let parentRight = parentRect.right;
+        let parentTop = parentRect.top;
+
+        // window 보다 menu가 더 큰경우 세로좌표 보정
+        if (window.innerHeight < parentRect.top + (submenuRect.bottom - submenuRect.top)) {
+            parentTop = window.innerHeight - (submenuRect.bottom - submenuRect.top);
+        }
+
+        submenu.style.left = String(parentRight) + 'px' ;
+        submenu.style.top = String(parentTop) + 'px';
+
+        // enter시 보이는 것은 css에서 해도 되나 focus 처리를 위해 javascript 사용
+        hncSubmenu_Show(submenu); // 자신의 parent라면 닫으면 안된다.
     }
-
-    let parentRect = this.getBoundingClientRect(); // window.scrollX, window.scrollY 계산 포함해야 함
-    let submenuRect = submenu.getBoundingClientRect();
-    let parentRight = parentRect.right;
-    let parentTop = parentRect.top;
-
-    // window 보다 menu가 더 큰경우 세로좌표 보정
-    if (window.innerHeight < parentRect.top + (submenuRect.bottom - submenuRect.top)) {
-        parentTop = window.innerHeight - (submenuRect.bottom - submenuRect.top);
-    }
-
-    submenu.style.left = String(parentRight) + 'px' ;
-    submenu.style.top = String(parentTop) + 'px';
-
-    // enter시 보이는 것은 css에서 해도 되나 focus 처리를 위해 javascript 사용
-    hncSubmenu_Show(submenu); // 자신의 parent라면 닫으면 안된다.
 }
 // submenuItem 바깥으로 나가면 마우스 닫음
 // hover상태인데도 마우스를 약간 움직이면 hover/out이 반복적으로 호출되어 mouseenter/mouseleave에서 구현
-function hncSubmenuItem_OnMouseLeave(e) {
-    let submenu = hncSubmenu_FindFromParent(this);
-    if (submenu == null) {
-        alert("hnc-submenu-item 하위에 hnc-submenu 가 정의되지 않음");
-        return;
+function hncMenuItem_OnMouseLeave(e) {
+    this.tabIndex = -1;
+    if (hncSubmenu_IsSubmenuItem(this) == true) {
+        let submenu = hncSubmenu_FindFromParent(this);
+        if (submenu == null) {
+            alert('hnc-submenu-item 하위에 hnc-submenu 가 정의되지 않음');
+            return;
+        }
+        hncSubmenu_Hide(submenu);
     }
-    hncSubmenu_Hide(submenu);
 }
-// 하위 메뉴 클릭시 이벤트 전파 중단하여 닫히지 않게 함
-function hncSubmenuItem_OnClick(e) {
-    e.stopPropagation();
+
+function hncMenuItem_OnClick(e) {
+    // 하위 메뉴 클릭시 이벤트 전파 중단하여 닫히지 않게 함
+    if (hncSubmenu_IsSubmenuItem(this) == true) { 
+        e.stopPropagation();
+    }
 }
 
 // submenu-item들의 오른쪽 Expander 추가. absolute로 배치됨
-function hncSubmenuItem_AddExpander() {
+function hncMenuItem_AddExpander() {
     let items = document.querySelectorAll('.hnc-submenu-item');
     if (items == undefined) {
         return;
@@ -418,4 +419,25 @@ function hncContainsClassName(element, className) {
         return true;
     }
     return false;
+}
+// 이미 있으면 추가 안항(class이름 앞에 css 처럼 . 사용하지 말것)
+function hncAddClass(element, className) {
+    if (element == undefined || element == null) {
+        return;
+    }
+    if (hncContainsClassName(element, className) == true) {
+        return;
+    }
+
+    element.className += ' ' + className;
+}
+// 이미 없다면 삭제 안함(class이름 앞에 css 처럼 . 사용하지 말것)
+function hncRemoveClass(element, className) {
+    if (element == undefined || element == null) {
+        return;
+    }
+    if (hncContainsClassName(element, className) == false) {
+        return;
+    }
+    element.className = element.className.replace(' ' + className, '');
 }

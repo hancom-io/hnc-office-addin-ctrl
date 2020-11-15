@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // slider
     let sliders = document.querySelectorAll('.hnc-slider');
     for (let slider of sliders) {
-        slider.addEventListener("input", hncSlider_OnInput);
+        slider.addEventListener('input', hncSlider_OnInput);
     }
 
     // tab-radio
