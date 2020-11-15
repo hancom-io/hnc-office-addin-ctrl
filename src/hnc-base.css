@@ -11,7 +11,7 @@
 .hnc-control {
     display: inline-block; /* 가로 배치가능하도록 inline, margin 적용이 되도록 inline-block으로 사용 */
     vertical-align: middle;
-    box-sizing: content-box; /*  box-sizing이 button은 border-box임(테두리와 padding이 width에 포함됨). 이에 따라 div, button 에 css 줄때 다른 width가 나타나게 되어, 기본 css 스타일로 강제함 */
+    box-sizing: content-box; /* box-sizing이 button은 border-box임(테두리와 padding이 width에 포함됨). 이에 따라 div, button 에 css 줄때 다른 width가 나타나게 되어, 기본 css 스타일로 강제함 */
 
     margin: var(--hnc-control-margin);
     padding: var(--hnc-control-padding);
@@ -30,7 +30,9 @@
 .hnc-icon-text-button:hover,
 .hnc-submenu-button:hover,
 .hnc-menu-item:hover,
+.hnc-menu-item:focus, /* 메뉴를 키보드 이동시 포커스 표시는 hover와 동일 */
 .hnc-submenu-item:hover,
+.hnc-submenu-item:focus,
 .hnc-checkbox + .hnc-caption:hover:before {
     /* 일반적인 하일라이트-배경을 채우고, 테두리를 그림 */
     background-color: var(--hnc-control-background-color-hover);
