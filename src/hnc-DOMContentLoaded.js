@@ -1,14 +1,6 @@
 // Copyright (c) Hancom. All rights reserved. 
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
-var hncKeys = {
-    esc: 27,
-    space: 32,
-    left: 37,
-    up: 38,
-    right: 39,
-    down: 40
-};
 // html에서 hnc 계열 컨트롤들을 초기화 하고, 이벤트핸들러 장착
 document.addEventListener('DOMContentLoaded', function() {
     

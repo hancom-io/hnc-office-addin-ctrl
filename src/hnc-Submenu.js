@@ -1,6 +1,15 @@
 // Copyright (c) Hancom. All rights reserved. 
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
+var hncKeys = {
+    esc: 27,
+    space: 32,
+    left: 37,
+    up: 38,
+    right: 39,
+    down: 40
+};
+
 // -----------------------
 // hncSubmenuButton
 // -----------------------
@@ -92,6 +101,12 @@ function hncSubmenu_OnKeyDown(e) {
         case 'Tab': // shift+tab도 동일
             hncSubmenu_Hide(this); // e.preventDefault(); 를 호출하지 않고 이벤트 전파하여 tab이동시킴
             break;
+        case ' ':
+            currentIndex = hncSubmenu_GetCurrentIndex(this);
+            hncSubmenu_GetAt(this, currentIndex).click();
+            e.preventDefault(); // 이벤트 전파를 중단.
+            e.stopPropagation();
+            break;
     }  
 }
 // body, html 클릭시 모든 submenu 닫음
@@ -106,15 +121,16 @@ function hncSubmenu_GetCurrentIndex(submenu) {
     }
 
     // 포커싱된 인덱스를 구한다.
-    if (document.hasFocus()) {
+    if (document.hasFocus() && document.activeElement != undefined && document.activeElement != null) {
         for (let i = 0; i < hncSubmenu_GetCount(submenu); ++i) {
-            if (submenu.children[i] == document.activeElement) {
+            if (hncSubmenu_GetAt(submenu, i) == document.activeElement) {
                 return i;
             }
         }
     }
     return -1;
 }
+
 // down방향인지 up 방향인지 에 따라 주어진 index가 separator면 이를 회피 
 function hncSubmenu_GotoIndex(submenu, index, down) {
     if (submenu == null) {
@@ -134,10 +150,10 @@ function hncSubmenu_GotoIndex(submenu, index, down) {
     }
 
     // 주어진 index가 separator인지 확인하여 separator가 아닌 곳으로 위치 보정
-    if (hncSubmenu_IsSeparator(submenu.children[index]) == true) {
+    if (hncSubmenu_IsSeparator(hncSubmenu_GetAt(submenu, index)) == true) {
         if (down == true) { // down 키 입력
             for (let i = index + 1; i < menuItemCount; ++i) {
-                if (hncSubmenu_IsSeparator(submenu.children[i]) == false) {
+                if (hncSubmenu_IsSeparator(hncSubmenu_GetAt(submenu, i)) == false) {
                     index = i;
                     break;
                 }
@@ -150,7 +166,7 @@ function hncSubmenu_GotoIndex(submenu, index, down) {
         else {
             let i = index;
             for (; 0 < i; --i) {
-                if (hncSubmenu_IsSeparator(submenu.children[i - 1]) == false) {
+                if (hncSubmenu_IsSeparator(hncSubmenu_GetAt(submenu, i - 1)) == false) {
                     index = i - 1;
                     break;
                 }
@@ -165,11 +181,11 @@ function hncSubmenu_GotoIndex(submenu, index, down) {
     // 선택된 항목에만 포커스를 준다.
     for (let i = 0; i < menuItemCount; ++i) {
         if (index == i) {
-            submenu.children[i].tabIndex = 0;
-            submenu.children[i].focus();
+            hncSubmenu_GetAt(submenu, i).tabIndex = 0;
+            hncSubmenu_GetAt(submenu, i).focus();
         }
         else {
-            submenu.children[i].tabIndex = -1;   
+            hncSubmenu_GetAt(submenu, i).tabIndex = -1;   
         }
     }
 
@@ -179,6 +195,13 @@ function hncSubmenu_GetCount(submenu) {
         return 0;
     }
     return submenu.childElementCount;
+}
+function hncSubmenu_GetAt(submenu, index) {
+    if (index < 0 || hncSubmenu_GetCount(submenu) <= index) {
+        alert('유효하지 않은 index');
+        return null;
+    }
+    return submenu.children[index];
 }
 function hncSubmenu_IsSeparator(menuItem) {
     if (menuItem == undefined) {
@@ -262,6 +285,22 @@ function hncSubmenu_Show(submenu) {
     }
     hncSubmenu_CloseAll(submenu); // 모든 서브메뉴를 닫고(submenu의 parent는 안닫고)
 
+    // submenuItem의 하위 submenu일때 좌표 보정
+    if (hncSubmenu_IsSubmenuItem(hncSubmenu_GetParent(submenu)) == true) {
+        let parentRect = hncSubmenu_GetParent(submenu).getBoundingClientRect(); // window.scrollX, window.scrollY 계산 포함해야 함
+        let submenuRect = submenu.getBoundingClientRect();
+        let parentRight = parentRect.right;
+        let parentTop = parentRect.top;
+
+        // window 보다 menu가 더 큰경우 세로좌표 보정
+        if (window.innerHeight < parentRect.top + (submenuRect.bottom - submenuRect.top)) {
+            parentTop = window.innerHeight - (submenuRect.bottom - submenuRect.top);
+        }
+
+        submenu.style.left = String(parentRight) + 'px' ;
+        submenu.style.top = String(parentTop) + 'px';
+    }
+
     submenu.style.opacity = 1; // 내것만 연다.
     submenu.style['pointer-events'] = 'auto'; 
     submenu.tabIndex = 0; // 키보드 이벤트를 받을 수 있게 함
@@ -337,19 +376,6 @@ function hncMenuItem_OnMouseEnter(e) {
             return;
         }
 
-        let parentRect = this.getBoundingClientRect(); // window.scrollX, window.scrollY 계산 포함해야 함
-        let submenuRect = submenu.getBoundingClientRect();
-        let parentRight = parentRect.right;
-        let parentTop = parentRect.top;
-
-        // window 보다 menu가 더 큰경우 세로좌표 보정
-        if (window.innerHeight < parentRect.top + (submenuRect.bottom - submenuRect.top)) {
-            parentTop = window.innerHeight - (submenuRect.bottom - submenuRect.top);
-        }
-
-        submenu.style.left = String(parentRight) + 'px' ;
-        submenu.style.top = String(parentTop) + 'px';
-
         // enter시 보이는 것은 css에서 해도 되나 focus 처리를 위해 javascript 사용
         hncSubmenu_Show(submenu); // 자신의 parent라면 닫으면 안된다.
     }
@@ -372,6 +398,12 @@ function hncMenuItem_OnClick(e) {
     // 하위 메뉴 클릭시 이벤트 전파 중단하여 닫히지 않게 함
     if (hncSubmenu_IsSubmenuItem(this) == true) { 
         e.stopPropagation();
+
+        // 하위메뉴가 open되지 안았다면 open
+        let submenu = hncSubmenu_FindFromParent(this);
+        if (submenu != null && hncSubmenu_IsOpen(submenu) == false) {
+            hncSubmenu_Show(submenu);  
+        }
     }
 }
 
