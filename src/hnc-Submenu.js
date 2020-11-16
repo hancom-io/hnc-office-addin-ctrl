@@ -71,7 +71,7 @@ function hncSubmenu_OnKeyDown(e) {
     switch (e.key) { 
         case 'ArrowUp': 
             currentIndex = hncSubmenu_GetCurrentIndex(this);
-            if (hncSubmenu_IsSubmenuButton(hncSubmenu_GetParent(this)) && currentIndex == -1) { // submenubutton의 submenu인데, 아직 menuItem 선택을 한번도 안했다면 닫는다.
+            if (hncSubmenu_IsSubmenuButton(this.parentElement) && currentIndex == -1) { // submenubutton의 submenu인데, 아직 menuItem 선택을 한번도 안했다면 닫는다.
                 hncSubmenu_Hide(this);
             }
             else {
@@ -88,11 +88,11 @@ function hncSubmenu_OnKeyDown(e) {
             break;
         case 'ArrowLeft':
             // 상위가 submenuItem이라면 현 menu를 닫음
-            if (hncSubmenu_IsSubmenuItem(hncSubmenu_GetParent(this)) == true) {
+            if (hncSubmenu_IsSubmenuItem(this.parentElement) == true) {
                 hncAddClass(this, 'hnc-submenu-keyboard-navigation'); // 키보드 조작중에 하위 메뉴 delay를 없앰
                 hncSubmenu_Hide(this);
             }
-             e.preventDefault();
+            e.preventDefault();
             e.stopPropagation();
             break;             
         case 'ArrowRight': 
@@ -111,17 +111,17 @@ function hncSubmenu_OnKeyDown(e) {
         break;
         case 'Escape': // 메뉴를 닫는다.
             hncSubmenu_Hide(this);
-            e.preventDefault(); // 이벤트 전파를 중단. 따라서 1회 닫기작업하고, 그다음엔 이벤트가 전파되어 계속 up 키를 누르면 스크롤 될 것임
+            e.preventDefault(); 
             e.stopPropagation();
             break;
         case 'Tab': // shift+tab도 동일
-            hncSubmenu_Hide(this); // e.preventDefault(); 를 호출하지 않고 이벤트 전파하여 tab이동시킴
+            hncSubmenu_Hide(this); // e.preventDefault(); 를 호출하지 않고 기본동작 진행하여 tab이동시킴
             break;
         case ' ': // Space
         case 'Enter':
             currentIndex = hncSubmenu_GetCurrentIndex(this);
             hncSubmenu_GetAt(this, currentIndex).click();
-            e.preventDefault(); // 이벤트 전파를 중단.
+            e.preventDefault(); 
             e.stopPropagation();
             break;
     }  
@@ -205,7 +205,6 @@ function hncSubmenu_GotoIndex(submenu, index, down) {
             hncSubmenu_GetAt(submenu, i).tabIndex = -1;   
         }
     }
-
 }
 function hncSubmenu_GetCount(submenu) {
     if (submenu == null) {
@@ -259,13 +258,6 @@ function hncSubmenu_FindFromParent(parent) {
 
     return null;
 }
-function hncSubmenu_GetParent(submenu) {
-    if (submenu == undefined || submenu == null) {
-        return null;
-    }
-    
-    return submenu.parentElement;
-}
 
 // submenu를 토글한다.
 function hncSubmenu_Toggle(submenu) {
@@ -302,8 +294,8 @@ function hncSubmenu_Show(submenu) {
     hncSubmenu_CloseAll(submenu); // 모든 서브메뉴를 닫고(submenu의 parent는 안닫고)
 
     // submenuItem의 하위 submenu일때 좌표 보정
-    if (hncSubmenu_IsSubmenuItem(hncSubmenu_GetParent(submenu)) == true) {
-        let parentRect = hncSubmenu_GetParent(submenu).getBoundingClientRect(); // window.scrollX, window.scrollY 계산 포함해야 함
+    if (hncSubmenu_IsSubmenuItem(submenu.parentElement) == true) {
+        let parentRect = submenu.parentElement.getBoundingClientRect(); // window.scrollX, window.scrollY 계산 포함해야 함
         let submenuRect = submenu.getBoundingClientRect();
         let parentRight = parentRect.right;
         let parentTop = parentRect.top;
@@ -322,7 +314,7 @@ function hncSubmenu_Show(submenu) {
     submenu.tabIndex = 0; // 키보드 이벤트를 받을 수 있게 함
     submenu.focus(); 
     submenu.addEventListener('keydown', hncSubmenu_OnKeyDown);
-    hncAddClass(hncSubmenu_GetParent(submenu), 'hnc-submenu-opened');
+    hncAddClass(submenu.parentElement, 'hnc-submenu-opened');
 
     // 하위 menuItem에 이벤트 장착
     for (let menuItem of submenu.children) {
@@ -350,9 +342,9 @@ function hncSubmenu_Hide(submenu) {
     submenu.style.opacity = 0;
     submenu.style['pointer-events'] = 'none';   
     submenu.tabIndex = -1; // 키보드 이벤트를 받을 수 없게 함
-    hncSubmenu_GetParent(submenu).focus(); // 상위개체에 포커스 반환
+    submenu.parentElement.focus(); // 상위개체에 포커스 반환
     submenu.removeEventListener('keydown', hncSubmenu_OnKeyDown);
-    hncRemoveClass(hncSubmenu_GetParent(submenu), 'hnc-submenu-opened');
+    hncRemoveClass(submenu.parentElement, 'hnc-submenu-opened');
     hncRemoveClass(submenu, 'hnc-submenu-keyboard-navigation'); // 키보드 조작중에 하위메뉴 표시 delay를 없앴던 것 복원
 
     // 하위 menuItem에 이벤트 제거
@@ -382,10 +374,38 @@ function hncSubmenu_CloseAll(submenu) {
 // hncMenuItem
 // -----------------------
 // mouseenter되는 경우 상위 항목의 위치로 부터 left, top 좌표를 계산하여 메뉴 표시
-// hover상태인데도 마우스를 약간 움직이면 hover/out이 반복적으로 호출되어 mouseenter/mouseleave에서 구현
+// hover상태인데도 마우스를 약간 움직이면 hover/out이 반복적으로 호출되어 mouseenter/mouseleave 이벤트 사용
 function hncMenuItem_OnMouseEnter(e) {
+
+    let parentSubmenu = this.parentElement;
+    let oldIndex = hncSubmenu_GetCurrentIndex(parentSubmenu); 
     this.tabIndex = 0;
     this.focus();
+    let newIndex = hncSubmenu_GetCurrentIndex(parentSubmenu); // 전과 후의 index를 비교하여 변경된 경우 하위메뉴 닫음
+
+    // 현 menuItem의 sibling인 menuItem 중에서 submenu가 있다면 닫는다.
+    if (oldIndex != newIndex) {
+        for (let i = 0; i < hncSubmenu_GetCount(parentSubmenu); ++i) {
+            let siblingMenuItem = hncSubmenu_GetAt(parentSubmenu, i);
+            if (siblingMenuItem != this) {
+                if (hncSubmenu_IsSubmenuItem(siblingMenuItem) == true) {
+                    let siblingSubmenu = hncSubmenu_FindFromParent(siblingMenuItem);
+                    if (siblingSubmenu == null) {
+                        alert('hnc-submenu-item 하위에 hnc-submenu 가 정의되지 않음');
+                        return;
+                    }
+                    // sibling의 submenu 닫음
+                    hncSubmenu_Hide(siblingSubmenu); 
+
+                    // hide 시 parent menuItem에 포커싱을 주니 다시 this에 포커싱을 줌.
+                    siblingMenuItem.tabIndex = -1;
+                    this.tabIndex = 0;
+                    this.focus();
+                }
+            }
+        }
+    }
+
     if (hncSubmenu_IsSubmenuItem(this) == true) {
         let submenu = hncSubmenu_FindFromParent(this);
         if (submenu == null) {
@@ -393,22 +413,13 @@ function hncMenuItem_OnMouseEnter(e) {
             return;
         }
 
-        // enter시 보이는 것은 css에서 해도 되나 focus 처리를 위해 javascript 사용
-        hncSubmenu_Show(submenu); // 자신의 parent라면 닫으면 안된다.
+        hncSubmenu_Show(submenu);
     }
 }
-// submenuItem 바깥으로 나가면 마우스 닫음
-// hover상태인데도 마우스를 약간 움직이면 hover/out이 반복적으로 호출되어 mouseenter/mouseleave에서 구현
+// hover시 하위메뉴 표시를 위해 submenuItem 바깥으로 나가면 submenu를 바로 닫아버리면 사용성이 떨어짐. 
+// 따라서, mouseEnter를 통해 선택된 menuItem이 change될때 하위 메뉴를 닫음.
 function hncMenuItem_OnMouseLeave(e) {
     this.tabIndex = -1;
-    if (hncSubmenu_IsSubmenuItem(this) == true) {
-        let submenu = hncSubmenu_FindFromParent(this);
-        if (submenu == null) {
-            alert('hnc-submenu-item 하위에 hnc-submenu 가 정의되지 않음');
-            return;
-        }
-        hncSubmenu_Hide(submenu);
-    }
 }
 
 function hncMenuItem_OnClick(e) {
