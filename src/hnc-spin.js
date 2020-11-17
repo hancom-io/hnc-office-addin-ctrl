@@ -7,7 +7,7 @@ function hncSpin_Init() {
     if (spins == undefined) {
         return;
     }
-
+   
     // 하위 depth 부터 넣어야 모두 보임. 0부터 삽입하면 하위 depth 의 expander가 안보임
     for (let i = spins.length; 0 < i ; i--) {
 
@@ -22,6 +22,17 @@ function hncSpin_Init() {
 
         spins[i - 1].outerHTML =  spinContainer;
     }
+
+    // spin의 up/down
+    let spinUps = document.querySelectorAll('.hnc-spin-up');
+    for (let up of spinUps) {
+        up.addEventListener('click', hncSpinUp_OnClick);
+    }
+
+    let spinDowns = document.querySelectorAll('.hnc-spin-down');
+    for (let down of spinDowns) {
+        down.addEventListener('click', hncSpinDown_OnClick);
+    } 
 }
 
 // 버튼 클릭시 spin 값 수정

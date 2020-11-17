@@ -12,6 +12,11 @@ function hncTab_Init() {
     for (let i = 0; i < tabs.length ; ++i) {
         hncTab_Update(tabs[i]);
     }
+    // tab-radio
+    let tabRadios = document.querySelectorAll('.hnc-tab-radio');
+    for (let tabRadio of tabRadios) {
+        tabRadio.addEventListener("change", hncTabRadio_OnChange);
+    }
 }
 
 function hncTabRadio_OnChange(e) {

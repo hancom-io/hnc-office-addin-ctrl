@@ -17,10 +17,11 @@ function hncSubmenuButton_Init() {
         buttons[i - 1].innerHTML += '<div class="hnc-expander-down"><svg width="7" height="4"><g><path class="hnc-expander-path" d="M0,0 L7,0 L3.5,4z"/></g></svg></div>';
     }
 
-    // 각 버튼에 이벤트 핸들러 장착
-    Array.prototype.forEach.call(buttons, function(button, i)  {
+    // 버튼 클릭시 하위 메뉴 확장
+    for (let button of buttons) {
+        button.addEventListener('click', hncSubmenuButton_OnClick);
         button.addEventListener('keydown', hncSubmenuButton_OnKeyDown);
-    });
+    }
 
     hncMenuItem_AddExpander();
 }
@@ -72,7 +73,7 @@ function hncSubmenu_OnKeyDown(e) {
         case 'ArrowUp': 
             currentIndex = hncSubmenu_GetCurrentIndex(this);
             if (hncSubmenu_IsSubmenuButton(this.parentElement) && currentIndex == -1) { // submenubutton의 submenu인데, 아직 menuItem 선택을 한번도 안했다면 닫는다.
-                hncSubmenu_Hide(this);
+                hncSubmenu_Hide(this, true);
             }
             else {
                 hncSubmenu_GotoIndex(this, currentIndex - 1, false);
@@ -89,8 +90,7 @@ function hncSubmenu_OnKeyDown(e) {
         case 'ArrowLeft':
             // 상위가 submenuItem이라면 현 menu를 닫음
             if (hncSubmenu_IsSubmenuItem(this.parentElement) == true) {
-                hncAddClass(this, 'hnc-submenu-keyboard-navigation'); // 키보드 조작중에 하위 메뉴 delay를 없앰
-                hncSubmenu_Hide(this);
+                hncSubmenu_Hide(this, true);
             }
             e.preventDefault();
             e.stopPropagation();
@@ -103,24 +103,22 @@ function hncSubmenu_OnKeyDown(e) {
             let menuItem = hncSubmenu_GetAt(this, currentIndex);
             // submenu가 있다면 표시
             if (menuItem != null && hncSubmenu_IsSubmenuItem(menuItem) == true) {
-                hncAddClass(hncSubmenu_FindFromParent(menuItem), 'hnc-submenu-keyboard-navigation'); // 키보드 조작중에 하위메뉴 delay를 없앰
-                hncSubmenu_Show(hncSubmenu_FindFromParent(menuItem));
+                 hncSubmenu_Show(hncSubmenu_FindFromParent(menuItem));
             }
             e.preventDefault();
             e.stopPropagation();
         break;
         case 'Escape': // 메뉴를 닫는다.
-            hncSubmenu_Hide(this);
+            hncSubmenu_Hide(this, true);
             e.preventDefault(); 
             e.stopPropagation();
             break;
         case 'Tab': // shift+tab도 동일
-            hncSubmenu_Hide(this); // e.preventDefault(); 를 호출하지 않고 기본동작 진행하여 tab이동시킴
+            hncSubmenu_Hide(this, true); // e.preventDefault(); 를 호출하지 않고 기본동작 진행하여 tab이동시킴
             break;
         case ' ': // Space
         case 'Enter':
-            currentIndex = hncSubmenu_GetCurrentIndex(this);
-            hncSubmenu_GetAt(this, currentIndex).click();
+            hncSubmenu_GetCurrentAt(this).click();
             e.preventDefault(); 
             e.stopPropagation();
             break;
@@ -138,7 +136,7 @@ function hncSubmenu_GetCurrentIndex(submenu) {
     }
 
     // 포커싱된 인덱스를 구한다.
-    if (document.hasFocus() && document.activeElement != undefined && document.activeElement != null) {
+    if (document.activeElement != undefined && document.activeElement != null) {
         for (let i = 0; i < hncSubmenu_GetCount(submenu); ++i) {
             if (hncSubmenu_GetAt(submenu, i) == document.activeElement) {
                 return i;
@@ -146,6 +144,9 @@ function hncSubmenu_GetCurrentIndex(submenu) {
         }
     }
     return -1;
+}
+function hncSubmenu_GetCurrentAt(submenu) {
+    return hncSubmenu_GetAt(submenu, hncSubmenu_GetCurrentIndex(submenu));
 }
 
 // down방향인지 up 방향인지 에 따라 주어진 index가 separator면 이를 회피 
@@ -259,14 +260,14 @@ function hncSubmenu_FindFromParent(parent) {
     return null;
 }
 
-// submenu를 토글한다.
+// submenu를 토글한다. hide시에는 상위 개체에 포커스를 준다.
 function hncSubmenu_Toggle(submenu) {
     if (submenu == null) {
         return;
     }
     
     if (hncSubmenu_IsOpen(submenu) == true) { // 화면에서 보인다면 감춤 */
-        hncSubmenu_Hide(submenu);
+        hncSubmenu_Hide(submenu, true);
     }
     else {
         hncSubmenu_Show(submenu);
@@ -277,11 +278,11 @@ function hncSubmenu_IsOpen(submenu) {
     if (submenu == null) {
         return false;
     }
-    let opacity = submenu.style.opacity;
-    if (opacity == 1) {
-        return true;
+    let display = window.getComputedStyle(submenu, null).display;
+    if (display == 'none') {
+        return false;
     }
-    return false;
+    return true;
 }
 // show시 키보드 포커스 획득
 function hncSubmenu_Show(submenu) {
@@ -289,6 +290,8 @@ function hncSubmenu_Show(submenu) {
         return;
     }
     if (hncSubmenu_IsOpen(submenu) == true) {
+        submenu.tabIndex = 0; // 포커스를 parent에 뺏겼을 수 있으므로 다시 가져온다.
+        submenu.focus(); 
         return;
     }
     hncSubmenu_CloseAll(submenu); // 모든 서브메뉴를 닫고(submenu의 parent는 안닫고)
@@ -309,8 +312,7 @@ function hncSubmenu_Show(submenu) {
         submenu.style.top = String(parentTop) + 'px';
     }
 
-    submenu.style.opacity = 1; // 내것만 연다.
-    submenu.style['pointer-events'] = 'auto'; 
+    submenu.style.display = 'block'; // 내것만 연다.
     submenu.tabIndex = 0; // 키보드 이벤트를 받을 수 있게 함
     submenu.focus(); 
     submenu.addEventListener('keydown', hncSubmenu_OnKeyDown);
@@ -324,7 +326,8 @@ function hncSubmenu_Show(submenu) {
     } 
 }
 // hide시 키보드 포커스 반환
-function hncSubmenu_Hide(submenu) {
+// focusToParent : 상위 항목으로 포커스 반환
+function hncSubmenu_Hide(submenu, focusToParent) {
     if (submenu == null) {
         return;
     }
@@ -336,17 +339,17 @@ function hncSubmenu_Hide(submenu) {
     for (let menuItem of submenu.children) {
         let childSubmenu = hncSubmenu_FindFromParent(menuItem);
         if (childSubmenu != null) {
-            hncSubmenu_Hide(childSubmenu); // 재귀호출. 하위의 서브메뉴를 닫는다.
+            hncSubmenu_Hide(childSubmenu, true); // 재귀호출. 하위의 서브메뉴를 닫는다.
         }
     }
-    submenu.style.opacity = 0;
-    submenu.style['pointer-events'] = 'none';   
+    submenu.style.display = 'none';
     submenu.tabIndex = -1; // 키보드 이벤트를 받을 수 없게 함
-    submenu.parentElement.focus(); // 상위개체에 포커스 반환
+    if (focusToParent == true) {
+        submenu.parentElement.focus(); // 상위개체에 포커스 반환
+    }
     submenu.removeEventListener('keydown', hncSubmenu_OnKeyDown);
     hncRemoveClass(submenu.parentElement, 'hnc-submenu-opened');
-    hncRemoveClass(submenu, 'hnc-submenu-keyboard-navigation'); // 키보드 조작중에 하위메뉴 표시 delay를 없앴던 것 복원
-
+ 
     // 하위 menuItem에 이벤트 제거
     for (let menuItem of submenu.children) {
         menuItem.tabIndex = -1; // 키보드 이동에 따라 하위 항목이 TabIndex를 가졌을 수 있으므로 모두 제거. 제거하지 않으면 Tab 이동시 숨겨진 submenu내의 menuItem에 포커싱이 감
@@ -365,7 +368,7 @@ function hncSubmenu_CloseAll(submenu) {
 
     for (let other of others) {
         if (hncIsAncestor(other, submenu) == false) { // submenu의 조상이 아니라면 닫음. submenu == null 이면 false
-            hncSubmenu_Hide(other);
+            hncSubmenu_Hide(other, true);
         }
     }
 }
@@ -373,39 +376,13 @@ function hncSubmenu_CloseAll(submenu) {
 // -----------------------
 // hncMenuItem
 // -----------------------
-// mouseenter되는 경우 상위 항목의 위치로 부터 left, top 좌표를 계산하여 메뉴 표시
 // hover상태인데도 마우스를 약간 움직이면 hover/out이 반복적으로 호출되어 mouseenter/mouseleave 이벤트 사용
+// 타이머를 이용하여 약간 뒤에 메뉴 표시
 function hncMenuItem_OnMouseEnter(e) {
-
-    let parentSubmenu = this.parentElement;
-    let oldIndex = hncSubmenu_GetCurrentIndex(parentSubmenu); 
     this.tabIndex = 0;
     this.focus();
-    let newIndex = hncSubmenu_GetCurrentIndex(parentSubmenu); // 전과 후의 index를 비교하여 변경된 경우 하위메뉴 닫음
 
-    // 현 menuItem의 sibling인 menuItem 중에서 submenu가 있다면 닫는다.
-    if (oldIndex != newIndex) {
-        for (let i = 0; i < hncSubmenu_GetCount(parentSubmenu); ++i) {
-            let siblingMenuItem = hncSubmenu_GetAt(parentSubmenu, i);
-            if (siblingMenuItem != this) {
-                if (hncSubmenu_IsSubmenuItem(siblingMenuItem) == true) {
-                    let siblingSubmenu = hncSubmenu_FindFromParent(siblingMenuItem);
-                    if (siblingSubmenu == null) {
-                        alert('hnc-submenu-item 하위에 hnc-submenu 가 정의되지 않음');
-                        return;
-                    }
-                    // sibling의 submenu 닫음
-                    hncSubmenu_Hide(siblingSubmenu); 
-
-                    // hide 시 parent menuItem에 포커싱을 주니 다시 this에 포커싱을 줌.
-                    siblingMenuItem.tabIndex = -1;
-                    this.tabIndex = 0;
-                    this.focus();
-                }
-            }
-        }
-    }
-
+    let parentSubmenu = this.parentElement;
     if (hncSubmenu_IsSubmenuItem(this) == true) {
         let submenu = hncSubmenu_FindFromParent(this);
         if (submenu == null) {
@@ -413,13 +390,34 @@ function hncMenuItem_OnMouseEnter(e) {
             return;
         }
 
-        hncSubmenu_Show(submenu);
+        setTimeout(() => {
+            // 주어진 시간뒤에도 아직 마우스가 상위 submenuItem에 있다면 show한다.
+            if (hncSubmenu_GetCurrentAt(parentSubmenu) == submenu.parentElement) {
+                hncSubmenu_Show(submenu);
+            }
+        }, parseFloat(window.getComputedStyle(submenu, null).transitionDelay) * 1000);
+        
     }
 }
-// hover시 하위메뉴 표시를 위해 submenuItem 바깥으로 나가면 submenu를 바로 닫아버리면 사용성이 떨어짐. 
-// 따라서, mouseEnter를 통해 선택된 menuItem이 change될때 하위 메뉴를 닫음.
+// hover시 하위메뉴 표시를 위해 submenuItem 바깥으로 나가면 타이머를 이용해서 조금 있다가 닫음. 
 function hncMenuItem_OnMouseLeave(e) {
     this.tabIndex = -1;
+
+    if (hncSubmenu_IsSubmenuItem(this) == true) {
+
+        let submenu = hncSubmenu_FindFromParent(this);
+        if (submenu == null) {
+            alert('hnc-submenu-item 하위에 hnc-submenu 가 정의되지 않음');
+            return;
+        }
+        // submenu 닫음
+        setTimeout(() => {
+            // 닫으려는 submenu에 혹시라도 마우스로 다시 돌아와 focus 받은 menuItem이 있다면 안닫는다.
+            if (hncSubmenu_GetCurrentIndex(submenu) == -1) {
+                hncSubmenu_Hide(submenu, false); // 상위개체에 포커스를 반답하지 않음
+            }
+        }, parseFloat(window.getComputedStyle(submenu, null).transitionDelay) * 1000);
+    }
 }
 
 function hncMenuItem_OnClick(e) {
@@ -427,7 +425,7 @@ function hncMenuItem_OnClick(e) {
     if (hncSubmenu_IsSubmenuItem(this) == true) { 
         e.stopPropagation();
 
-        hncSubmenu_Show(hncSubmenu_FindFromParent(this));  
+        hncSubmenu_Show(hncSubmenu_FindFromParent(this));
     }
 }
 

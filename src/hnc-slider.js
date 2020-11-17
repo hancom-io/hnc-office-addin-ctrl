@@ -22,6 +22,12 @@ function hncSlider_Init() {
 
         sliders[i - 1].outerHTML =  sliderContainer;
     }
+
+    // container로 감싼 후 다시 이벤트 핸들러 장착
+    sliders = document.querySelectorAll('.hnc-slider');
+    for (let slider of sliders) {
+        slider.addEventListener('input', hncSlider_OnInput);
+    } 
 }
 // slider 값 설정시 배경색 변경
 function hncSlider_OnInput(e) {

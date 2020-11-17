@@ -16,36 +16,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // select 된 tab-body 표시
     hncTab_Init();
 
-    // 버튼 클릭시 하위 메뉴 확장
-    let buttons = document.querySelectorAll('.hnc-submenu-button');
-    for (let button of buttons) {
-        button.addEventListener('click', hncSubmenuButton_OnClick);
-    }
-
     // 빈 영역을 클릭하면 모든 submenu를 닫는다.
     document.addEventListener('click', hncDocument_OnClick);
-
-    // spin의 up/down
-    let spinUps = document.querySelectorAll('.hnc-spin-up');
-    for (let up of spinUps) {
-        up.addEventListener('click', hncSpinUp_OnClick);
-    }
-
-    let spinDowns = document.querySelectorAll('.hnc-spin-down');
-    for (let down of spinDowns) {
-        down.addEventListener('click', hncSpinDown_OnClick);
-    }
-
-    // slider
-    let sliders = document.querySelectorAll('.hnc-slider');
-    for (let slider of sliders) {
-        slider.addEventListener('input', hncSlider_OnInput);
-    }
-
-    // tab-radio
-    let tabRadios = document.querySelectorAll('.hnc-tab-radio');
-    for (let tabRadio of tabRadios) {
-        tabRadio.addEventListener("change", hncTabRadio_OnChange);
-    }
-
 });
