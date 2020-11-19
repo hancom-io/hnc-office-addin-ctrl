@@ -50,7 +50,7 @@
     border-color: var(--hnc-control-text-color-accent4); 
 }
 .hnc-slider:disabled::-webkit-slider-thumb {
-    color: var(--hnc-control-text-color-disabled); /* div로 캡션을 넣지 않고, 직접 content로 입력한 경우도 동작하도록 색지정 */
+    color: var(--hnc-control-text-color-disabled); /* 추후 track 배경에서 사용됨 */
     background-color: var(--hnc-control-background-color-disabled);
     border-color: var(--hnc-control-border-color-disabled);
 }
