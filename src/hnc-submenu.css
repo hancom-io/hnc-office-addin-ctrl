@@ -12,7 +12,7 @@
 -------------------------- */
 .hnc-submenu {
     display: none;
-    position: absolute; /* display = none 이 아니기에 화면 크기에 관여하게 된다. 그래서 버튼에서 하위메뉴가 있으면 전체 브라우저에 스크롤이 나타날 수 있음. */
+    position: absolute; 
     text-align: left;
     z-index: 1000; /* 메뉴가 최상위에 보일 수 있도록 조정 */
 

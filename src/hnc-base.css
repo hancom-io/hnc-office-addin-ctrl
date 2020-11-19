@@ -11,7 +11,7 @@
 .hnc-control {
     display: inline-block; /* 가로 배치가능하도록 inline, margin 적용이 되도록 inline-block으로 사용 */
     vertical-align: middle;
-    box-sizing: content-box; /* box-sizing이 button은 border-box임(테두리와 padding이 width에 포함됨). 이에 따라 div, button 에 css 줄때 다른 width가 나타나게 되어, 기본 css 스타일로 강제함 */
+    box-sizing: content-box; /* button은 box-sizing이 border-box임(테두리와 padding이 width에 포함됨). 이에 따라 button에서 사용하는 경우와 div에서 사용하는 경우에, 크기가 서로 달라짐. 통일성을 주기위해 기본 css 스타일로 강제함 */
 
     margin: var(--hnc-control-margin);
     padding: var(--hnc-control-padding);
@@ -99,6 +99,13 @@
     border-width: 1px; /* 일반적으로 테두리가 보이지 않으나, focus시 표시될 수 있어 width 영역 확보 */
 
 }
+
+.hnc-command-button > .hnc-image + .hnc-caption,
+.hnc-icon-text-button > .hnc-image + .hnc-caption, /* hnc-icon-text-button child인 hnc-image에 인접한 hnc-caption */
+.hnc-hyperlink-button > .hnc-image + .hnc-caption,
+.hnc-submenu-button > .hnc-image + .hnc-caption {
+    margin-left: 6px; /* image 와의 공간 추가 */
+}
 .hnc-control:disabled > .hnc-caption,
 .hnc-checkbox:disabled + .hnc-caption,
 .hnc-radio:disabled + .hnc-caption {
@@ -109,7 +116,7 @@
 .hnc-icon-only-button > .hnc-caption,
 .hnc-tab-header-label > .hnc-image ~ .hnc-caption {
     display: none; /* icon-only 인 경우 caption 숨김. 이후 hover시 display: block을 하여 툴팁으로 표시됨 */
-    position: absolute; /* 상위 버튼이 caption 툴팁 표시에 따라 레이아웃이 커지지 않도록 지정 */
+    position: absolute; /* 상위요소 레이아웃에 영향 안줌 */
 
     text-align: left;
   
@@ -126,7 +133,7 @@
 }
 .hnc-icon-only-button:hover > .hnc-caption,
 .hnc-tab-header-label:hover > .hnc-image ~ .hnc-caption {
-    display: block; /* icon-only 인 경우 caption 숨기고, hover시 툴팁으로 표시. 하단에 표시하기위해 block 사용 */
+    display: block; /* icon-only 인 경우 caption 숨기고, hover시 툴팁으로 표시. 버튼 하단에 표시하기 위해 block 사용 */
 }
 
 .hnc-hyperlink-button:focus > .hnc-caption,
@@ -159,12 +166,7 @@
     opacity: 0.5;
     filter: grayscale(100%);
 }
-.hnc-command-button > .hnc-image,
-.hnc-icon-text-button > .hnc-image,
-.hnc-hyperlink-button > .hnc-image,
-.hnc-submenu-button > .hnc-image {
-    margin: 0px 6px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 - text와의 공간 추가 */
-}
+
 .hnc-menu-item > .hnc-image,
 .hnc-submenu-item > .hnc-image { /* menu item 하위에 사용하면 16x16 으로 크기 강제 */
     position: absolute; /* 이미지 위치 절대 크기로 조정 */
