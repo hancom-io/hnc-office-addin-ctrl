@@ -114,7 +114,7 @@
 }
 
 .hnc-icon-only-button > .hnc-caption,
-.hnc-tab-header-label > .hnc-image ~ .hnc-caption {
+.hnc-tab-header > .hnc-image ~ .hnc-caption {
     display: none; /* icon-only 인 경우 caption 숨김. 이후 hover시 display: block을 하여 툴팁으로 표시됨 */
     position: absolute; /* 상위요소 레이아웃에 영향 안줌 */
 
@@ -128,11 +128,11 @@
     border-radius: var(--hnc-control-border-radius);
     box-shadow: var(--hnc-control-tooltip-box-shadow); /* offset x, offiset y, radius, color */
 }
-.hnc-tab-header-label >  .hnc-image ~ .hnc-caption {
+.hnc-tab-header >  .hnc-image ~ .hnc-caption {
     margin-top: 12px; /* tab-header 선택표시를 가려서 많이 띄움 */
 }
 .hnc-icon-only-button:hover > .hnc-caption,
-.hnc-tab-header-label:hover > .hnc-image ~ .hnc-caption {
+.hnc-tab-header:hover > .hnc-image ~ .hnc-caption {
     display: block; /* icon-only 인 경우 caption 숨기고, hover시 툴팁으로 표시. 버튼 하단에 표시하기 위해 block 사용 */
 }
 
@@ -140,7 +140,7 @@
 .hnc-checkbox:focus + .hnc-caption,
 .hnc-radio:focus + .hnc-caption,  /* 포커스 받았을때 캡션에만 rect 표시 */
 .hnc-slider:focus::before,
-.hnc-tab-radio:focus + .hnc-tab-header > .hnc-tab-header-label { 
+.hnc-tab-radio:focus + .hnc-tab-header-container > .hnc-tab-header { 
     border-color: var(--hnc-control-border-color-accent2);                  
     border-style: dotted;
 }

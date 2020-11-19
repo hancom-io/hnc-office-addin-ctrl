@@ -9,6 +9,22 @@ function hncTab_Init() {
         return;
     }
 
+    let tabHeaders = document.querySelectorAll('.hnc-tab-header');
+    if (tabHeaders == undefined) {
+        return;
+    }   
+    //상위 Container를 만듬
+    for (let i = tabHeaders.length; 0 < i ; i--) {
+
+        //상위 Container를 만들고, input 추가
+        let tabHeaderContainer = '<div class="hnc-control hnc-tab-header-container">';
+        tabHeaderContainer += tabHeaders[i - 1].outerHTML;
+        tabHeaderContainer += '</div>';
+
+        tabHeaders[i - 1].outerHTML =  tabHeaderContainer;
+    }
+
+
     for (let i = 0; i < tabs.length ; ++i) {
         hncTab_Update(tabs[i]);
     }

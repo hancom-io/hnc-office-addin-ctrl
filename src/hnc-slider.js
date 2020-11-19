@@ -17,7 +17,6 @@ function hncSlider_Init() {
         //상위 Container를 만들고, input 추가
         let sliderContainer = '<div class="hnc-slider-container">';
         sliderContainer += sliders[i - 1].outerHTML;
-      
         sliderContainer += '</div>';
 
         sliders[i - 1].outerHTML =  sliderContainer;

@@ -36,17 +36,17 @@
     position: absolute; /* display none으로 해도되나, 그러면 포커스를 줄 수 없어서 clip 사용 */
     clip: rect(0,0,0,0);
 }
-.hnc-tab-header {
+.hnc-tab-header-container {
     margin: 0;
     background-color: transparent; 
     border-color: transparent;
     border-width: 0px;
     border-bottom-width: var(--hnc-control-border-width); /* 하단 1px만 표시. 최초는 tab-body와 동일한 색 */
 }
-.hnc-workspace-style .hnc-tab-header {
+.hnc-workspace-style .hnc-tab-header-container {
     padding-bottom: 2px; /* 작업창은 tab 선택 표시가 3px이어서 padding 영역을 좀더 확보함. 원래는 1px */
 }
-.hnc-tab-header:before {
+.hnc-tab-header-container:before { /* tab-header 간의 구분자 */
     content: "";
     display: inline-block;
     margin-left: -1px; /* 왼쪽 tab-header 사이 중간이 되도록 margin 조정 */
@@ -55,19 +55,19 @@
     vertical-align: middle;
     background-color: var(--hnc-control-background-accent2);
 }
-.hnc-tab-headers > li:first-child > .hnc-tab-header:before {
+.hnc-tab-headers > li:first-child > .hnc-tab-header-container:before {
     background-color: transparent; /* 첫번째 tab-header는 구분선이 없음 */
 }
-.hnc-tab-radio:checked ~ .hnc-tab-header {
+.hnc-tab-radio:checked ~ .hnc-tab-header-container {
     border-color: var(--hnc-control-border-color-accent1); /* tab-header 선택 표시. */
     padding-bottom: 0px; /* 하단 패딩을 줄이고, 하단 너비 증가 */
     border-bottom-width: 2px;
 }
 
-.hnc-workspace-style .hnc-tab-radio:checked ~ .hnc-tab-header {
+.hnc-workspace-style .hnc-tab-radio:checked ~ .hnc-tab-header-container {
     border-bottom-width: 3px; /*workspace-style은 좀 굵게 선택 표시 */
 }
-.hnc-tab-header > .hnc-tab-header-label {
+.hnc-tab-header-container > .hnc-tab-header {
     display: inline-block;
     margin: 0;
     padding: 7px; /* 빈 영역을 클릭해도 radio 선택될 수 있게 padding으로 공간 확보 */
@@ -79,20 +79,20 @@
     /* focus 는 hnc-base에 정의 */
     /* caption 툴팁은 hnc-base에 정의 */
 }
-.hnc-tab-radio:checked ~ .hnc-tab-header > .hnc-tab-header-label,
-.hnc-tab-radio:checked ~ .hnc-tab-header > .hnc-tab-header-label > .hnc-caption { /* 선택된 header 캡션은 굵게 */
+.hnc-tab-radio:checked ~ .hnc-tab-header-container > .hnc-tab-header,
+.hnc-tab-radio:checked ~ .hnc-tab-header-container > .hnc-tab-header > .hnc-caption { /* 선택된 header 캡션은 굵게 */
     color: var(--hnc-control-text-color-accent3);
     font-weight: bold;
 }
 
-.hnc-tab-radio:checked ~ .hnc-tab-header > .hnc-tab-header-label > .hnc-image + .hnc-caption {
+.hnc-tab-radio:checked ~ .hnc-tab-header-container > .hnc-tab-header > .hnc-image + .hnc-caption {
     color: var(--hnc-control-text-color);
     font-weight: normal; /* image와 함께 있는 캡션이면 툴팁이므로 툴팁과 동일하게 스타일링 */ 
 }
-.hnc-tab-header > .hnc-tab-header-label > .hnc-image {
+.hnc-tab-header-container > .hnc-tab-header > .hnc-image {
     filter: grayscale(100%); /* tab-header의 이미지는 회색조로 표시 */  
 }
-.hnc-tab-radio:checked ~ .hnc-tab-header > .hnc-tab-header-label > .hnc-image {
+.hnc-tab-radio:checked ~ .hnc-tab-header-container > .hnc-tab-header > .hnc-image {
     filter: none; /* 선택된 tab-header의 이미지는 원래대로 표시 */  
 }
 .hnc-tab-body {
