@@ -28,7 +28,7 @@
 }
 .hnc-groupbox > .hnc-caption:first-child::after { /* 캡션 오른편 separator */
     content:"";
-    flex: 1; /* 증가 너비 */
+    flex-grow: 1; /* 증가 너비 */
     margin-left: 10px; /* 왼쪽 캡션과의 여백 */
     height: 1px;
     background-color: var(--hnc-control-background-accent2);
