@@ -106,12 +106,6 @@
 .hnc-submenu-button > .hnc-image + .hnc-caption {
     margin-left: 6px; /* image 와의 공간 추가 */
 }
-.hnc-control:disabled > .hnc-caption,
-.hnc-checkbox:disabled + .hnc-caption,
-.hnc-radio:disabled + .hnc-caption {
-    color: var(--hnc-control-text-color-disabled)!important; /* hyperlink에서는 버튼의 caption 색을 hover시 바꾸는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
-    text-decoration: none!important; /* hyperlink에서는 캡션에 underline을 표시하는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
-}
 
 .hnc-icon-only-button > .hnc-caption,
 .hnc-tab-header > .hnc-image ~ .hnc-caption {
@@ -150,6 +144,13 @@
 }
 .hnc-hyperlink-button:visited > .hnc-caption {
     color: var(--hnc-control-text-color-visited);
+}
+
+.hnc-control:disabled > .hnc-caption,
+.hnc-checkbox:disabled + .hnc-caption,
+.hnc-radio:disabled + .hnc-caption {
+    color: var(--hnc-control-text-color-disabled); 
+    text-decoration: none; 
 }
 /* -----------------------
 ** image

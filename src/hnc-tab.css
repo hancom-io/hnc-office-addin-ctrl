@@ -83,7 +83,7 @@
 .hnc-tab-radio:checked ~ .hnc-tab-header-container > .hnc-tab-header > .hnc-caption { /* 선택된 header 캡션은 굵게 */
     color: var(--hnc-control-text-color-accent3);
     font-weight: bold;
-}
+} 
 
 .hnc-tab-radio:checked ~ .hnc-tab-header-container > .hnc-tab-header > .hnc-image + .hnc-caption {
     color: var(--hnc-control-text-color);
