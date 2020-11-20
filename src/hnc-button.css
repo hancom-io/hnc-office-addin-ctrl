@@ -64,6 +64,13 @@
 }
 /* -----------------------
 ** submenu button
-** javascript에서 expander 추가. 
+
 ** 외형은 icon-text-botton, hnc-base 에 정의됨
+** 오른쪽 expander는 javascript 코드에서 <div>로 일괄 추가함.
+**
+** css의 :after선택자로 추가할 수는 있으나, 이경우 hover/disbaled 처리를 위해 svg 내의 class 선택후 css단에서 fill 속성 변경하더라도 적용이 안됨.
+** css단에 ui/skin을 분리하여 일괄 관장하는게 좋으므로, javascript에서 강제로 div로 추가함.
+**
+** menu show/hide는 javascript에서 opacity 조정하여 구현.
+** 버튼 클릭시 하위메뉴 show/hide는 javascript 에서 구현.
 -------------------------- */

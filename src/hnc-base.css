@@ -59,10 +59,12 @@
 .hnc-spin-container:hover .hnc-spin,
 .hnc-spin-container:hover .hnc-spin-up,
 .hnc-spin-container:hover .hnc-spin-down,
+.hnc-combobox:hover,
 .hnc-editor:focus,
 .hnc-spin:focus,
 .hnc-spin:focus~.hnc-spin-arrow-container .hnc-spin-up,
-.hnc-spin:focus~.hnc-spin-arrow-container .hnc-spin-down {
+.hnc-spin:focus~.hnc-spin-arrow-container .hnc-spin-down,
+.hnc-combobox:focus {
     border-color: var(--hnc-control-border-color-hover);
 }
 
@@ -80,7 +82,8 @@
 .hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-up, /* 비활성된 spin의 up/down */
 .hnc-spin:disabled~.hnc-spin-arrow-container .hnc-spin-down,
 .hnc-slider:disabled,
-.hnc-slider:disabled::-webkit-slider-thumb {
+.hnc-slider:disabled::-webkit-slider-thumb,
+.hnc-combobox:disabled {
     color: var(--hnc-control-text-color-disabled); /* div로 캡션을 넣지 않고, 직접 content로 입력한 경우도 동작하도록 색지정 */
     background-color: var(--hnc-control-background-color-disabled);
     border-color: var(--hnc-control-border-color-disabled);

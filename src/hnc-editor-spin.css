@@ -13,7 +13,8 @@
 }
 .hnc-caption + .hnc-editor, 
 .hnc-caption + .hnc-spin-container,
-.hnc-caption + .hnc-slider-container {
+.hnc-caption + .hnc-slider-container,
+.hnc-caption + .hnc-combobox {
     margin-left: 4px; /* 캡션 붙어있으면 마진 추가 */
 }
 
