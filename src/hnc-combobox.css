@@ -5,25 +5,31 @@
 ** combobox
 ** 기본 형태를 지우고 화살표 사용자 정의
 ** select 엘리먼트는 :after를 지원하지 않아 background 속성으로 추가함.
+** div 태그 하위로 svg가 들어간 것이 아니기 때문에 class 혹은 fill 속성을 따르지 못함. 따라서, static 하게 fill 색상값 작성
 -------------------------- */
 .hnc-combobox {
-    -webkit-appearance: none;  /* 원래 형태 숨김 */
+    -webkit-appearance: none;  /* Chrome, Safari, Edge, Opera 에서 원래 형태 감춤 */
     -moz-appearance: none;
     appearance: none;
     font-size: var(--hnc-control-font-size); /* hnc-control에서 font-size: 0 으로 설정하므로 원래 크기로 변경 */
     padding-left: 2px;
     padding-right: 2px;
-    border-radius: var(--hnc-control-border-radius);
-    /* hover, focus 는 hnc-base에 구현 - disabled 보다 먼저 구현하기 위함. 그렇지 않으면, disable 상태에서 hover시 hover 속성이 적용됨 */
-    /* 왼쪽 옆에 caption이 있으면 margin 추가 - hnc-editor에 구현 */ 
-    background-image: url('data:image/svg+xml, <svg xmlns="http://www.w3.org/2000/svg" width="7" height="4"><g><path class="hnc-expander-path" d="M0,0 L7,0 L3.5,4z"/></g></svg>');
+
+    /* #은 url 인코딩시 %23이 되어야 함. #7f7f7f -> %237f7f7f */
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="7" height="4"><g><path fill="%237f7f7f" d="M0,0 L7,0 L3.5,4z"/></g></svg>'); 
     background-repeat: no-repeat;
     background-position : right 3px center;
+    border-radius: var(--hnc-control-border-radius);
 
+    /* hover, focus 는 hnc-base에 구현 - disabled 보다 먼저 구현하기 위함. 그렇지 않으면, disable 상태에서 hover시 hover 속성이 적용됨 */
+    /* 왼쪽 옆에 caption이 있으면 margin 추가 - hnc-editor에 구현 */
 }
 .hnc-combobox::-ms-expand {
     display: none; /* IE10, IE11 에서 원래 형태 숨김 - 테스트 안됨 */
 }
-.hnc-combobox:after {
-    content:"1";
+.hnc-combobox:hover {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="7" height="4"><g><path fill="%23335095" d="M0,0 L7,0 L3.5,4z"/></g></svg>'); 
+}
+.hnc-combobox:disabled {
+    background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="7" height="4"><g><path fill="%23bfbfbf" d="M0,0 L7,0 L3.5,4z"/></g></svg>'); 
 }
