@@ -39,6 +39,14 @@
                             <button class="hnc-control hnc-command-button" tabindex="0" disabled="true">
                                 <span class="hnc-control hnc-caption">비활성</span>
                             </button>
+                            <div></div>
+                            <button class="hnc-control hnc-command-button" tabindex="0">
+                                <span class="hnc-control hnc-caption">확인</span>
+                            </button>
+                            <div></div>
+                            <div class="hnc-control hnc-command-button" tabindex="0">
+                                <span class="hnc-control hnc-caption">취소</span>
+                            </div>
                         </div>
                     </li>
                     <!-- ****************** -->
@@ -74,7 +82,7 @@
                     <!-- ****************** -->
                     <li>
                         <div>icon text button</div>
-                        <div>아이콘으로 의미 전달이 어려울때 사용. 아이콘만 추가하면 툴팁이 나오지 않고, 우측 margin이 넓어짐</div>
+                        <div>아이콘으로 의미 전달이 어려울때 사용. 아이콘만 추가 가능</div>
                         <div class="hnc-control-container">
                             <button class="hnc-control hnc-icon-text-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
@@ -87,7 +95,7 @@
                             <button class="hnc-control hnc-icon-text-button" tabindex="0">
                                 <span class="hnc-control hnc-caption">텍스트만 있는 경우</span>
                             </button>
-                            <!-- 아이콘만 있으면 툴팁이 나오지 않고, 우측 margin이 넓어보임 -->
+                            <!-- 아이콘만 추가 가능 -->
                             <button class="hnc-control hnc-icon-text-button" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                             </button>
@@ -148,7 +156,7 @@
                         <div>클릭시 button 하위에 있는 submenu 를 토글 표시함</div>
 
                         <div class="hnc-control-container">
-                            <button class="hnc-control hnc-submenu-button" tabindex="0">
+                            <button class="hnc-control hnc-submenu-button" aria-haspopup="true" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">submenu button</span>
                                 <ul class="hnc-control hnc-submenu">
@@ -158,10 +166,10 @@
                                         <span class="hnc-control hnc-caption">icon 메뉴(이미지와 함께)</span>
                                     </li>
                                     <li class="hnc-control hnc-separator"></li>
-                                    <li class="hnc-control hnc-submenu-item">
+                                    <li class="hnc-control hnc-submenu-item" aria-haspopup="true">
                                         <span class="hnc-control hnc-caption">1단계 하위메뉴</span>
                                         <ul class="hnc-control hnc-submenu">
-                                            <li class="hnc-control hnc-submenu-item">
+                                            <li class="hnc-control hnc-submenu-item" aria-haspopup="true">
                                                 <span class="hnc-control hnc-caption">2단계 하위 메뉴1-좀 명칭이 긴</span>
                                                 <ul class="hnc-control hnc-submenu">
                                                     <li class="hnc-control hnc-menu-item">2단계 메뉴1</li>
@@ -176,7 +184,7 @@
                                     <li class="hnc-control hnc-menu-item">1단계 메뉴3</li>
                                 </ul>
                             </button>
-                            <button class="hnc-control hnc-submenu-button" tabindex="0">
+                            <button class="hnc-control hnc-submenu-button" aria-haspopup="true" tabindex="0">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">submenu button</span>
                                 <ul class="hnc-control hnc-submenu">
@@ -185,10 +193,31 @@
                                     <li class="hnc-control hnc-menu-item">1단계 하위메뉴3</li>
                                 </ul>
                             </button>
-                            <button class="hnc-control hnc-submenu-button" tabindex="0" disabled="true">
+                            <button class="hnc-control hnc-submenu-button" aria-haspopup="true" tabindex="0" disabled="true">
                                 <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
                                 <span class="hnc-control hnc-caption">비활성</span>
                             </button>
+                            <button class="hnc-control hnc-submenu-button" aria-haspopup="true" tabindex="0"> 
+                                <span class="hnc-control hnc-caption">submenu 테스트</span>
+                                <ul class="hnc-control hnc-submenu">
+                                    <li class="hnc-control hnc-submenu-item">메뉴1
+                                        <ul class="hnc-control hnc-submenu">
+                                            <li class="hnc-control hnc-menu-item">메뉴1-1</li>
+                                            <li class="hnc-control hnc-menu-item">메뉴1-2</li>
+                                            <li class="hnc-control hnc-menu-item">메뉴1-3</li>
+                                        </ul>
+                                    </li>
+                                    <li class="hnc-control hnc-separator"></li>
+                                    <li class="hnc-control hnc-menu-item">메뉴2</li>
+                                    <li class="hnc-control hnc-submenu-item">메뉴3
+                                        <ul class="hnc-control hnc-submenu">
+                                            <li class="hnc-control hnc-menu-item">메뉴3-1</li>
+                                            <li class="hnc-control hnc-menu-item">메뉴3-2</li>
+                                            <li class="hnc-control hnc-menu-item">메뉴3-3</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </button> 
                         </div>
                     </li>
                     <!-- ****************** -->
@@ -285,18 +314,6 @@
                                 <div> </div>
                                 <input type="checkbox" class="hnc-control hnc-checkbox" id="test-groupbox1" tabindex="0"/>
                                 <label class="hnc-control hnc-caption" for="test-groupbox1">체크박스</label>
-                                <div> </div>
-                                <input type="radio" class="hnc-control hnc-radio" id="test-groupbox2" name="radio-groupbox" tabindex="0"/>
-                                <label class="hnc-control hnc-caption" for="test-groupbox2">라디오</label>
-                                <div> </div>
-                                <label class="hnc-control hnc-caption" for="test-groupbox3">항목</label>
-                                <input type="text" class="hnc-control hnc-editor" id="test-groupbox3" tabindex="0"/>
-                                <div> </div>
-                                <label class="hnc-control hnc-caption" for="test-groupbox4">항목</label>
-                                <input type="number" class="hnc-control hnc-spin" id="test-groupbox4" tabindex="0"/>
-                                <div> </div>
-                                <label class="hnc-control hnc-caption" for="test-groupbox5">항목</label>
-                                <input type="range" class="hnc-control hnc-slider" id="test-groupbox5" tabindex="0"/>
                             </div>
                          </div>
                     </li>
@@ -312,15 +329,11 @@
                                 <ul class="hnc-control hnc-tab-headers">
                                     <li>
                                         <input type="radio" class="hnc-control hnc-tab-radio" id="tab1" name="tab-radio" tabindex="0" checked/>
-                                        <div class="hnc-control hnc-tab-header">
-                                            <label class="hnc-control hnc-tab-header-label" for="tab1">탭 1</label>
-                                        </div>
+                                        <label class="hnc-control hnc-tab-header" for="tab1">탭 1</label>
                                     </li>
                                     <li>
                                         <input type="radio" class="hnc-control hnc-tab-radio" id="tab2" name="tab-radio" tabindex="0"/>
-                                        <div class="hnc-control hnc-tab-header">
-                                            <label class="hnc-control hnc-tab-header-label" for="tab2">탭 2</label>
-                                        </div>
+                                        <label class="hnc-control hnc-tab-header" for="tab2">탭 2</label>
                                     </li>
                                 </ul>
                                 <div class="hnc-control hnc-tab-bodies">
@@ -348,29 +361,23 @@
                                 <ul class="hnc-control hnc-tab-headers">
                                     <li>
                                         <input type="radio" class="hnc-control hnc-tab-radio" id="workspace-tab1" name="workspace-tab-radio" tabindex="0" checked/>
-                                        <div class="hnc-control hnc-tab-header" class="hnc-control hnc-tab-header">
-                                            <label class="hnc-control hnc-tab-header-label" for="workspace-tab1">
-                                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
-                                                <span class="hnc-control hnc-caption">이미지 헤더 탭1</span>
-                                            </label>
-                                        </div>
+                                        <label class="hnc-control hnc-tab-header" for="workspace-tab1">
+                                            <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                            <span class="hnc-control hnc-caption">이미지 헤더 탭1</span>
+                                        </label>
                                     </li>
                                     <li>
                                         <input type="radio" class="hnc-control hnc-tab-radio" id="workspace-tab2" name="workspace-tab-radio" tabindex="0"/>
-                                        <div class="hnc-control hnc-tab-header">
-                                            <label class="hnc-control hnc-tab-header-label" for="workspace-tab2">
-                                                <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
-                                                <span class="hnc-control hnc-caption">이미지 헤더 탭2</span>
-                                            </label>
-                                        </div>
+                                        <label class="hnc-control hnc-tab-header" for="workspace-tab2">
+                                            <image class="hnc-control hnc-image" src="../tester-img/hnc-find-16.png"></image>
+                                            <span class="hnc-control hnc-caption">이미지 헤더 탭2</span>
+                                        </label>
                                     </li>
                                     <li>
                                         <input type="radio" class="hnc-control hnc-tab-radio" id="workspace-tab3" name="workspace-tab-radio" tabindex="0"/>
-                                        <div class="hnc-control hnc-tab-header">
-                                            <label class="hnc-control hnc-tab-header-label" for="workspace-tab3">
-                                                <span class="hnc-control hnc-caption">caption 만 있는 경우</span>
-                                            </label>
-                                        </div>
+                                        <label class="hnc-control hnc-tab-header" for="workspace-tab3">
+                                            <span class="hnc-control hnc-caption">caption 만 있는 경우</span>
+                                        </label>
                                     </li>
                                 </ul>
                                 <div class="hnc-control hnc-tab-bodies">

@@ -2,9 +2,12 @@
 // Licensed under the MIT License. See License.txt in the project root for license information. 
 
 // spin-container로 감싸고, spin들의 updown 버튼 추가
-function hncInitSpin() {
+function hncSpin_Init() {
     let spins = document.querySelectorAll('.hnc-spin');
-
+    if (spins == undefined) {
+        return;
+    }
+   
     // 하위 depth 부터 넣어야 모두 보임. 0부터 삽입하면 하위 depth 의 expander가 안보임
     for (let i = spins.length; 0 < i ; i--) {
 
@@ -19,10 +22,21 @@ function hncInitSpin() {
 
         spins[i - 1].outerHTML =  spinContainer;
     }
+
+    // spin의 up/down
+    let spinUps = document.querySelectorAll('.hnc-spin-up');
+    for (let up of spinUps) {
+        up.addEventListener('click', hncSpinUp_OnClick);
+    }
+
+    let spinDowns = document.querySelectorAll('.hnc-spin-down');
+    for (let down of spinDowns) {
+        down.addEventListener('click', hncSpinDown_OnClick);
+    } 
 }
 
 // 버튼 클릭시 spin 값 수정
-function onClick_HncSpinUp(e) {
+function hncSpinUp_OnClick(e) {
     // this : 이벤트를 발생시킨 버튼
     let spinContainer = this.parentElement.parentElement;
     if (spinContainer == undefined) {
@@ -58,7 +72,7 @@ function onClick_HncSpinUp(e) {
     // 이벤트 전파를 중단
     e.stopPropagation();
 }
-function onClick_HncSpinDown(e) {
+function hncSpinDown_OnClick(e) {
     // this : 이벤트를 발생시킨 버튼
     let spinContainer = this.parentElement.parentElement;
     if (spinContainer == undefined) {

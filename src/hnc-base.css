@@ -11,7 +11,7 @@
 .hnc-control {
     display: inline-block; /* 가로 배치가능하도록 inline, margin 적용이 되도록 inline-block으로 사용 */
     vertical-align: middle;
-    box-sizing: content-box; /*  box-sizing이 button은 border-box임(테두리와 padding이 width에 포함됨). 이에 따라 div, button 에 css 줄때 다른 width가 나타나게 되어, 기본 css 스타일로 강제함 */
+    box-sizing: content-box; /* button은 box-sizing이 border-box임(테두리와 padding이 width에 포함됨). 이에 따라 button에서 사용하는 경우와 div에서 사용하는 경우에, 크기가 서로 달라짐. 통일성을 주기위해 기본 css 스타일로 강제함 */
 
     margin: var(--hnc-control-margin);
     padding: var(--hnc-control-padding);
@@ -25,12 +25,26 @@
     border-style: var(--hnc-control-border-style);
     border-width: var(--hnc-control-border-width);
 }
+
+
+/* 테두리 투명인데, hnc-submenu-opened 에서 테두리색을 넣음. 이때 hnc-submenu-item이 나중에 정의되면 테두리가 반영되지 않아 hnc-base에 정의함 */
+.hnc-menu-item,
+.hnc-submenu-item {
+    display: block; /* 각 menu-item은 개행되어야 함 */
+    padding-left: 28px; /* icon이 있는 경우 왼쪽 영역 */
+    padding-right: 12px; /* 우측 expander 표시 영역 */
+    font-size: var(--hnc-control-font-size); /* li 태그에 직접 content를 작성한 경우 hnc-container의 영향으로 글꼴 0으로 나오는 경우가 있어 크기지정 */
+    border-color: transparent; /* hnc-control의 기본 테두리 색상 제거 */
+    /* image, hover, focus 형태는 hnc-base에 정의 */
+}
+
 .hnc-command-button:hover,
 .hnc-icon-only-button:hover,
 .hnc-icon-text-button:hover,
 .hnc-submenu-button:hover,
-.hnc-menu-item:hover,
-.hnc-submenu-item:hover,
+.hnc-menu-item:focus, /* 키보드 처리로 인해 over시 focus를 주고 포커스 된 것을 하일라이트 */
+.hnc-submenu-item:focus,
+.hnc-submenu-opened, /* submenu가 열려진 상태라면 하일라이트한다. javascript에서 class 추가/삭제함 */
 .hnc-checkbox + .hnc-caption:hover:before {
     /* 일반적인 하일라이트-배경을 채우고, 테두리를 그림 */
     background-color: var(--hnc-control-background-color-hover);
@@ -88,17 +102,18 @@
     border-width: 1px; /* 일반적으로 테두리가 보이지 않으나, focus시 표시될 수 있어 width 영역 확보 */
 
 }
-.hnc-control:disabled > .hnc-caption,
-.hnc-checkbox:disabled + .hnc-caption,
-.hnc-radio:disabled + .hnc-caption {
-    color: var(--hnc-control-text-color-disabled)!important; /* hyperlink에서는 버튼의 caption 색을 hover시 바꾸는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
-    text-decoration: none!important; /* hyperlink에서는 캡션에 underline을 표시하는데, disabled 속성을 선행해서 따라야 하므로 important 추가 */
+
+.hnc-command-button > .hnc-image + .hnc-caption,
+.hnc-icon-text-button > .hnc-image + .hnc-caption, /* hnc-icon-text-button child인 hnc-image에 인접한 hnc-caption */
+.hnc-hyperlink-button > .hnc-image + .hnc-caption,
+.hnc-submenu-button > .hnc-image + .hnc-caption {
+    margin-left: 6px; /* image 와의 공간 추가 */
 }
 
 .hnc-icon-only-button > .hnc-caption,
-.hnc-tab-header-label > .hnc-image ~ .hnc-caption {
+.hnc-tab-header > .hnc-image ~ .hnc-caption {
     display: none; /* icon-only 인 경우 caption 숨김. 이후 hover시 display: block을 하여 툴팁으로 표시됨 */
-    position: absolute; /* 상위 버튼이 caption 툴팁 표시에 따라 레이아웃이 커지지 않도록 지정 */
+    position: absolute; /* 상위요소 레이아웃에 영향 안줌 */
 
     text-align: left;
   
@@ -110,19 +125,19 @@
     border-radius: var(--hnc-control-border-radius);
     box-shadow: var(--hnc-control-tooltip-box-shadow); /* offset x, offiset y, radius, color */
 }
-.hnc-tab-header-label >  .hnc-image ~ .hnc-caption {
+.hnc-tab-header >  .hnc-image ~ .hnc-caption {
     margin-top: 12px; /* tab-header 선택표시를 가려서 많이 띄움 */
 }
 .hnc-icon-only-button:hover > .hnc-caption,
-.hnc-tab-header-label:hover > .hnc-image ~ .hnc-caption {
-    display: block; /* icon-only 인 경우 caption 숨기고, hover시 툴팁으로 표시. 하단에 표시하기위해 block 사용 */
+.hnc-tab-header:hover > .hnc-image ~ .hnc-caption {
+    display: block; /* icon-only 인 경우 caption 숨기고, hover시 툴팁으로 표시. 버튼 하단에 표시하기 위해 block 사용 */
 }
 
 .hnc-hyperlink-button:focus > .hnc-caption,
 .hnc-checkbox:focus + .hnc-caption,
 .hnc-radio:focus + .hnc-caption,  /* 포커스 받았을때 캡션에만 rect 표시 */
 .hnc-slider:focus::before,
-.hnc-tab-radio:focus + .hnc-tab-header > .hnc-tab-header-label { 
+.hnc-tab-radio:focus + .hnc-tab-header-container > .hnc-tab-header { 
     border-color: var(--hnc-control-border-color-accent2);                  
     border-style: dotted;
 }
@@ -132,6 +147,13 @@
 }
 .hnc-hyperlink-button:visited > .hnc-caption {
     color: var(--hnc-control-text-color-visited);
+}
+
+.hnc-control:disabled > .hnc-caption,
+.hnc-checkbox:disabled + .hnc-caption,
+.hnc-radio:disabled + .hnc-caption {
+    color: var(--hnc-control-text-color-disabled); 
+    text-decoration: none; 
 }
 /* -----------------------
 ** image
@@ -148,12 +170,7 @@
     opacity: 0.5;
     filter: grayscale(100%);
 }
-.hnc-command-button > .hnc-image,
-.hnc-icon-text-button > .hnc-image,
-.hnc-hyperlink-button > .hnc-image,
-.hnc-submenu-button > .hnc-image {
-    margin: 0px 6px 0px 0px; /* 위, 오른쪽, 아래, 왼쪽 - text와의 공간 추가 */
-}
+
 .hnc-menu-item > .hnc-image,
 .hnc-submenu-item > .hnc-image { /* menu item 하위에 사용하면 16x16 으로 크기 강제 */
     position: absolute; /* 이미지 위치 절대 크기로 조정 */

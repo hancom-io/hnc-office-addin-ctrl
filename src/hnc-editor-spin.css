@@ -25,7 +25,7 @@
 ** upDown 동작은 javascript에서 처리
 -------------------------- */
 .hnc-spin-container, /* spin, spin-up, spin-down을 묶어둔 개체로 표시 내용 없음 */ 
-.hnc-slider-container { /* slider의 focus rect 표시를 위해 slider와 slider::before를 감싸둔  개체로 표시 내용 없음 */ 
+.hnc-slider-container { /* slider의 focus rect 표시를 위해 slider와 slider::before를 감싸둔 개체로 표시 내용 없음 */ 
     display: inline-block;
     position: relative; /* 하위 항목들이 상대적 배치됨 */
     margin : 0;

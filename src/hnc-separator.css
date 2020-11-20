@@ -11,5 +11,4 @@
     pointer-events: none; /* 마우스 이벤트 안받음 */
     background-color: var(--hnc-control-background-accent1);
     border-width: 0px; /*border는 상하 1px씩 2px로 그려지므로 배경채우기로 사용 */
-
 }

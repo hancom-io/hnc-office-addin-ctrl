@@ -3,15 +3,39 @@
 
 
 // select 된 Tab을 표시
-function hncInitTab() {
+function hncTab_Init() {
     let tabs = document.querySelectorAll('.hnc-tab');
+    if (tabs == undefined) {
+        return;
+    }
+
+    let tabHeaders = document.querySelectorAll('.hnc-tab-header');
+    if (tabHeaders == undefined) {
+        return;
+    }   
+    //상위 Container를 만듬
+    for (let i = tabHeaders.length; 0 < i ; i--) {
+
+        //상위 Container를 만들고, input 추가
+        let tabHeaderContainer = '<div class="hnc-control hnc-tab-header-container">';
+        tabHeaderContainer += tabHeaders[i - 1].outerHTML;
+        tabHeaderContainer += '</div>';
+
+        tabHeaders[i - 1].outerHTML =  tabHeaderContainer;
+    }
+
 
     for (let i = 0; i < tabs.length ; ++i) {
-        hncUpdateTab(tabs[i]);
+        hncTab_Update(tabs[i]);
+    }
+    // tab-radio
+    let tabRadios = document.querySelectorAll('.hnc-tab-radio');
+    for (let tabRadio of tabRadios) {
+        tabRadio.addEventListener("change", hncTabRadio_OnChange);
     }
 }
 
-function onChange_HncTabRadio(e) {
+function hncTabRadio_OnChange(e) {
     // this : 이벤트를 발생시킨 radio.
 
     if (this.parentElement == null) { // parentElement : 태그만 찾음
@@ -31,19 +55,19 @@ function onChange_HncTabRadio(e) {
     }
    
        
-    hncUpdateTab(this.parentElement.parentElement.parentElement);
+    hncTab_Update(this.parentElement.parentElement.parentElement);
 }
 
 // tab에 선택된 body를 표시한다.
-function hncUpdateTab(tab) {
+function hncTab_Update(tab) {
     if (tab == null) {
         return;
     }
     for (let tabHeaders of tab.children) {
         if (tabHeaders.className.includes(' hnc-tab-headers') == true) {
             for (let i = 0; i < tabHeaders.childElementCount; ++i) {
-                if (hncIsActiveTab(tabHeaders.children[i]) == true) {
-                    hncSelectTabBody(tab, i);
+                if (hncTab_IsActive(tabHeaders.children[i]) == true) {
+                    hncTab_SelectBody(tab, i);
                     break;
                 }
             }
@@ -52,7 +76,7 @@ function hncUpdateTab(tab) {
     }
 }
 // 주어진 li가 선택된 tab이면 true
-function hncIsActiveTab(li) {
+function hncTab_IsActive(li) {
     if (li == null) {
         return false;
     }
@@ -67,7 +91,7 @@ function hncIsActiveTab(li) {
 }
 
 // tabBody의 index를 선택하여 표시하고 나머지는 hide 함. -1이면 모두 hide
-function hncSelectTabBody(tab, index) {
+function hncTab_SelectBody(tab, index) {
     if (tab == null) {
         return;
     }
